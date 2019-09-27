@@ -1,0 +1,13 @@
+.case {
+    background-color: tomato;
+    width:4vw;
+    height:4vw;
+    margin:1px 1px;
+}
+
+@media (max-width:768px) {
+    .case {
+        width:7vw;
+        height:7vw;
+    }
+}
