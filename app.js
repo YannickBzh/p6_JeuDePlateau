@@ -4,6 +4,18 @@ const numberOflines = 10;
 const $row = $('div.row');
 
 
+for (let j = 1; j < numberOflines; j++) {
+
+    for (let i = 0; i < numberOfCases; i++) {
+        const $case = document.createElement("div");
+        $case.className = `case x-${i}`;
+        $row[0].appendChild($case);
+    }
+    const $line = document.createElement("div");
+    $line.className = "row";
+    $row[0].after($line);
+}
+
 /*
  * TODO NEXT WEEK :
  * - Traduire de Vanilla JavaScript en jQuery OK
@@ -20,20 +32,6 @@ const $row = $('div.row');
 
 //     $case.classList = `case x-${i}`;
 // }
-
-for (let j = 0; j <= numberOflines; j++) {
-
-    for (let i = 1; i <= numberOfCases; i++) {
-        const $case = document.createElement("div");
-        $case.classList = `case x-${i}`;
-        $row[0].appendChild($case);
-    }
-    const $line = $(".row").after( "<div class='row'>" );
-    //$line.classList = "row"
-    $row[0].after($line);
-   
-}
-
 
 // for (let j = 1; j <= numberOflines; j++) {
 //     const $case = document.createElement("div");
