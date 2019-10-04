@@ -1,13 +1,17 @@
-.case {
-    background-color: tomato;
-    width:4vw;
-    height:4vw;
-    margin:1px 1px;
+
+.row {
+    display: flex;
+    margin-bottom: 2px;
 }
 
-@media (max-width:768px) {
-    .case {
-        width:7vw;
-        height:7vw;
-    }
+.case {
+    height: 50px;
+    width: 50px;
+    background-color: tomato;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.caseBlock {
+    background-color: grey;
 }
