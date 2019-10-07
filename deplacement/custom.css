@@ -1,0 +1,29 @@
+
+.row {
+    display: flex;
+    margin-bottom: 2px;
+}
+
+.case {
+    height: 50px;
+    width: 50px;
+    background-color: tomato;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.caseBlock {
+    background-color: grey;
+}
+
+.caseGrey {
+    height: 50px;
+    width: 50px;
+    background-color: grey;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.player {
+    background-color: blue;
+}
