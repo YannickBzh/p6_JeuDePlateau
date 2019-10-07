@@ -13,3 +13,11 @@ for (let j = 1; j <= numberOflines; j++) {
     }
     $game.append($row);
 }
+
+const $selectAllCases = $('.case');
+
+for (let i = 1 ; i <= 10 ; i++) {
+    let randomNumber = Math.floor((Math.random()*99)+1);
+    $selectAllCases[randomNumber].classList.add("caseGrey");
+    console.log(randomNumber)
+}
