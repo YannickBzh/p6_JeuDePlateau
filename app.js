@@ -16,12 +16,6 @@ for (let j = 1; j <= numberOflines; j++) {
     $game.append($row);
 }
 
-// $selectAllCases = Noeud HTML (Html Element)
-// const $selectAllCases = $('.empty');
-
-// console.log($selectAllCases)
-
-
 for (let i = 1; i <= numberOfCaseGrey; i++) {
     // Selection toutes mes cases empty
     const $selectAllCases = $('.empty');
@@ -36,21 +30,53 @@ for (let i = 1; i <= numberOfCaseGrey; i++) {
     $selectAllCases[randomNumber].classList.remove("empty");
 }
 
+// Affiche le player Ted aléatoirement
 for (let i = 1; i <= 1; i++) {
     const $selectAllCases = $('.empty');
-    let tedPlayer =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
-    $selectAllCases[tedPlayer].classList.add("tedPlayer");
-    $selectAllCases[tedPlayer].classList.remove("empty");
+    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
+    $selectAllCases[randomNumber].classList.add("tedPlayer");
+    $selectAllCases[randomNumber].classList.remove("empty");
 }
 
+// Affiche le player Barney aléatoirement
 for (let i = 1; i <= 1; i++) {
     const $selectAllCases = $('.empty');
-    let tedPlayer =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
-    $selectAllCases[tedPlayer].classList.add("barneyPlayer");
-    $selectAllCases[tedPlayer].classList.remove("empty");
+    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
+    $selectAllCases[randomNumber].classList.add("barneyPlayer");
+    $selectAllCases[randomNumber].classList.remove("empty");
 }
 
+// Affiche weapon tie
+for (let i = 1; i <= 1; i++) {
+    const $selectAllCases = $('.empty');
+    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
+    $selectAllCases[randomNumber].classList.add("weaponTie");
+    $selectAllCases[randomNumber].classList.remove("empty");
+}
 
+// Affiche weapon umbrella
+for (let i = 1; i <= 1; i++) {
+    const $selectAllCases = $('.empty');
+    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
+    $selectAllCases[randomNumber].classList.add("weaponUmbrella");
+    $selectAllCases[randomNumber].classList.remove("empty");
+}
+
+// Affiche weapon horn
+for (let i = 1; i <= 1; i++) {
+    const $selectAllCases = $('.empty');
+    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
+    $selectAllCases[randomNumber].classList.add("weaponHorn");
+    $selectAllCases[randomNumber].classList.remove("empty");
+}
+
+// Affiche weapon pineapple
+for (let i = 1; i <= 1; i++) {
+    const $selectAllCases = $('.empty');
+    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
+    $selectAllCases[randomNumber].classList.add("weaponPineapple");
+    $selectAllCases[randomNumber].classList.remove("empty");
+}
 /**
  * TODO : 
  *  - Maintenant que tu sais comment positionner les greyCases, tu peux faire pareil avec les weapons et les players.
