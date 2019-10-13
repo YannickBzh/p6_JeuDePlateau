@@ -1,6 +1,7 @@
 const numberOfCases = 10;
 const numberOflines = 10;
 const numberOfCaseGrey = 10;
+const $tedPlayer = $('.tedPlayer')
 
 // $game = Noeud HTML (Html Element)
 const $game = $('.game');
@@ -77,6 +78,14 @@ for (let i = 1; i <= 1; i++) {
     $selectAllCases[randomNumber].classList.add("weaponPineapple");
     $selectAllCases[randomNumber].classList.remove("empty");
 }
+
+// Déplacer le player Ted
+$('.empty').click(function(){
+    $('.tedPlayer').removeClass("tedPlayer");
+    $(this).addClass('tedPlayer');
+})
+
+
 /**
  * TODO : 
  *  - Maintenant que tu sais comment positionner les greyCases, tu peux faire pareil avec les weapons et les players.
