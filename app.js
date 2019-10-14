@@ -80,9 +80,13 @@ for (let i = 1; i <= 1; i++) {
 }
 
 // Déplacer le player Ted
-$('.empty').click(function(){
-    $('.tedPlayer').removeClass("tedPlayer");
-    $(this).addClass('tedPlayer');
+$('.case').click(function(){
+    if($(this).hasClass('empty')){
+        let ted = $('.tedPlayer');
+        ted.removeClass("tedPlayer");
+        ted.addClass("empty");
+        $(this).addClass("tedPlayer");
+    }
 })
 
 

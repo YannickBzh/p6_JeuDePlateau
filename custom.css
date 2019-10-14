@@ -27,27 +27,27 @@
 /* Players */
 
 .tedPlayer {
-    background: url(assets/ted-player.png)
+    background: url(assets/ted-player.png);
 }
 
 .barneyPlayer {
-    background: url(assets/barney-player.png)
+    background: url(assets/barney-player.png);
 }
 
 /* Weapons */
 
 .weaponTie {
-    background: url(assets/tie.png)
+    background: url(assets/tie.png);
 }
 
 .weaponUmbrella {
-    background: url(assets/umbrella.png)
+    background: url(assets/umbrella.png);
 }
 
 .weaponHorn {
-    background: url(assets/blue-horn.png)
+    background: url(assets/blue-horn.png);
 }
 
 .weaponPineapple {
-    background: url(assets/pineapple.png)
+    background: url(assets/pineapple.png);
 }
