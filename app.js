@@ -31,53 +31,33 @@ for (let i = 1; i <= numberOfCaseGrey; i++) {
     $selectAllCases[randomNumber].classList.remove("empty");
 }
 
-// Affiche le player Ted aléatoirement
-for (let i = 1; i <= 1; i++) {
-    const $selectAllCases = $('.empty');
-    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
-    $selectAllCases[randomNumber].classList.add("tedPlayer");
-    $selectAllCases[randomNumber].classList.remove("empty");
+// Fonction permettant d'afficher aléatoirement sur la board les players et les weapons
+function display(name) {
+    for (let i = 1; i <= 1; i++) {
+        const $selectAllCases = $('.empty');
+        let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
+        $selectAllCases[randomNumber].classList.add(name);
+        $selectAllCases[randomNumber].classList.remove("empty");
+    }
 }
 
-// Affiche le player Barney aléatoirement
-for (let i = 1; i <= 1; i++) {
-    const $selectAllCases = $('.empty');
-    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
-    $selectAllCases[randomNumber].classList.add("barneyPlayer");
-    $selectAllCases[randomNumber].classList.remove("empty");
-}
+// Affiche le player Ted
+display("tedPlayer")
+
+// Affiche le player Barney
+display("barneyPlayer")
 
 // Affiche weapon tie
-for (let i = 1; i <= 1; i++) {
-    const $selectAllCases = $('.empty');
-    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
-    $selectAllCases[randomNumber].classList.add("weaponTie");
-    $selectAllCases[randomNumber].classList.remove("empty");
-}
+display("weaponTie")
 
 // Affiche weapon umbrella
-for (let i = 1; i <= 1; i++) {
-    const $selectAllCases = $('.empty');
-    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
-    $selectAllCases[randomNumber].classList.add("weaponUmbrella");
-    $selectAllCases[randomNumber].classList.remove("empty");
-}
+display("weaponUmbrella")
 
 // Affiche weapon horn
-for (let i = 1; i <= 1; i++) {
-    const $selectAllCases = $('.empty');
-    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
-    $selectAllCases[randomNumber].classList.add("weaponHorn");
-    $selectAllCases[randomNumber].classList.remove("empty");
-}
+display("weaponHorn")
 
 // Affiche weapon pineapple
-for (let i = 1; i <= 1; i++) {
-    const $selectAllCases = $('.empty');
-    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
-    $selectAllCases[randomNumber].classList.add("weaponPineapple");
-    $selectAllCases[randomNumber].classList.remove("empty");
-}
+display("weaponPineapple")
 
 // Déplacer le player Ted
 $('.case').click(function(){
@@ -88,7 +68,6 @@ $('.case').click(function(){
         $(this).addClass("tedPlayer");
     }
 })
-
 
 /**
  * TODO : 
