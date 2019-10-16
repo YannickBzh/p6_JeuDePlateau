@@ -62,6 +62,7 @@ display("weaponPineapple")
 // Déplacer le player Ted
 $('.case').click(function(){
     if($(this).hasClass('empty')){
+        $(this).removeClass('empty');
         let ted = $('.tedPlayer');
         ted.removeClass("tedPlayer");
         ted.addClass("empty");
