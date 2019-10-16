@@ -1,3 +1,9 @@
+let playerPosition = $('.player')
+
+console.log(playerPosition.attr('class'))
+
+
+
 $('.case').click(function(){
     if($(this).hasClass('empty')){
         $(this).removeClass('empty');
@@ -5,15 +11,13 @@ $('.case').click(function(){
         bluePlayer.removeClass("player");
         bluePlayer.addClass("empty");
         $(this).addClass("player");
+
+        console.log('====')
+        console.log($(this).attr('class'))
     }
 })
 
-
-// /**
-//  * TODO : 
-//  *  - Maintenant que tu sais comment positionner les greyCases, tu peux faire pareil avec les weapons et les players.
-//  *  - Gestion du déplacement (c.f. dossier déplacement)
-//  *      -> l'idée est pour l'instant quand on clique sur une box que le player se déplace
-//  *      -> on verra après pour gérer les cases adjacentes.
-//  */
+/**
+ * Todo : gérer le déplacement : d'abord sur une case adjacente, puis sur deux cases adjacentes
+ */
 
