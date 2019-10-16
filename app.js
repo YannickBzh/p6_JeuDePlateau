@@ -33,12 +33,10 @@ for (let i = 1; i <= numberOfCaseGrey; i++) {
 
 // Fonction permettant d'afficher aléatoirement sur la board les players et les weapons
 function display(name) {
-    for (let i = 1; i <= 1; i++) {
-        const $selectAllCases = $('.empty');
-        let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
-        $selectAllCases[randomNumber].classList.add(name);
-        $selectAllCases[randomNumber].classList.remove("empty");
-    }
+    const $selectAllCases = $('.empty');
+    let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
+    $selectAllCases[randomNumber].classList.add(name);
+    $selectAllCases[randomNumber].classList.remove("empty");
 }
 
 // Affiche le player Ted
