@@ -1,12 +1,10 @@
-//let playerPosition = $('.player'); // je cherche la position sur laquel se situe le joueur
+//let playerPosition = $('.player'); // je cherche la position sur laquelle se situe le joueur
 //console.log(playerPosition.attr('class')) // je sors ses classes
 //console.log(playerPosition.attr('class')[7]) // Je sors son abscisse
 //console.log(playerPosition.attr('class')[11]) // Je sors son ordonnée
 
 let playerPosition = $('.player'); // Position du player
 let playerClass = playerPosition.attr('class'); // je sors les classes du player
-
-//console.log(`abscisse = ${numeroDeAbscisse}, ordonnée = ${numeroOrdonnee}`);
 
 $('.case').click(function () {
     if ($(this).hasClass('empty')) {
@@ -16,9 +14,9 @@ $('.case').click(function () {
         let newOrdonnee = newClass.substring(11, 13); // je sors l'ordonnée de la case cliquée
         let playerPosition = $('.player'); // Position du player
         let playerClass = playerPosition.attr('class'); // je sors les classes du player
-        let playerAbscisse = playerClass.substring(7, 9); // je sors la l'abscisse du player
+        let playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
         let playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
-        if ((parseInt(newAbscisse) == parseInt(playerAbscisse) + 1) || (parseInt(newOrdonnee) == parseInt(playerOrdonnee) + 1)) {
+        if ((parseInt(newAbscisse) == parseInt(playerAbscisse) + 1) && (parseInt(newOrdonnee) == parseInt(playerOrdonnee)) || ((parseInt(newOrdonnee) == parseInt(playerOrdonnee) + 1) && (parseInt(newAbscisse) == parseInt(playerAbscisse))) || ((parseInt(newAbscisse) == parseInt(playerAbscisse) - 1) && (parseInt(newOrdonnee) == parseInt(playerOrdonnee)) || ((parseInt(newOrdonnee) == parseInt(playerOrdonnee) - 1) && (parseInt(newAbscisse) == parseInt(playerAbscisse))))) {
             $(this).removeClass('empty');
             let bluePlayer = $('.player');
             bluePlayer.removeClass("player");
