@@ -22,23 +22,21 @@ for (let i = 1; i <= numberOfCaseGrey; i++) {
     const $selectAllCases = $('.empty');
 
     // Crée un indice random par rapport à toutes mes classes empty
-    let randomNumber = Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
+    let randomNumber = Math.floor((Math.random() * $selectAllCases.length - 1) + 1);
 
     // Ajoute lui la classe caseGrey
     $selectAllCases[randomNumber].classList.add("caseGrey");
-    
+
     // Supprime la classe
     $selectAllCases[randomNumber].classList.remove("empty");
 }
 
 // Fonction permettant d'afficher aléatoirement sur la board les players et les weapons
 function display(name) {
-    for (let i = 1; i <= 1; i++) {
-        const $selectAllCases = $('.empty');
-        let randomNumber =  Math.floor(( Math.random() * $selectAllCases.length - 1 )+1);
-        $selectAllCases[randomNumber].classList.add(name);
-        $selectAllCases[randomNumber].classList.remove("empty");
-    }
+    const $selectAllCases = $('.empty');
+    let randomNumber = Math.floor((Math.random() * $selectAllCases.length - 1) + 1);
+    $selectAllCases[randomNumber].classList.add(name);
+    $selectAllCases[randomNumber].classList.remove("empty");
 }
 
 // Affiche le player Ted
@@ -60,8 +58,8 @@ display("weaponHorn")
 display("weaponPineapple")
 
 // Déplacer le player Ted
-$('.case').click(function(){
-    if($(this).hasClass('empty')){
+$('.case').click(function () {
+    if ($(this).hasClass('empty')) {
         $(this).removeClass('empty');
         let ted = $('.tedPlayer');
         ted.removeClass("tedPlayer");
@@ -71,7 +69,7 @@ $('.case').click(function(){
 })
 
 /**
- * TODO : 
+ * TODO :
  *  - Maintenant que tu sais comment positionner les greyCases, tu peux faire pareil avec les weapons et les players.
  *  - Gestion du déplacement (c.f. dossier déplacement)
  *      -> l'idée est pour l'instant quand on clique sur une box que le player se déplace
