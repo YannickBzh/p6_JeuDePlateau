@@ -73,6 +73,10 @@ $('.case').click(function () {
                 (newOrdonnee == parseInt(player2Ordonnee) + i) && (newAbscisse == parseInt(player2Abscisse)) ||
                 (newAbscisse == parseInt(player2Abscisse) - i) && (newOrdonnee == parseInt(player2Ordonnee)) ||
                 (newOrdonnee == parseInt(player2Ordonnee) - i) && (newAbscisse == parseInt(player2Abscisse))) {
+
+                /**
+                 * Refactoriser
+                 */
                 $(this).removeClass('empty');
                 let bluePlayer = $('.player-2');
                 bluePlayer.removeClass("player-2");
@@ -86,11 +90,18 @@ $('.case').click(function () {
 
 
 function colorCases() {
+    /**
+     * Review : peut être refactotirdet
+     */
     let player2Position = $('.player-2'); // Position du player
     let player2Class = player2Position.attr('class'); // je sors les classes du player
     let player2Abscisse = player2Class.substring(7, 9); // je sors l'abscisse du player
     let player2Ordonnee = player2Class.substring(11, 13) // je sors l'ordonnée du player
     let cases = $('.case'); // Je sélectionne toutes mes cases
+
+    /**
+     * Refactoriser
+     */
     for (let j = 0; j < cases.length; j++) {
         let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
         let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
