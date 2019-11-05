@@ -1,14 +1,23 @@
 
 window.onload = colorCases();
-
+let whoIsPlaying = 'player-1'
+//let whoIsPlaying2 = 'player-2'
 /* Player 1*/
+
+function movePLayer($this, $player, playerName) {
+    $this.removeClass('empty');
+    $player.removeClass(playerName);
+    $player.addClass('empty');
+    $this.addClass(playerName);
+}
+
 
 $('.case').click(function () {
     if ($(this).hasClass('caseYouCanGo')) {
         let newClass = $(this).attr('class'); // je sors les classes de la case cliquée
         let newAbscisse = newClass.substring(7, 9); // je sors l'abscisse de la case cliquée
         let newOrdonnee = newClass.substring(11, 13); // je sors l'ordonnée de la case cliquée
-        let playerPosition = $('.player'); // Position du player
+        let playerPosition = $('.player-1'); // Position du player
         let playerClass = playerPosition.attr('class'); // je sors les classes du player
         let playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
         let playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
@@ -17,11 +26,9 @@ $('.case').click(function () {
                 (newOrdonnee == parseInt(playerOrdonnee) + i) && (newAbscisse == parseInt(playerAbscisse)) ||
                 (newAbscisse == parseInt(playerAbscisse) - i) && (newOrdonnee == parseInt(playerOrdonnee)) ||
                 (newOrdonnee == parseInt(playerOrdonnee) - i) && (newAbscisse == parseInt(playerAbscisse))) {
-                $(this).removeClass('empty');
-                let bluePlayer = $('.player');
-                bluePlayer.removeClass("player");
-                bluePlayer.addClass("empty");
-                $(this).addClass("player");
+                let $player1 = $('.player-1');
+                const $that = $(this)
+                movePLayer($that, $player1, whoIsPlaying)
                 colorCases();
             }
         }
@@ -30,7 +37,7 @@ $('.case').click(function () {
 
 
 function colorCases() {
-    let playerPosition = $('.player'); // Position du player
+    let playerPosition = $('.player-1'); // Position du player
     let playerClass = playerPosition.attr('class'); // je sors les classes du player
     let playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
     let playerOrdonnee = playerClass.substring(11, 13) // je sors l'ordonnée du player
@@ -73,11 +80,10 @@ $('.case').click(function () {
                 (newOrdonnee == parseInt(player2Ordonnee) + i) && (newAbscisse == parseInt(player2Abscisse)) ||
                 (newAbscisse == parseInt(player2Abscisse) - i) && (newOrdonnee == parseInt(player2Ordonnee)) ||
                 (newOrdonnee == parseInt(player2Ordonnee) - i) && (newAbscisse == parseInt(player2Abscisse))) {
-                $(this).removeClass('empty');
-                let bluePlayer = $('.player-2');
-                bluePlayer.removeClass("player-2");
-                bluePlayer.addClass("empty");
-                $(this).addClass("player-2");
+                let $player2 = $('.player-2');
+                let whoIsPlaying = 'player-2'
+                const $that = $(this)
+                movePLayer($that, $player2, whoIsPlaying)
                 colorCases();
             }
         }
@@ -94,7 +100,7 @@ function colorCases() {
     for (let j = 0; j < cases.length; j++) {
         let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
         let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
-        let casesAbscisse = casesAbs.substring(2, 4); // je sors le nombre des abscisses de mes cases
+        let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
         let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
         if ((casesAbscisse == parseInt(player2Abscisse) + 1) && (casesOrdonnee == parseInt(player2Ordonnee)) ||
             (casesAbscisse == parseInt(player2Abscisse) + 2) && (casesOrdonnee == parseInt(player2Ordonnee)) ||
@@ -113,10 +119,11 @@ function colorCases() {
     }
 }
 
+let playerTurn = $('.player')
 
-// $('.caseYouCanGo').on('click', function(){
-//     $('.row').toggleClass('player');
-// });
+
+
+
 /**
  * DONE : gérer le déplacement : d'abord sur une case adjacente, puis sur deux cases adjacentes
  *
