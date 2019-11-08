@@ -42,6 +42,7 @@ function whereIsMyPlayer(classPlayer) {
 
 $('.case').click(function () {
     if ($(this).hasClass('caseYouCanGo')) {
+        // getPlayerClassAndClicClass('.player-1')
         let newClass = $(this).attr('class'); // je sors les classes de la case cliquée
         let newAbscisse = newClass.substring(7, 9); // je sors l'abscisse de la case cliquée
         let newOrdonnee = newClass.substring(11, 13); // je sors l'ordonnée de la case cliquée
