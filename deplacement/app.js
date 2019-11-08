@@ -5,10 +5,11 @@ let playerClass = "";
 let playerAbscisse = "";
 let playerOrdonnee = "";
 let cases = "";
+// let newClass = "";
+// let newAbscisse = "";
+// let newOrdonnee = "";
 window.onload = colorCases();
 
-
-/* Player 1*/
 
 function movePLayer($this, $player, playerName) {
     $this.removeClass('empty');
@@ -17,6 +18,7 @@ function movePLayer($this, $player, playerName) {
     $this.addClass(playerName);
 }
 
+
 function whereIsMyPlayer(classPlayer) {
     playerPosition = $(classPlayer); // Position du player
     playerClass = playerPosition.attr('class'); // je sors les classes du player
@@ -24,6 +26,19 @@ function whereIsMyPlayer(classPlayer) {
     playerOrdonnee = playerClass.substring(11, 13) // je sors l'ordonnée du player
     cases = $('.case'); // Je sélectionne toutes mes cases
   }
+
+
+// function getPlayerClassAndClicClass(classPlayer) {
+    // let newClass = $(this).attr('class'); // je sors les classes de la case cliquée
+    // let newAbscisse = newClass.substring(7, 9); // je sors l'abscisse de la case cliquée
+    // let newOrdonnee = newClass.substring(11, 13); // je sors l'ordonnée de la case cliquée
+    // let playerPosition = $(classPlayer); // Position du player
+    // let playerClass = playerPosition.attr('class'); // je sors les classes du player
+    // let playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
+    // let playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
+// }
+
+/* Player 1*/
 
 $('.case').click(function () {
     if ($(this).hasClass('caseYouCanGo')) {
@@ -48,8 +63,6 @@ $('.case').click(function () {
     }
 })
 
-
-
 function colorCases() {
     whereIsMyPlayer('.player-1');
     for (let j = 0; j < cases.length; j++) {
@@ -73,7 +86,6 @@ function colorCases() {
         }
     }
 }
-
 
 
 /* Player 2 */
@@ -126,10 +138,6 @@ function colorCases() {
         }
     }
 }
-
-
-
-
 
 
 /**
