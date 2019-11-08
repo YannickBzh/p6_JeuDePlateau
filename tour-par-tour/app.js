@@ -20,7 +20,7 @@ $('.case').on('click', function() {
     const $player2 = $('.player-2')
 
     if (whoIsPlaying === 'player-1') {
-        // $(this) = jQuery ?
+        // $(this) = jQuery
         // = Context dans lequel est executé l'événement.
         // $that = convention quand on capture le contexte d'execution dans une variable
         const $that = $(this)
