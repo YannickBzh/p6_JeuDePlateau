@@ -1,14 +1,17 @@
 
-let whoIsPlaying = 'player-1'
+let whoIsPlaying = 'player-1';
 let playerPosition = "";
 let playerClass = "";
 let playerAbscisse = "";
 let playerOrdonnee = "";
 let cases = "";
-// let newClass = "";
-// let newAbscisse = "";
-// let newOrdonnee = "";
+let newClass = "";
+let newAbscisse = "";
+let newOrdonnee = "";
+
+window.onload = colorCases2();
 window.onload = colorCases();
+
 
 
 function movePLayer($this, $player, playerName) {
@@ -23,42 +26,55 @@ function whereIsMyPlayer(classPlayer) {
     playerPosition = $(classPlayer); // Position du player
     playerClass = playerPosition.attr('class'); // je sors les classes du player
     playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
-    playerOrdonnee = playerClass.substring(11, 13) // je sors l'ordonnée du player
+    playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
     cases = $('.case'); // Je sélectionne toutes mes cases
-  }
+}
 
 
-// function getPlayerClassAndClicClass(classPlayer) {
-    // let newClass = $(this).attr('class'); // je sors les classes de la case cliquée
-    // let newAbscisse = newClass.substring(7, 9); // je sors l'abscisse de la case cliquée
-    // let newOrdonnee = newClass.substring(11, 13); // je sors l'ordonnée de la case cliquée
-    // let playerPosition = $(classPlayer); // Position du player
-    // let playerClass = playerPosition.attr('class'); // je sors les classes du player
-    // let playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
-    // let playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
-// }
+function getPlayerClassAndClicClass(context, classPlayer) {
+    newClass = context.attr('class'); // je sors les classes de la case cliquée
+    newAbscisse = newClass.substring(7, 9); // je sors l'abscisse de la case cliquée
+    newOrdonnee = newClass.substring(11, 13); // je sors l'ordonnée de la case cliquée
+    playerPosition = $(classPlayer); // Position du player
+    playerClass = playerPosition.attr('class'); // je sors les classes du player
+    playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
+    playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
+}
+
+
+$('.case').click(function () {
+    const $player1 = $('.player-1');
+    const $player2 = $('.player-2');
+    if (whoIsPlaying === 'player-1') {
+        const $that = $(this);
+        //handleMove($that, $player1, whoIsPlaying);
+        movePLayer($that, $player1, whoIsPlaying);
+        colorCases2()
+        whoIsPlaying = 'player-2';
+    } else {
+        const $that = $(this);
+        //handleMove($that, $player2, whoIsPlaying);
+        movePLayer($that, $player2, whoIsPlaying);
+        colorCases()
+        whoIsPlaying = 'player-1';
+    }
+})
 
 /* Player 1*/
 
 $('.case').click(function () {
     if ($(this).hasClass('caseYouCanGo')) {
-        // getPlayerClassAndClicClass('.player-1')
-        let newClass = $(this).attr('class'); // je sors les classes de la case cliquée
-        let newAbscisse = newClass.substring(7, 9); // je sors l'abscisse de la case cliquée
-        let newOrdonnee = newClass.substring(11, 13); // je sors l'ordonnée de la case cliquée
-        let playerPosition = $('.player-1'); // Position du player
-        let playerClass = playerPosition.attr('class'); // je sors les classes du player
-        let playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
-        let playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
+        getPlayerClassAndClicClass($(this), '.player-1');
         for (let i = 1; i <= 2; i++) {
             if ((newAbscisse == parseInt(playerAbscisse) + i) && (newOrdonnee == parseInt(playerOrdonnee)) ||
                 (newOrdonnee == parseInt(playerOrdonnee) + i) && (newAbscisse == parseInt(playerAbscisse)) ||
                 (newAbscisse == parseInt(playerAbscisse) - i) && (newOrdonnee == parseInt(playerOrdonnee)) ||
                 (newOrdonnee == parseInt(playerOrdonnee) - i) && (newAbscisse == parseInt(playerAbscisse))) {
                 let $player1 = $('.player-1');
-                const $that = $(this)
-                movePLayer($that, $player1, whoIsPlaying)
-                colorCases();
+                const $that = $(this);
+                movePLayer($that, $player1, whoIsPlaying);
+                colorCases()
+                //whoseTurn();
             }
         }
     }
@@ -83,7 +99,7 @@ function colorCases() {
             cases[j].classList.add("caseYouCanGo");
         } else {
             cases[j].classList.remove("caseYouCanGo");
-            cases[j].classList.add('empty')
+            cases[j].classList.add('empty');
         }
     }
 }
@@ -93,30 +109,25 @@ function colorCases() {
 
 $('.case').click(function () {
     if ($(this).hasClass('caseYouCanGo')) {
-        let newClass = $(this).attr('class'); // je sors les classes de la case cliquée
-        let newAbscisse = newClass.substring(7, 9); // je sors l'abscisse de la case cliquée
-        let newOrdonnee = newClass.substring(11, 13); // je sors l'ordonnée de la case cliquée
-        let player2Position = $('.player-2'); // Position du player
-        let player2Class = player2Position.attr('class'); // je sors les classes du player
-        let player2Abscisse = player2Class.substring(7, 9); // je sors l'abscisse du player
-        let player2Ordonnee = player2Class.substring(11, 13); // je sors l'ordonnée du player
+        getPlayerClassAndClicClass($(this), '.player-2');
         for (let i = 1; i <= 2; i++) {
-            if ((newAbscisse == parseInt(player2Abscisse) + i) && (newOrdonnee == parseInt(player2Ordonnee)) ||
-                (newOrdonnee == parseInt(player2Ordonnee) + i) && (newAbscisse == parseInt(player2Abscisse)) ||
-                (newAbscisse == parseInt(player2Abscisse) - i) && (newOrdonnee == parseInt(player2Ordonnee)) ||
-                (newOrdonnee == parseInt(player2Ordonnee) - i) && (newAbscisse == parseInt(player2Abscisse))) {
+            if ((newAbscisse == parseInt(playerAbscisse) + i) && (newOrdonnee == parseInt(playerOrdonnee)) ||
+                (newOrdonnee == parseInt(playerOrdonnee) + i) && (newAbscisse == parseInt(playerAbscisse)) ||
+                (newAbscisse == parseInt(playerAbscisse) - i) && (newOrdonnee == parseInt(playerOrdonnee)) ||
+                (newOrdonnee == parseInt(playerOrdonnee) - i) && (newAbscisse == parseInt(playerAbscisse))) {
                 let $player2 = $('.player-2');
-                let whoIsPlaying = 'player-2'
-                const $that = $(this)
-                movePLayer($that, $player2, whoIsPlaying)
-                colorCases();
+                let whoIsPlaying = 'player-2';
+                const $that = $(this);
+                movePLayer($that, $player2, whoIsPlaying);
+                colorCases2()
+                //whoseTurn()
             }
         }
     }
 })
 
 
-function colorCases() {
+function colorCases2() {
     whereIsMyPlayer('.player-2');
     for (let j = 0; j < cases.length; j++) {
         let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
@@ -141,17 +152,14 @@ function colorCases() {
 }
 
 
+
+
+
 /**
- * DONE : gérer le déplacement : d'abord sur une case adjacente, puis sur deux cases adjacentes
+ * To Do next:
+ *  - Refactorisation
+ *      -> Créer de plus petites fonctions pour tes différentes actions plus simples à manipuler.
+ *      -> tu peux t'inspirer de handleMove
  *
- * TODO :
- *  -> gérer la surbrillance
- *  -> ajouter un deuxième carré (comme player-2) et gérer le tour par tour
- *      -> indice : variable globale (pas une constante) qui indique quel player est en train de jouer
- *      -> ne pas hésiter à repartir sur modèle simplifié si tu coinces avec le reste
- *  -> commence à prendre du recul sur ce qu'on fait pour comprendre la stratégie de création de classe
- *
- * RESSOURCES :
- *  -> méthode filter JavaScript
- *  -> méthode literal
+ *  - Intégration de la partie déplacement/hilight avec la partie tour/tour.
  */

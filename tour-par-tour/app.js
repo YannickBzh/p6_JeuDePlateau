@@ -1,12 +1,5 @@
 let whoIsPlaying = 'player-1'
 
-// console.log('====')
-// console.log($player1)
-
-// console.log('++++')
-// console.log($player2)
-
-
 function handleMove($this, $player, playerName) {
     $this.removeClass('empty');    
     $player.removeClass(playerName);
@@ -14,7 +7,7 @@ function handleMove($this, $player, playerName) {
     $this.addClass(playerName);
 }
 
-$('.case').on('click', function() {
+$('.case').click(function () {
     // important de les mettre ici -> $player1 && $player2 sont réinitialisés à chaque événement
     const $player1 = $('.player-1')
     const $player2 = $('.player-2')
