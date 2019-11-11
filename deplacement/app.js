@@ -79,15 +79,15 @@ function movePLayer($this, $player, playerName) {
 
 // Fonction pour gérer le tour-par-tour
 $('.case').click(function () {
-    if ($(this).hasClass('caseYouCanGo')) {
+    if (($(this).hasClass('caseYouCanGo')) && ((!$(this).hasClass('player-1')) && (!$(this).hasClass('player-2')))) {
         const $player1 = $('.player-1');
         const $player2 = $('.player-2');
-        if (whoIsPlaying === 'player-1') {
+        if ((whoIsPlaying === 'player-1')) {
             const $that = $(this);
             movePLayer($that, $player1, whoIsPlaying);
             colorCasesPlayer2()
             whoIsPlaying = 'player-2';
-        } else {
+        } else if ((whoIsPlaying === 'player-2')) {
             const $that = $(this);
             movePLayer($that, $player2, whoIsPlaying);
             colorCasesPlayer1()
