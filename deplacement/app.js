@@ -13,14 +13,6 @@ window.onload = colorCasesPlayer2();
 window.onload = colorCasesPlayer1();
 
 
-// Fonction pour déplacer le player
-function movePLayer($this, $player, playerName) {
-    $this.removeClass('empty');
-    $player.removeClass(playerName);
-    $player.addClass('empty');
-    $this.addClass(playerName);
-}
-
 // Fonction pour sortir les numéros d'abscisse et d'ordonnée du player
 function whereIsMyPlayer(classPlayer) {
     playerPosition = $(classPlayer); // Position du player
@@ -39,6 +31,50 @@ function getPlayerClassAndClicClass(context, classPlayer) {
     playerClass = playerPosition.attr('class'); // je sors les classes du player
     playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
     playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
+}
+
+// Fonction pour griser les cases adjacentes
+function caseYouCanGo() {
+    for (let j = 0; j < cases.length; j++) {
+        let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
+        let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
+        let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
+        let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
+        if ((casesAbscisse == parseInt(playerAbscisse) + 1) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
+            (casesAbscisse == parseInt(playerAbscisse) + 2) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
+            (casesOrdonnee == parseInt(playerOrdonnee) + 1) && (casesAbscisse == parseInt(playerAbscisse)) ||
+            (casesOrdonnee == parseInt(playerOrdonnee) + 2) && (casesAbscisse == parseInt(playerAbscisse)) ||
+            (casesAbscisse == parseInt(playerAbscisse) - 1) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
+            (casesAbscisse == parseInt(playerAbscisse) - 2) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
+            (casesOrdonnee == parseInt(playerOrdonnee) - 1) && (casesAbscisse == parseInt(playerAbscisse)) ||
+            (casesOrdonnee == parseInt(playerOrdonnee) - 2) && (casesAbscisse == parseInt(playerAbscisse))) {
+            cases[j].classList.remove('empty');
+            cases[j].classList.add("caseYouCanGo");
+        } else {
+            cases[j].classList.remove("caseYouCanGo");
+            cases[j].classList.add('empty')
+        }
+    }
+}
+
+// Fonction pour griser les cases adjacentes au Player-1
+function colorCasesPlayer1() {
+    whereIsMyPlayer('.player-1');
+    caseYouCanGo()
+}
+
+// Fonction pour griser les cases adjacentes au Player-2
+function colorCasesPlayer2() {
+    whereIsMyPlayer('.player-2');
+    caseYouCanGo()
+}
+
+// Fonction pour déplacer le player
+function movePLayer($this, $player, playerName) {
+    $this.removeClass('empty');
+    $player.removeClass(playerName);
+    $player.addClass('empty');
+    $this.addClass(playerName);
 }
 
 // Fonction pour gérer le tour-par-tour
@@ -71,39 +107,11 @@ $('.case').click(function () {
                 (newOrdonnee == parseInt(playerOrdonnee) + i) && (newAbscisse == parseInt(playerAbscisse)) ||
                 (newAbscisse == parseInt(playerAbscisse) - i) && (newOrdonnee == parseInt(playerOrdonnee)) ||
                 (newOrdonnee == parseInt(playerOrdonnee) - i) && (newAbscisse == parseInt(playerAbscisse))) {
-                let $player1 = $('.player-1');
-                const $that = $(this);
-                movePLayer($that, $player1, whoIsPlaying);
                 colorCasesPlayer1()
             }
         }
     }
 })
-
-// Fonction pour grisée les cases adjacentes au Player-1
-function colorCasesPlayer1() {
-    whereIsMyPlayer('.player-1');
-    for (let j = 0; j < cases.length; j++) {
-        let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
-        let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
-        let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
-        let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
-        if ((casesAbscisse == parseInt(playerAbscisse) + 1) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
-            (casesAbscisse == parseInt(playerAbscisse) + 2) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
-            (casesOrdonnee == parseInt(playerOrdonnee) + 1) && (casesAbscisse == parseInt(playerAbscisse)) ||
-            (casesOrdonnee == parseInt(playerOrdonnee) + 2) && (casesAbscisse == parseInt(playerAbscisse)) ||
-            (casesAbscisse == parseInt(playerAbscisse) - 1) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
-            (casesAbscisse == parseInt(playerAbscisse) - 2) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
-            (casesOrdonnee == parseInt(playerOrdonnee) - 1) && (casesAbscisse == parseInt(playerAbscisse)) ||
-            (casesOrdonnee == parseInt(playerOrdonnee) - 2) && (casesAbscisse == parseInt(playerAbscisse))) {
-            cases[j].classList.remove('empty');
-            cases[j].classList.add("caseYouCanGo");
-        } else {
-            cases[j].classList.remove("caseYouCanGo");
-            cases[j].classList.add('empty');
-        }
-    }
-}
 
 
 /* Player 2 */
@@ -117,42 +125,11 @@ $('.case').click(function () {
                 (newOrdonnee == parseInt(playerOrdonnee) + i) && (newAbscisse == parseInt(playerAbscisse)) ||
                 (newAbscisse == parseInt(playerAbscisse) - i) && (newOrdonnee == parseInt(playerOrdonnee)) ||
                 (newOrdonnee == parseInt(playerOrdonnee) - i) && (newAbscisse == parseInt(playerAbscisse))) {
-                let $player2 = $('.player-2');
-                const $that = $(this);
-                movePLayer($that, $player2, whoIsPlaying);
                 colorCasesPlayer2()
             }
         }
     }
 })
-
-// Fonction pour grisée les cases adjacentes au Player-2
-function colorCasesPlayer2() {
-    whereIsMyPlayer('.player-2');
-    for (let j = 0; j < cases.length; j++) {
-        let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
-        let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
-        let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
-        let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
-        if ((casesAbscisse == parseInt(playerAbscisse) + 1) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
-            (casesAbscisse == parseInt(playerAbscisse) + 2) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
-            (casesOrdonnee == parseInt(playerOrdonnee) + 1) && (casesAbscisse == parseInt(playerAbscisse)) ||
-            (casesOrdonnee == parseInt(playerOrdonnee) + 2) && (casesAbscisse == parseInt(playerAbscisse)) ||
-            (casesAbscisse == parseInt(playerAbscisse) - 1) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
-            (casesAbscisse == parseInt(playerAbscisse) - 2) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
-            (casesOrdonnee == parseInt(playerOrdonnee) - 1) && (casesAbscisse == parseInt(playerAbscisse)) ||
-            (casesOrdonnee == parseInt(playerOrdonnee) - 2) && (casesAbscisse == parseInt(playerAbscisse))) {
-            cases[j].classList.remove('empty');
-            cases[j].classList.add("caseYouCanGo");
-        } else {
-            cases[j].classList.remove("caseYouCanGo");
-            cases[j].classList.add('empty')
-        }
-    }
-}
-
-
-
 
 
 /**
