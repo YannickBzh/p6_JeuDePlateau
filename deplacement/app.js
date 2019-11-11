@@ -9,11 +9,11 @@ let newClass = "";
 let newAbscisse = "";
 let newOrdonnee = "";
 
-window.onload = colorCases2();
-window.onload = colorCases();
+window.onload = colorCasesPlayer2();
+window.onload = colorCasesPlayer1();
 
 
-
+// Fonction pour déplacer le player
 function movePLayer($this, $player, playerName) {
     $this.removeClass('empty');
     $player.removeClass(playerName);
@@ -21,7 +21,7 @@ function movePLayer($this, $player, playerName) {
     $this.addClass(playerName);
 }
 
-
+// Fonction pour sortir les numéros d'abscisse et d'ordonnée du player
 function whereIsMyPlayer(classPlayer) {
     playerPosition = $(classPlayer); // Position du player
     playerClass = playerPosition.attr('class'); // je sors les classes du player
@@ -30,7 +30,7 @@ function whereIsMyPlayer(classPlayer) {
     cases = $('.case'); // Je sélectionne toutes mes cases
 }
 
-
+// Fonction pour sortir la position de la case cliquée et la position du player
 function getPlayerClassAndClicClass(context, classPlayer) {
     newClass = context.attr('class'); // je sors les classes de la case cliquée
     newAbscisse = newClass.substring(7, 9); // je sors l'abscisse de la case cliquée
@@ -41,27 +41,28 @@ function getPlayerClassAndClicClass(context, classPlayer) {
     playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
 }
 
-
+// Fonction pour gérer le tour-par-tour
 $('.case').click(function () {
-    const $player1 = $('.player-1');
-    const $player2 = $('.player-2');
-    if (whoIsPlaying === 'player-1') {
-        const $that = $(this);
-        //handleMove($that, $player1, whoIsPlaying);
-        movePLayer($that, $player1, whoIsPlaying);
-        colorCases2()
-        whoIsPlaying = 'player-2';
-    } else {
-        const $that = $(this);
-        //handleMove($that, $player2, whoIsPlaying);
-        movePLayer($that, $player2, whoIsPlaying);
-        colorCases()
-        whoIsPlaying = 'player-1';
+    if ($(this).hasClass('caseYouCanGo')) {
+        const $player1 = $('.player-1');
+        const $player2 = $('.player-2');
+        if (whoIsPlaying === 'player-1') {
+            const $that = $(this);
+            movePLayer($that, $player1, whoIsPlaying);
+            colorCasesPlayer2()
+            whoIsPlaying = 'player-2';
+        } else {
+            const $that = $(this);
+            movePLayer($that, $player2, whoIsPlaying);
+            colorCasesPlayer1()
+            whoIsPlaying = 'player-1';
+        }
     }
 })
 
 /* Player 1*/
 
+// Déplace le player-1 sur 2 cases adjacentes
 $('.case').click(function () {
     if ($(this).hasClass('caseYouCanGo')) {
         getPlayerClassAndClicClass($(this), '.player-1');
@@ -73,14 +74,14 @@ $('.case').click(function () {
                 let $player1 = $('.player-1');
                 const $that = $(this);
                 movePLayer($that, $player1, whoIsPlaying);
-                colorCases()
-                //whoseTurn();
+                colorCasesPlayer1()
             }
         }
     }
 })
 
-function colorCases() {
+// Fonction pour grisée les cases adjacentes au Player-1
+function colorCasesPlayer1() {
     whereIsMyPlayer('.player-1');
     for (let j = 0; j < cases.length; j++) {
         let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
@@ -107,6 +108,7 @@ function colorCases() {
 
 /* Player 2 */
 
+// Déplace le player-2 sur 2 cases adjacentes
 $('.case').click(function () {
     if ($(this).hasClass('caseYouCanGo')) {
         getPlayerClassAndClicClass($(this), '.player-2');
@@ -116,18 +118,16 @@ $('.case').click(function () {
                 (newAbscisse == parseInt(playerAbscisse) - i) && (newOrdonnee == parseInt(playerOrdonnee)) ||
                 (newOrdonnee == parseInt(playerOrdonnee) - i) && (newAbscisse == parseInt(playerAbscisse))) {
                 let $player2 = $('.player-2');
-                let whoIsPlaying = 'player-2';
                 const $that = $(this);
                 movePLayer($that, $player2, whoIsPlaying);
-                colorCases2()
-                //whoseTurn()
+                colorCasesPlayer2()
             }
         }
     }
 })
 
-
-function colorCases2() {
+// Fonction pour grisée les cases adjacentes au Player-2
+function colorCasesPlayer2() {
     whereIsMyPlayer('.player-2');
     for (let j = 0; j < cases.length; j++) {
         let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
