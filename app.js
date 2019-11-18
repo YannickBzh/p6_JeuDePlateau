@@ -13,7 +13,6 @@ let newAbscisse = "";
 let newOrdonnee = "";
 
 
-
 // $game = Noeud HTML (Html Element)
 const $game = $('.game');
 
@@ -31,16 +30,9 @@ for (let j = 0; j <= numberOflines; j++) {
 
 // Génération des cases inatteignables 
 for (let i = 1; i <= numberOfCaseGrey; i++) {
-    // Selection toutes mes cases empty
     const $selectAllCases = $('.empty');
-
-    // Crée un indice random par rapport à toutes mes classes empty
     let randomNumber = Math.floor((Math.random() * $selectAllCases.length - 1) + 1);
-
-    // Ajoute lui la classe caseGrey
     $selectAllCases[randomNumber].classList.add("caseGrey");
-
-    // Supprime la classe
     $selectAllCases[randomNumber].classList.remove("empty");
 }
 
@@ -81,17 +73,6 @@ function whereIsMyPlayer(classPlayer) {
     playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
     playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
     cases = $('.case'); // Je sélectionne toutes mes cases
-}
-
-// Fonction pour sortir la position de la case cliquée et la position du player
-function getPlayerClassAndClicClass(context, classPlayer) {
-    newClass = context.attr('class'); // je sors les classes de la case cliquée
-    newAbscisse = newClass.substring(7, 9); // je sors l'abscisse de la case cliquée
-    newOrdonnee = newClass.substring(11, 13); // je sors l'ordonnée de la case cliquée
-    playerPosition = $(classPlayer); // Position du player
-    playerClass = playerPosition.attr('class'); // je sors les classes du player
-    playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
-    playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
 }
 
 // Fonction pour griser les cases adjacentes
@@ -161,45 +142,11 @@ $('.case').click(function () {
     }
 })
 
-/* Player 1*/
-
-// Autorise le déplacement du player-1 sur 2 cases adjacentes
-$('.case').click(function () {
-    if ($(this).hasClass('caseYouCanGo')) {
-        getPlayerClassAndClicClass($(this), '.player-1');
-        for (let i = 1; i <= 2; i++) {
-            if ((newAbscisse == parseInt(playerAbscisse) + i) && (newOrdonnee == parseInt(playerOrdonnee)) ||
-                (newOrdonnee == parseInt(playerOrdonnee) + i) && (newAbscisse == parseInt(playerAbscisse)) ||
-                (newAbscisse == parseInt(playerAbscisse) - i) && (newOrdonnee == parseInt(playerOrdonnee)) ||
-                (newOrdonnee == parseInt(playerOrdonnee) - i) && (newAbscisse == parseInt(playerAbscisse))) {
-                colorCasesPlayer1()
-            }
-        }
-    }
-})
-
-
-/* Player 2 */
-
-// Autorise le déplacement du player-2 sur 2 cases adjacentes
-$('.case').click(function () {
-    if ($(this).hasClass('caseYouCanGo')) {
-        getPlayerClassAndClicClass($(this), '.player-2');
-        for (let i = 1; i <= 2; i++) {
-            if ((newAbscisse == parseInt(playerAbscisse) + i) && (newOrdonnee == parseInt(playerOrdonnee)) ||
-                (newOrdonnee == parseInt(playerOrdonnee) + i) && (newAbscisse == parseInt(playerAbscisse)) ||
-                (newAbscisse == parseInt(playerAbscisse) - i) && (newOrdonnee == parseInt(playerOrdonnee)) ||
-                (newOrdonnee == parseInt(playerOrdonnee) - i) && (newAbscisse == parseInt(playerAbscisse))) {
-                colorCasesPlayer2()
-            }
-        }
-    }
-})
 
 
 /**
  * To Do
- * 
+ *
  * 1 - Empêcher les caseYouCanGo si armes/joueurs/blocs-inatteignables à proximité
  * 2 - Récupérer une weapon, déposer celle en sa possession (Ne pas hésiter à créer un nouveau dossier si trop complexe)
  * 3 - Commencer à penser en POO
