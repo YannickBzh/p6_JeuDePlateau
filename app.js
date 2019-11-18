@@ -75,6 +75,20 @@ function whereIsMyPlayer(classPlayer) {
     cases = $('.case'); // Je sélectionne toutes mes cases
 }
 
+function checkTopDeplacement() {
+    // parcourt vers le haut :
+    //  - si a + 1 c'est possible alors ajoute la classe .caseYouCanGo sinon sort de la fonction (indice : return)
+    //  - si a + 2 c'est possible alors ajoute la classe .caseYouCanGo sinon sort de la fonction (indice : return)
+    //  - si a + 3 c'est possible alors ajoute la classe .caseYouCanGo sinon sort de la fonction (indice : return)
+}
+
+function checkRightDeplacement() {
+    // parcourt vers le droite :
+    //  - si a + 1 c'est possible alors ajoute la classe .caseYouCanGo sinon sort de la fonction (indice : return)
+    //  - si a + 2 c'est possible alors ajoute la classe .caseYouCanGo sinon sort de la fonction (indice : return)
+    //  - si a + 3 c'est possible alors ajoute la classe .caseYouCanGo sinon sort de la fonction (indice : return)
+}
+
 // Fonction pour griser les cases adjacentes
 function caseYouCanGo() {
     for (let j = 0; j < cases.length; j++) {
@@ -82,6 +96,13 @@ function caseYouCanGo() {
         let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
         let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
         let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
+        /**
+         * @review -> refactorse ça avant d'avancer
+         *  - je controlle vers le haut
+         *  - je controlle vers la droite
+         *  - je controlle vers le bas
+         *  - je controlle vers la gauche
+         */
         if ((casesAbscisse == parseInt(playerAbscisse) + 1) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
             (casesAbscisse == parseInt(playerAbscisse) + 2) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
             (casesAbscisse == parseInt(playerAbscisse) + 3) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
@@ -94,6 +115,13 @@ function caseYouCanGo() {
             (casesOrdonnee == parseInt(playerOrdonnee) - 1) && (casesAbscisse == parseInt(playerAbscisse)) ||
             (casesOrdonnee == parseInt(playerOrdonnee) - 2) && (casesAbscisse == parseInt(playerAbscisse)) ||
             (casesOrdonnee == parseInt(playerOrdonnee) - 3) && (casesAbscisse == parseInt(playerAbscisse))) {
+
+
+            // console.log(cases[j])
+
+            console.log(casesAbscisse)
+            console.log(playerAbscisse)
+
             cases[j].classList.remove('empty');
             cases[j].classList.add("caseYouCanGo");
         } else {
