@@ -3,14 +3,6 @@ const numberOflines = 9;
 const numberOfCaseGrey = 10;
 const $tedPlayer = $('.player-1')
 let whoIsPlaying = 'player-1';
-let playerPosition = "";
-let playerClass = "";
-let playerAbscisse = "";
-let playerOrdonnee = "";
-let cases = "";
-let newClass = "";
-let newAbscisse = "";
-let newOrdonnee = "";
 
 let weapons = ["weaponTie", "weaponUmbrella", "weaponHorn", "weaponPineapple"]
 
@@ -75,43 +67,64 @@ function whereIsMyPlayer(classPlayer) {
     cases = $('.case'); // Je sélectionne toutes mes cases
 }
 
-function checkTopDeplacement() {
-        // parcourt vers le haut :
-    //  - si a - 1 c'est possible alors ajoute la classe .caseYouCanGo sinon sort de la fonction (indice : return)
-    //  - si a - 2 c'est possible alors ajoute la classe .caseYouCanGo sinon sort de la fonction (indice : return)
-    //  - si a - 3 c'est possible alors ajoute la classe .caseYouCanGo sinon sort de la fonction (indice : return)
-}
+// function checkDeplacement(posXYCase, posXYPlayer) {
+//     for (let j = 0; j < cases.length; j++) {
+//         casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
+//         casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
+//         casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
+//         casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
+//         if ((casesOrdonnee == posXYCase) && (casesAbscisse == parseInt(posXYPlayer))) {
+//             if (cases[j].classList.contains('caseGrey')) {
+//                 return;
+//             } else {
+//                 cases[j].classList.remove('empty');
+//                 cases[j].classList.add("caseYouCanGo");
+//             }
+//         }
+//     }
+// }
 
 
 // Fonction pour les highlights vers le haut
 function highlightTop() {
     for (let i = 1; i <= 3; i++) {
         let topCaseOrdonnee = (parseInt(playerOrdonnee) - i);
+        //checkDeplacement(topCaseOrdonnee, playerAbscisse);
         for (let j = 0; j < cases.length; j++) {
             let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
             let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
             let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
             let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
             if ((casesOrdonnee == topCaseOrdonnee) && (casesAbscisse == parseInt(playerAbscisse))) {
-                cases[j].classList.remove('empty');
-                cases[j].classList.add("caseYouCanGo");
+                if (cases[j].classList.contains('caseGrey')) {
+                    return;
+                } else {
+                    cases[j].classList.remove('empty');
+                    cases[j].classList.add("caseYouCanGo");
+                }
             }
         }
     }
 }
 
+
+
 // Fonction pour les highlights vers le bas
-function highlightDown() {
+function highlightBottom() {
     for (let i = 1; i <= 3; i++) {
-        let topCaseOrdonnee = (parseInt(playerOrdonnee) + i);
+        let bottomCaseOrdonnee = (parseInt(playerOrdonnee) + i);
         for (let j = 0; j < cases.length; j++) {
             let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
             let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
             let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
             let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
-            if ((casesOrdonnee == topCaseOrdonnee) && (casesAbscisse == parseInt(playerAbscisse))) {
-                cases[j].classList.remove('empty');
-                cases[j].classList.add("caseYouCanGo");
+            if ((casesOrdonnee == bottomCaseOrdonnee) && (casesAbscisse == parseInt(playerAbscisse))) {
+                if (cases[j].classList.contains('caseGrey')) {
+                    return;
+                } else {
+                    cases[j].classList.remove('empty');
+                    cases[j].classList.add("caseYouCanGo");
+                }
             }
         }
     }
@@ -120,15 +133,19 @@ function highlightDown() {
 // Fonction pour les highlights vers la gauche
 function highlightLeft() {
     for (let i = 1; i <= 3; i++) {
-        let topCaseAbscisse = (parseInt(playerAbscisse) - i);
+        let leftCaseAbscisse = (parseInt(playerAbscisse) - i);
         for (let j = 0; j < cases.length; j++) {
             let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
             let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
             let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
             let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
-            if ((casesAbscisse == topCaseAbscisse) && (casesOrdonnee == parseInt(playerOrdonnee))) {
-                cases[j].classList.remove('empty');
-                cases[j].classList.add("caseYouCanGo");
+            if ((casesAbscisse == leftCaseAbscisse) && (casesOrdonnee == parseInt(playerOrdonnee))) {
+                if (cases[j].classList.contains('caseGrey')) {
+                    return;
+                } else {
+                    cases[j].classList.remove('empty');
+                    cases[j].classList.add("caseYouCanGo");
+                }
             }
         }
     }
@@ -137,15 +154,19 @@ function highlightLeft() {
 // Fonction pour les highlights vers la droite
 function highlightRight() {
     for (let i = 1; i <= 3; i++) {
-        let topCaseAbscisse = (parseInt(playerAbscisse) + i);
+        let rightCaseAbscisse = (parseInt(playerAbscisse) + i);
         for (let j = 0; j < cases.length; j++) {
             let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
             let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
             let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
             let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
-            if ((casesAbscisse == topCaseAbscisse) && (casesOrdonnee == parseInt(playerOrdonnee))) {
-                cases[j].classList.remove('empty');
-                cases[j].classList.add("caseYouCanGo");
+            if ((casesAbscisse == rightCaseAbscisse) && (casesOrdonnee == parseInt(playerOrdonnee))) {
+                if (cases[j].classList.contains('caseGrey')) {
+                    return;
+                } else {
+                    cases[j].classList.remove('empty');
+                    cases[j].classList.add("caseYouCanGo");
+                }
             }
         }
     }
@@ -163,20 +184,20 @@ function eraseHighlight() {
     }
 }
 
-// Fonction pour griser les cases adjacentes au Player-1
+// Fonction highlights Player-1
 function highlightPlayer1() {
     whereIsMyPlayer('.player-1');
     highlightTop()
-    highlightDown()
+    highlightBottom()
     highlightLeft()
     highlightRight()
 }
 
-// Fonction pour griser les cases adjacentes au Player-2
+// Fonction highlights Player-2
 function highlightPlayer2() {
     whereIsMyPlayer('.player-2');
     highlightTop()
-    highlightDown()
+    highlightBottom()
     highlightLeft()
     highlightRight()
 }
@@ -205,8 +226,8 @@ $('.case').click(function () {
             movePLayer($that, $player2, whoIsPlaying);
             highlightPlayer1()
             whoIsPlaying = 'player-1';
-        } 
-    } 
+        }
+    }
 })
 
 
