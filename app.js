@@ -63,8 +63,8 @@ display("weaponHorn")
 // Affiche weapon pineapple
 display("weaponPineapple")
 
-// Chargement des cases adjacentes atteignables par les joueurs
-window.onload = colorCasesPlayer1();
+// Chargement des cases adjacentes atteignables par le joueur 1
+window.onload = highlightPlayer1();
 
 // Fonction pour sortir les numéros d'abscisse et d'ordonnée du player
 function whereIsMyPlayer(classPlayer) {
@@ -83,8 +83,8 @@ function checkTopDeplacement() {
 }
 
 
-// Fonction pour griser les cases vers le haut
-function colorTopDeplacement() {
+// Fonction pour les highlights vers le haut
+function highlightTop() {
     for (let i = 1; i <= 3; i++) {
         let topCaseOrdonnee = (parseInt(playerOrdonnee) - i);
         for (let j = 0; j < cases.length; j++) {
@@ -100,8 +100,8 @@ function colorTopDeplacement() {
     }
 }
 
-// Fonction pour griser les cases vers le bas
-function colorDownDeplacement() {
+// Fonction pour les highlights vers le bas
+function highlightDown() {
     for (let i = 1; i <= 3; i++) {
         let topCaseOrdonnee = (parseInt(playerOrdonnee) + i);
         for (let j = 0; j < cases.length; j++) {
@@ -117,8 +117,8 @@ function colorDownDeplacement() {
     }
 }
 
-// Fonction pour griser les cases vers la gauche
-function colorLeftDeplacement() {
+// Fonction pour les highlights vers la gauche
+function highlightLeft() {
     for (let i = 1; i <= 3; i++) {
         let topCaseAbscisse = (parseInt(playerAbscisse) - i);
         for (let j = 0; j < cases.length; j++) {
@@ -134,8 +134,8 @@ function colorLeftDeplacement() {
     }
 }
 
-// Fonction pour griser les cases vers la droite
-function colorRightDeplacement() {
+// Fonction pour les highlights vers la droite
+function highlightRight() {
     for (let i = 1; i <= 3; i++) {
         let topCaseAbscisse = (parseInt(playerAbscisse) + i);
         for (let j = 0; j < cases.length; j++) {
@@ -151,9 +151,8 @@ function colorRightDeplacement() {
     }
 }
 
-
-// Fonction pour supprimer les cases grisées après mouvement du joueur précédent
-function eraseCaseYouCanGo() {
+// Fonction pour supprimer les highlights après mouvement du joueur précédent
+function eraseHighlight() {
     for (let j = 0; j < cases.length; j++) {
         let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
         let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
@@ -165,21 +164,21 @@ function eraseCaseYouCanGo() {
 }
 
 // Fonction pour griser les cases adjacentes au Player-1
-function colorCasesPlayer1() {
+function highlightPlayer1() {
     whereIsMyPlayer('.player-1');
-    colorTopDeplacement()
-    colorDownDeplacement()
-    colorLeftDeplacement()
-    colorRightDeplacement()
+    highlightTop()
+    highlightDown()
+    highlightLeft()
+    highlightRight()
 }
 
 // Fonction pour griser les cases adjacentes au Player-2
-function colorCasesPlayer2() {
+function highlightPlayer2() {
     whereIsMyPlayer('.player-2');
-    colorTopDeplacement()
-    colorDownDeplacement()
-    colorLeftDeplacement()
-    colorRightDeplacement()
+    highlightTop()
+    highlightDown()
+    highlightLeft()
+    highlightRight()
 }
 
 // Fonction pour déplacer le player
@@ -188,7 +187,7 @@ function movePLayer($this, $player, playerName) {
     $player.removeClass(playerName);
     $player.addClass('empty');
     $this.addClass(playerName);
-    eraseCaseYouCanGo()
+    eraseHighlight()
 }
 
 // Fonction pour gérer le tour-par-tour
@@ -199,12 +198,12 @@ $('.case').click(function () {
         if ((whoIsPlaying === 'player-1')) {
             const $that = $(this);
             movePLayer($that, $player1, whoIsPlaying);
-            colorCasesPlayer2()
+            highlightPlayer2()
             whoIsPlaying = 'player-2';
         } else if ((whoIsPlaying === 'player-2')) {
             const $that = $(this);
             movePLayer($that, $player2, whoIsPlaying);
-            colorCasesPlayer1()
+            highlightPlayer1()
             whoIsPlaying = 'player-1';
         } 
     } 
