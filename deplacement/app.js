@@ -41,13 +41,13 @@ function caseYouCanGo() {
         let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
         let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
         if ((casesAbscisse == parseInt(playerAbscisse) + 1) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
-            (casesAbscisse == parseInt(playerAbscisse) + 3) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
+            (casesAbscisse == parseInt(playerAbscisse) + 2) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
             (casesOrdonnee == parseInt(playerOrdonnee) + 1) && (casesAbscisse == parseInt(playerAbscisse)) ||
-            (casesOrdonnee == parseInt(playerOrdonnee) + 3) && (casesAbscisse == parseInt(playerAbscisse)) ||
+            (casesOrdonnee == parseInt(playerOrdonnee) + 2) && (casesAbscisse == parseInt(playerAbscisse)) ||
             (casesAbscisse == parseInt(playerAbscisse) - 1) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
-            (casesAbscisse == parseInt(playerAbscisse) - 3) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
+            (casesAbscisse == parseInt(playerAbscisse) - 2) && (casesOrdonnee == parseInt(playerOrdonnee)) ||
             (casesOrdonnee == parseInt(playerOrdonnee) - 1) && (casesAbscisse == parseInt(playerAbscisse)) ||
-            (casesOrdonnee == parseInt(playerOrdonnee) - 3) && (casesAbscisse == parseInt(playerAbscisse))) {
+            (casesOrdonnee == parseInt(playerOrdonnee) - 2) && (casesAbscisse == parseInt(playerAbscisse))) {
             cases[j].classList.remove('empty');
             cases[j].classList.add("caseYouCanGo");
         } else {
