@@ -67,29 +67,11 @@ function whereIsMyPlayer(classPlayer) {
     cases = $('.case'); // Je sélectionne toutes mes cases
 }
 
-// function checkDeplacement(posXYCase, posXYPlayer) {
-//     for (let j = 0; j < cases.length; j++) {
-//         casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
-//         casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
-//         casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
-//         casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
-//         if ((casesOrdonnee == posXYCase) && (casesAbscisse == parseInt(posXYPlayer))) {
-//             if (cases[j].classList.contains('caseGrey')) {
-//                 return;
-//             } else {
-//                 cases[j].classList.remove('empty');
-//                 cases[j].classList.add("caseYouCanGo");
-//             }
-//         }
-//     }
-// }
-
 
 // Fonction pour les highlights vers le haut
 function highlightTop() {
     for (let i = 1; i <= 3; i++) {
         let topCaseOrdonnee = (parseInt(playerOrdonnee) - i);
-        //checkDeplacement(topCaseOrdonnee, playerAbscisse);
         for (let j = 0; j < cases.length; j++) {
             let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
             let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
@@ -106,8 +88,6 @@ function highlightTop() {
         }
     }
 }
-
-
 
 // Fonction pour les highlights vers le bas
 function highlightBottom() {
@@ -235,7 +215,7 @@ $('.case').click(function () {
 /**
  * To Do
  *
- * 1 - Empêcher les caseYouCanGo si armes/joueurs/blocs-inatteignables à proximité
+ * 1 - Empêcher les caseYouCanGo si armes/joueurs/blocs-inatteignables à proximité DONE
  * 2 - Récupérer une weapon, déposer celle en sa possession (Ne pas hésiter à créer un nouveau dossier si trop complexe)
  * 3 - Commencer à penser en POO
  */
