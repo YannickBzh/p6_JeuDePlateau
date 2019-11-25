@@ -1,6 +1,16 @@
+/**
+ * ça peut aller dans la classe Board
+ */
 const numberOfCases = 9;
 const numberOflines = 9;
 const numberOfCaseGrey = 10;
+
+/**
+ * ça pourrait aller dans la classe
+ *  - tu vas avoir une entité Player (entité regroupement de logique) = player a un nom, player peut avoir une arme, player des points de vie, etc.
+ * 
+ * Cela dit, game doit être au courant de quel player est en train de jouer
+ */
 const $tedPlayer = $('.player-1')
 let whoIsPlaying = 'player-1';
 
@@ -67,6 +77,9 @@ function whereIsMyPlayer(classPlayer) {
     cases = $('.case'); // Je sélectionne toutes mes cases
 }
 
+/**
+ * @refacto voir comment simplifier ses 4 méthodes.
+ */
 
 // Fonction pour les highlights vers le haut
 function highlightTop() {
