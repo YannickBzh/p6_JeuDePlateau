@@ -155,10 +155,6 @@ function highlightRight() {
 // Fonction pour supprimer les highlights après mouvement du joueur précédent
 function eraseHighlight() {
     for (let j = 0; j < cases.length; j++) {
-        let casesAbs = cases[j].classList[1]; // je sors la classe des abscisses de cases
-        let casesOrd = cases[j].classList[2]; // je sors la classe des ordonnées de cases
-        let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
-        let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
         cases[j].classList.remove("caseYouCanGo");
         cases[j].classList.add('empty')
     }
