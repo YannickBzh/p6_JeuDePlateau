@@ -4,7 +4,7 @@ const numberOfCaseGrey = 10;
 const $tedPlayer = $('.player-1')
 let whoIsPlaying = 'player-1';
 
-let weapons = ["weaponTie", "weaponUmbrella", "weaponHorn", "weaponPineapple"]
+//let weapons = ["weaponTie", "weaponUmbrella", "weaponHorn", "weaponPineapple"]
 
 // $game = Noeud HTML (Html Element)
 const $game = $('.game');

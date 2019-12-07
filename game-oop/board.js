@@ -1,3 +1,10 @@
+/**
+ * - Générer la board
+ * - Position des players
+ * - Position des weapons
+ * - Position des cases grises
+ */
+
 class Board {
     /**
      * 
@@ -24,4 +31,28 @@ class Board {
             this._$game.append($row);
         }
     }
+
+    generatedGreyCases() {
+        for (let i = 1; i <= this._numberOfCaseGrey; i++) {
+            const $selectAllCases = $('.empty');
+            let randomNumber = Math.floor((Math.random() * $selectAllCases.length - 1) + 1);
+            $selectAllCases[randomNumber].classList.add("caseGrey");
+            $selectAllCases[randomNumber].classList.remove("empty");
+        }
+    }
+
+    generatePlayersAndWeapons() {
+        const $selectAllCases = $('.empty');
+        let randomNumber = Math.floor((Math.random() * $selectAllCases.length - 1) + 1);
+        $selectAllCases[randomNumber].classList.add(this._className);
+        $selectAllCases[randomNumber].classList.remove("empty");
+    }
+
+    // whereIsMyPlayer(classPlayer) {
+    //     playerPosition = $(classPlayer); // Position du player
+    //     playerClass = playerPosition.attr('class'); // je sors les classes du player
+    //     playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
+    //     playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
+    //     cases = $('.case'); // Je sélectionne toutes mes cases
+    // }
 }
