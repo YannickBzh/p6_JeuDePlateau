@@ -13,11 +13,13 @@ class Board {
      * @param {number} numberOfCaseGrey 
      * @param {JQuery} $game 
      */
-    constructor(numberOfCases, numberOfLines, numberOfCaseGrey, $game) {
+    constructor(numberOfCases, numberOfLines, numberOfCaseGrey, $game, players, weapons) {
         this._numberOfCases = numberOfCases
         this._numberOfLines = numberOfLines
         this._numberOfCaseGrey = numberOfCaseGrey
         this._$game = $game
+        this._players = players;
+        this._weapons = weapons;
     }
 
     generatedBoard() {
@@ -42,10 +44,14 @@ class Board {
     }
 
     generatePlayersAndWeapons() {
-        const $selectAllCases = $('.empty');
-        let randomNumber = Math.floor((Math.random() * $selectAllCases.length - 1) + 1);
-        $selectAllCases[randomNumber].classList.add(this._className);
-        $selectAllCases[randomNumber].classList.remove("empty");
+        const playersAndWeapons = this._players.concat(this._weapons)
+
+        playersAndWeapons.forEach(element => {
+            const $selectAllCases = $('.empty');
+            let randomNumber = Math.floor((Math.random() * $selectAllCases.length - 1) + 1);
+            $selectAllCases[randomNumber].classList.add(element._className);
+            $selectAllCases[randomNumber].classList.remove("empty");
+        })
     }
 
     // whereIsMyPlayer(classPlayer) {
@@ -56,3 +62,11 @@ class Board {
     //     cases = $('.case'); // Je sélectionne toutes mes cases
     // }
 }
+
+
+/**
+ * Review du 7 décembre : 
+ *      -> this : contexte de ta classe ()
+ * 
+ *      -> forEach : c'est uniquement sur les tableaux, ça te permet de parcourir un                tableau mais tu ne peux pas le modifier.
+ */
