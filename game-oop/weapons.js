@@ -3,10 +3,9 @@
  * Déclarer les weapons, leur damage
  */
 
-class Weapons {
+class Weapons extends GameAttribute {
     constructor(name, damage, className) {
-        this._name = name;
+        super(name, className);
         this.damage = damage;
-        this._className = className;
     }
 }

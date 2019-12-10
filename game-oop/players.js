@@ -2,10 +2,9 @@
  * Générer les players
  */
 
-class Player {
+class Player extends GameAttribute {
     constructor(name, className, weapon) {
-        this._name = name;
-        this._className = className;
+        super(name, className)
         this._weapon = weapon;
     }
 }
