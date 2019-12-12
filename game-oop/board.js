@@ -45,7 +45,6 @@ class Board {
 
     generatePlayersAndWeapons() {
         const playersAndWeapons = this._players.concat(this._weapons)
-        //console.log(playersAndWeapons)
         playersAndWeapons.forEach(element => {
             const $selectAllCases = $('.empty');
             let randomNumber = Math.floor((Math.random() * $selectAllCases.length - 1) + 1);
@@ -53,14 +52,6 @@ class Board {
             $selectAllCases[randomNumber].classList.remove("empty");
         })
     }
-
-    // whereIsMyPlayer(classPlayer) {
-    //     playerPosition = $(classPlayer); // Position du player
-    //     playerClass = playerPosition.attr('class'); // je sors les classes du player
-    //     playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
-    //     playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
-    //     cases = $('.case'); // Je sélectionne toutes mes cases
-    // }
 }
 
 

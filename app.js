@@ -184,7 +184,7 @@ function movePLayer($this, $player, playerName) {
     $player.removeClass(playerName);
     $player.addClass('empty');
     $this.addClass(playerName);
-    eraseHighlight()
+    eraseHighlight();
 }
 
 // Fonction pour gérer le tour-par-tour
@@ -205,13 +205,3 @@ $('.case').click(function () {
         }
     }
 })
-
-
-
-/**
- * To Do
- *
- * 1 - Empêcher les caseYouCanGo si armes/joueurs/blocs-inatteignables à proximité DONE
- * 2 - Récupérer une weapon, déposer celle en sa possession (Ne pas hésiter à créer un nouveau dossier si trop complexe)
- * 3 - Commencer à penser en POO
- */

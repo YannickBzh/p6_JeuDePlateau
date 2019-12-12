@@ -16,7 +16,7 @@ board.generatePlayersAndWeapons()
 
 const newGame = new Game([player1, player2])
 
-// newGame.movePLayer()
+newGame.whoseTurn()
 newGame.highlightTop()
 newGame.highlightBottom()
 newGame.highlightLeft()
