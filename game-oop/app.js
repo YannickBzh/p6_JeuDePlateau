@@ -16,8 +16,7 @@ board.generatePlayersAndWeapons()
 
 const newGame = new Game([player1, player2])
 
-newGame.whoseTurn()
-newGame.highlightTop()
-newGame.highlightBottom()
-newGame.highlightLeft()
-newGame.highlightRight()
+$('.case').click(function () {
+    newGame.whoseTurn($(this));
+});
+newGame.highlightPlayer1();

@@ -1,9 +1,13 @@
 class Game {
     constructor(players) {
-        this._players = players
-        // this._currentPlayer = player1;
-        // this._currentEnemy = player2;
+        this._players = players;
+        this.$player1 = $('.player-1');
+        this.$player2 = $('.player-2');
+        this.$cases = $('.case');
+        this.whoIsPlaying = this.$player1;
     }
+
+
 
     whereIsMyPlayer(element) {
         let arrayPosition = [];
@@ -11,11 +15,12 @@ class Game {
         let playerClass = playerPosition.attr('class'); // je sors les classes du player
         let playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
         let playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
-        let cases = $('.case'); // Je sélectionne toutes mes cases
-        arrayPosition.push(playerAbscisse, playerOrdonnee, cases);
+        //let cases = $('.case'); // Je sélectionne toutes mes cases
+        arrayPosition.push(playerAbscisse, playerOrdonnee, this.$cases);
         return arrayPosition;
     }
 
+    
     highlightTop() {
         const playersXY = this._players;
         playersXY.forEach(element => {
@@ -112,40 +117,64 @@ class Game {
         })
     }
 
+    highlightPlayer1() {
+        this.whereIsMyPlayer(this._players[0]);
+        this.highlightTop();
+        this.highlightBottom();
+        this.highlightLeft();
+        this.highlightRight();
+    }
+
+    highlightPlayer2() {
+        this.whereIsMyPlayer(this._players[1]);
+        this.highlightTop();
+        this.highlightBottom();
+        this.highlightLeft();
+        this.highlightRight();
+    }
+
+
     eraseHighlight() {
-        for (let j = 0; j < cases.length; j++) {
-            positionPlayers[2][j].classList.remove("caseYouCanGo");
-            positionPlayers[2][j].classList.add('empty')
+        for (let j = 0; j < this.$cases.length; j++) {
+            this.$cases[j].classList.remove("caseYouCanGo");
+            this.$cases[j].classList.add('empty');
         }
     }
 
-    movePLayer($this, $player, playerName) {
-        $this.removeClass('empty');
-        $player.removeClass(playerName);
-        $player.addClass('empty');
-        $this.addClass(playerName);
-        //eraseHighlight();
-    }
+    // movePLayer($this, $player, playerName) {
+    //     $this.removeClass('empty');
+    //     $player.removeClass(playerName);
+    //     $player.addClass('empty');
+    //     $this.addClass(playerName);
+    //     //eraseHighlight();
+    // }
 
-    whoseTurn() {
-        $('.case').click(function () {
-            if (($(this).hasClass('caseYouCanGo')) && ((!$(this).hasClass('player-1')) && (!$(this).hasClass('player-2')) && (!$(this).hasClass('caseGrey')))) {
-                const $player1 = $('.player-1');
-                const $player2 = $('.player-2');
-                let whoIsPlaying = 'player-1';
-                if ((whoIsPlaying === 'player-1')) {
-                    const $that = $(this);
-                    this.movePLayer($that, $player1, whoIsPlaying);
-                    //highlightPlayer2();
-                    whoIsPlaying = 'player-2';
-                } else if ((whoIsPlaying === 'player-2')) {
-                    const $that = $(this);
-                    this.movePLayer($that, $player2, whoIsPlaying);
-                    //highlightPlayer1();
-                    whoIsPlaying = 'player-1';
-                }
-            }
-        })
-    }
+    whoseTurn(caseClicked) {
+        // $('.case').click(function () {
+             if ((caseClicked.hasClass('caseYouCanGo')) && ((!caseClicked.hasClass('player-1')) && (!caseClicked.hasClass('player-2')) && (!caseClicked.hasClass('caseGrey')))) {
+                 if (this.whoIsPlaying.hasClass('player-1')) {
+                     //this.movePLayer($that, $player1, "player1");
+                     caseClicked.removeClass('empty');
+                     this.whoIsPlaying.removeClass('player-1');
+                     this.whoIsPlaying.addClass('empty');
+                     caseClicked.addClass('player-1');
+                     this.eraseHighlight();
+                     this.highlightPlayer2();
+                     this.whoIsPlaying = $('.player-2');
+                 } else if (this.whoIsPlaying.hasClass('player-2')) {
+                     //this.movePLayer($that, $player2, "player2");
+                     caseClicked.removeClass('empty');
+                     this.whoIsPlaying.removeClass('player-2');
+                     this.whoIsPlaying.addClass('empty');
+                     caseClicked.addClass('player-2');
+                     this.eraseHighlight();
+                     this.highlightPlayer1();
+                     this.whoIsPlaying = $('.player-1');
+                 } 
+             }
+        // })
+     }
+
+
 }
 
