@@ -26,11 +26,11 @@ img {
 /* Players */
 
 .player-1 {
-    background: url(assets/ted-player.png);
+    background-image: url(assets/ted-player.png);
 }
 
 .player-2 {
-    background: url(assets/barney-player.png);
+    background-image: url(assets/barney-player.png);
 }
 
 /* Weapons */

@@ -9,129 +9,114 @@ class Game {
 
 
 
-    whereIsMyPlayer(element) {
+    whereIsMyPlayer(player) {
         let arrayPosition = [];
-        let playerPosition = $('.' + element._className); // Position du player
+        let playerPosition = $('.' + player._className); // Position du player
         let playerClass = playerPosition.attr('class'); // je sors les classes du player
         let playerAbscisse = playerClass.substring(7, 9); // je sors l'abscisse du player
         let playerOrdonnee = playerClass.substring(11, 13); // je sors l'ordonnée du player
-        //let cases = $('.case'); // Je sélectionne toutes mes cases
         arrayPosition.push(playerAbscisse, playerOrdonnee, this.$cases);
         return arrayPosition;
     }
 
 
-    highlightTop() {
-        const playersXY = this._players;
-        playersXY.forEach(element => {
-            let positionPlayers = this.whereIsMyPlayer(element);
-            for (let i = 1; i <= 3; i++) {
-                let topCaseOrdonnee = (parseInt(positionPlayers[1]) - i);
-                for (let j = 0; j < positionPlayers[2].length; j++) {
-                    let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
-                    let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
-                    let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
-                    let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
-                    if ((casesOrdonnee == topCaseOrdonnee) && (casesAbscisse == parseInt(positionPlayers[0]))) {
-                        if (positionPlayers[2][j].classList.contains('caseGrey')) {
-                            return;
-                        } else {
-                            positionPlayers[2][j].classList.remove('empty');
-                            positionPlayers[2][j].classList.add("caseYouCanGo");
-                        }
+    highlightTop(player) {
+        let positionPlayers = this.whereIsMyPlayer(player);
+        for (let i = 1; i <= 3; i++) {
+            let topCaseOrdonnee = (parseInt(positionPlayers[1]) - i);
+            for (let j = 0; j < positionPlayers[2].length; j++) {
+                let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
+                let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
+                let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
+                let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
+                if ((casesOrdonnee == topCaseOrdonnee) && (casesAbscisse == parseInt(positionPlayers[0]))) {
+                    if (positionPlayers[2][j].classList.contains('caseGrey')) {
+                        return;
+                    } else {
+                        positionPlayers[2][j].classList.remove('empty');
+                        positionPlayers[2][j].classList.add("caseYouCanGo");
                     }
                 }
             }
-        })
+        }
     }
 
-    highlightBottom() {
-        const playersXY = this._players;
-        playersXY.forEach(element => {
-            let positionPlayers = this.whereIsMyPlayer(element);
-            for (let i = 1; i <= 3; i++) {
-                let bottomCaseOrdonnee = (parseInt(positionPlayers[1]) + i);
-                for (let j = 0; j < positionPlayers[2].length; j++) {
-                    let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
-                    let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
-                    let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
-                    let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
-                    if ((casesOrdonnee == bottomCaseOrdonnee) && (casesAbscisse == parseInt(positionPlayers[0]))) {
-                        if (positionPlayers[2][j].classList.contains('caseGrey')) {
-                            return;
-                        } else {
-                            positionPlayers[2][j].classList.remove('empty');
-                            positionPlayers[2][j].classList.add("caseYouCanGo");
-                        }
+    highlightBottom(player) {
+        let positionPlayers = this.whereIsMyPlayer(player);
+        for (let i = 1; i <= 3; i++) {
+            let bottomCaseOrdonnee = (parseInt(positionPlayers[1]) + i);
+            for (let j = 0; j < positionPlayers[2].length; j++) {
+                let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
+                let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
+                let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
+                let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
+                if ((casesOrdonnee == bottomCaseOrdonnee) && (casesAbscisse == parseInt(positionPlayers[0]))) {
+                    if (positionPlayers[2][j].classList.contains('caseGrey')) {
+                        return;
+                    } else {
+                        positionPlayers[2][j].classList.remove('empty');
+                        positionPlayers[2][j].classList.add("caseYouCanGo");
                     }
                 }
             }
-        })
+        }
     }
 
-    highlightLeft() {
-        const playersXY = this._players;
-        playersXY.forEach(element => {
-            let positionPlayers = this.whereIsMyPlayer(element);
-            for (let i = 1; i <= 3; i++) {
-                let leftCaseAbscisse = (parseInt(positionPlayers[0]) - i);
-                for (let j = 0; j < positionPlayers[2].length; j++) {
-                    let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
-                    let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
-                    let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
-                    let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
-                    if ((casesAbscisse == leftCaseAbscisse) && (casesOrdonnee == parseInt(positionPlayers[1]))) {
-                        if (positionPlayers[2][j].classList.contains('caseGrey')) {
-                            return;
-                        } else {
-                            positionPlayers[2][j].classList.remove('empty');
-                            positionPlayers[2][j].classList.add("caseYouCanGo");
-                        }
+    highlightLeft(player) {
+        let positionPlayers = this.whereIsMyPlayer(player);
+        for (let i = 1; i <= 3; i++) {
+            let leftCaseAbscisse = (parseInt(positionPlayers[0]) - i);
+            for (let j = 0; j < positionPlayers[2].length; j++) {
+                let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
+                let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
+                let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
+                let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
+                if ((casesAbscisse == leftCaseAbscisse) && (casesOrdonnee == parseInt(positionPlayers[1]))) {
+                    if (positionPlayers[2][j].classList.contains('caseGrey')) {
+                        return;
+                    } else {
+                        positionPlayers[2][j].classList.remove('empty');
+                        positionPlayers[2][j].classList.add("caseYouCanGo");
                     }
                 }
             }
-        })
+        }
     }
 
-    highlightRight() {
-        const playersXY = this._players;
-        playersXY.forEach(element => {
-            let positionPlayers = this.whereIsMyPlayer(element);
-            for (let i = 1; i <= 3; i++) {
-                let rightCaseAbscisse = (parseInt(positionPlayers[0]) + i);
-                for (let j = 0; j < positionPlayers[2].length; j++) {
-                    let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
-                    let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
-                    let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
-                    let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
-                    if ((casesAbscisse == rightCaseAbscisse) && (casesOrdonnee == parseInt(positionPlayers[1]))) {
-                        if (positionPlayers[2][j].classList.contains('caseGrey')) {
-                            return;
-                        } else {
-                            positionPlayers[2][j].classList.remove('empty');
-                            positionPlayers[2][j].classList.add("caseYouCanGo");
-                        }
+    highlightRight(player) {
+        let positionPlayers = this.whereIsMyPlayer(player);
+        for (let i = 1; i <= 3; i++) {
+            let rightCaseAbscisse = (parseInt(positionPlayers[0]) + i);
+            for (let j = 0; j < positionPlayers[2].length; j++) {
+                let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
+                let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
+                let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
+                let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
+                if ((casesAbscisse == rightCaseAbscisse) && (casesOrdonnee == parseInt(positionPlayers[1]))) {
+                    if (positionPlayers[2][j].classList.contains('caseGrey')) {
+                        return;
+                    } else {
+                        positionPlayers[2][j].classList.remove('empty');
+                        positionPlayers[2][j].classList.add("caseYouCanGo");
                     }
                 }
             }
-        })
+        }
     }
 
     highlightPlayer1() {
-        this.whereIsMyPlayer(player1);
-        this.highlightTop();
-        this.highlightBottom();
-        this.highlightLeft();
-        this.highlightRight();
+        this.highlightTop(player1);
+        this.highlightBottom(player1);
+        this.highlightLeft(player1);
+        this.highlightRight(player1);
     }
-    
+
 
     highlightPlayer2() {
-        this.whereIsMyPlayer(player2);
-        this.highlightTop();
-        this.highlightBottom();
-        this.highlightLeft();
-        this.highlightRight();
+        this.highlightTop(player2);
+        this.highlightBottom(player2);
+        this.highlightLeft(player2);
+        this.highlightRight(player2);
     }
 
 
