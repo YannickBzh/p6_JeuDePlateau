@@ -5,10 +5,23 @@
 
 .container {
     margin-top:3%;
+    margin-right:0 !important;
+    margin-left:0 !important;
+    max-width:100% !important;
 }
 
-h1, span {
+h1 {
     font-family: 'Maven Pro', sans-serif;
+}
+
+span {
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing:2px;
+    font-size:22px;
+}
+
+img {
+    margin-right:25px;
 }
 /* Players */
 
