@@ -53,11 +53,3 @@ class Board {
         })
     }
 }
-
-
-/**
- * Review du 7 décembre : 
- *      -> this : contexte de ta classe ()
- * 
- *      -> forEach : c'est uniquement sur les tableaux, ça te permet de parcourir un                tableau mais tu ne peux pas le modifier.
- */

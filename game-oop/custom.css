@@ -1,3 +1,15 @@
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    margin-top:3%;
+}
+
+h1, span {
+    font-family: 'Maven Pro', sans-serif;
+}
 /* Players */
 
 .player-1 {
@@ -37,6 +49,7 @@
     background-color: tomato;
     margin-left: 1px;
     margin-right: 1px;
+    margin-bottom: 1px;
 }
 
 .caseBlock {
