@@ -23,6 +23,10 @@ span {
 img {
     margin-right:25px;
 }
+
+.align-vertical {
+    transform: translateY(6%);
+}
 /* Players */
 
 .player-1 {
@@ -62,12 +66,12 @@ img {
     background-color: tomato;
     margin-left: 1px;
     margin-right: 1px;
-    margin-bottom: 1px;
 }
 
-.caseBlock {
+/* .caseBlock {
     background-color: grey;
-}
+    cursor:not-allowed !important;
+} */
 
 .caseGrey {
     height: 50px;
@@ -75,6 +79,7 @@ img {
     background-color: grey;
     margin-left: 1px;
     margin-right: 1px;
+    cursor:not-allowed;
 }
 
 .caseYouCanGo {
@@ -83,4 +88,6 @@ img {
     background-color: rgb(252, 158, 142);
     margin-left: 1px;
     margin-right: 1px;
+    transition: 1s ease;
+    cursor: pointer;
 }
