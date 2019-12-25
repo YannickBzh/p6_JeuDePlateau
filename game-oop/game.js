@@ -138,14 +138,56 @@ class Game {
     handleClickOnCase() {
         const that = this
         $('.case').click(function () {
-            that.whoseTurn($(this));
+            that.handlePlayerTurn($(this));
         })
     }
 
-    whoseTurn(caseClicked) {
+    // Voir s'il existe une arme sur la case en question (autrement dit la case qui vient d'être cliquée)
+    // Si oui, retourne moi cette arme
+    retrieveWeaponFromCase(currentCase) {
+        return currentCase[0].className.split(' ').filter(word => word.startsWith('weapon'))
+    }
+
+    // Est-ce que la case cliquée contient une arme une arme
+    hasCaseWeapon(currentCase) {
+        // Prend le premier élément contenu dans mon array currentCase
+        // Puis récupère toutes les classes de cet élément
+        // Transforme les classes (string à la base) en un tableau
+        // Puis parcourir le tableau et regarde ce qui commence par weapon
+        // Si tu trouves une occurence, retourne true
+            // Sinon false
+        return !!this.retrieveWeaponFromCase(currentCase).length
+    }
+
+    /**
+     * whoseTurn : permet de déplacer le joueur et de passer la main au joueur
+     */
+
+    // Cette méthode connait la case qui vient d'être clické.
+    // -> tu sais où ton joueur va être déplacé
+    // -> tu sais aussi si cette case contient une arme (tu sais ça parce que dans ton html, tu as des classes qui correpondent aux armes)
+    handlePlayerTurn(caseClicked) {
+        
+        if (this.hasCaseWeapon(caseClicked)) {
+            const weaponOnCaseClicked = this.retrieveWeaponFromCase(caseClicked)[0]
+            console.log('=====')
+            console.log(weaponOnCaseClicked)
+            console.log(player1)
+            console.log('=====')
+            // ATTENTION : aujourd'hui, c'est uniquement sur le player1, il faut implémenter la solution pour le player 2
+            // player1._weapon = weaponOnCaseClicked
+            // console.log('=====')
+            // console.log(player1)
+            player1.handleWeaponSwitch(weaponOnCaseClicked)
+        }
+
         if ((caseClicked.hasClass('caseYouCanGo')) && ((!caseClicked.hasClass('player-1')) && (!caseClicked.hasClass('player-2')) && (!caseClicked.hasClass('caseGrey')))) {
             if (this.whoIsPlaying.hasClass('player-1')) {
                 //`this.movePLayer($that, $player1, "player1");
+                /**
+                 * @review
+                 * Peut-être refactoriser : -> les 7 lignes ci-dessous peuvent aller dans la méthode movePlayer
+                 */
                 caseClicked.removeClass('empty');
                 this.whoIsPlaying.removeClass('player-1');
                 this.whoIsPlaying.addClass('empty');

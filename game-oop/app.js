@@ -18,3 +18,11 @@ const newGame = new Game([player1, player2]);
 
 newGame.highlightPlayer1();
 newGame.handleClickOnCase();
+
+
+/**
+ * @review
+ *  PRIORITAIRE : refactoriser le déplacement
+ *      1. Gérer le changement d'arme (idéalement directement en orienté objet)
+ * 
+ */

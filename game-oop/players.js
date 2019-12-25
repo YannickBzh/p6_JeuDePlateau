@@ -7,4 +7,16 @@ class Player extends GameAttribute {
         super(name, className)
         this._weapon = weapon;
     }
+
+    // attaquer
+    handleFight() {}
+
+    // défendre
+    handleDefend() {}
+
+    // changer d'arme
+    handleWeaponSwitch(newWeapon) {
+        console.log('====')
+        console.log(newWeapon)
+    }
 }
