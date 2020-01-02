@@ -127,43 +127,75 @@ class Game {
         }
     }
 
-    // movePLayer($this, $player, playerName) {
-    //     $this.removeClass('empty');
-    //     $player.removeClass(playerName);
-    //     $player.addClass('empty');
-    //     $this.addClass(playerName);
-    //     //eraseHighlight();
-    // }
+    movePlayer(click, $player, playerName) {
+        click.removeClass('empty');
+        this.whoIsPlaying.removeClass($player);
+        this.whoIsPlaying.addClass('empty');
+        click.addClass($player);
+        this.eraseHighlight();
+        this.whoIsPlaying = $(playerName);
+    }
 
     handleClickOnCase() {
         const that = this
         $('.case').click(function () {
-            that.whoseTurn($(this));
+            that.handlePlayerTurn($(this));
         })
     }
 
-    whoseTurn(caseClicked) {
+    // Voir s'il existe une arme sur la case en question (autrement dit la case qui vient d'être cliquée)
+    // Si oui, retourne moi cette arme
+    retrieveWeaponFromCase(currentCase) {
+        return currentCase[0].className.split(' ').filter(word => word.startsWith('weapon'));
+    }
+
+    // Est-ce que la case cliquée contient une arme
+    hasCaseWeapon(currentCase) {
+        // Prend le premier élément contenu dans mon array currentCase
+        // Puis récupère toutes les classes de cet élément
+        // Transforme les classes (string à la base) en un tableau
+        // Puis parcourir le tableau et regarde ce qui commence par weapon
+        // Si tu trouves une occurence, retourne true
+            // Sinon false
+        return !!this.retrieveWeaponFromCase(currentCase).length;
+    }
+
+    /**
+     * handlePlayerTurn : permet de déplacer le joueur et de passer la main au joueur suivant
+     */
+
+    // Cette méthode connait la case qui vient d'être clickée.
+    // -> tu sais où ton joueur va être déplacé
+    // -> tu sais aussi si cette case contient une arme (tu sais ça parce que dans ton html, tu as des classes qui correpondent aux armes)
+    handlePlayerTurn(caseClicked) {
+        
+        if (this.hasCaseWeapon(caseClicked)) {
+            const weaponOnCaseClicked = this.retrieveWeaponFromCase(caseClicked)[0];
+            //console.log(!!this.retrieveWeaponFromCase(caseClicked))
+           /* console.log('=====')
+            console.log(weaponOnCaseClicked)
+            console.log(player1)
+            console.log('=====')*/
+            // ATTENTION : aujourd'hui, c'est uniquement sur le player1, il faut implémenter la solution pour le player 2
+            // player1._weapon = weaponOnCaseClicked
+            // console.log('=====')
+            // console.log(player1)
+            //console.log(player1._weapon)
+            caseClicked.removeClass('empty')
+            caseClicked.addClass(player1._weapon)
+            player1.handleWeaponSwitch(weaponOnCaseClicked);
+            caseClicked.removeClass(weaponOnCaseClicked);
+            //console.log(player1);
+        }
+
         if ((caseClicked.hasClass('caseYouCanGo')) && ((!caseClicked.hasClass('player-1')) && (!caseClicked.hasClass('player-2')) && (!caseClicked.hasClass('caseGrey')))) {
             if (this.whoIsPlaying.hasClass('player-1')) {
-                //`this.movePLayer($that, $player1, "player1");
-                caseClicked.removeClass('empty');
-                this.whoIsPlaying.removeClass('player-1');
-                this.whoIsPlaying.addClass('empty');
-                caseClicked.addClass('player-1');
-                this.eraseHighlight();
+                this.movePlayer(caseClicked, 'player-1', '.player-2')
                 this.highlightPlayer2();
-                this.whoIsPlaying = $('.player-2');
             } else if (this.whoIsPlaying.hasClass('player-2')) {
-                //this.movePLayer($that, $player2, "player2");
-                caseClicked.removeClass('empty');
-                this.whoIsPlaying.removeClass('player-2');
-                this.whoIsPlaying.addClass('empty');
-                caseClicked.addClass('player-2');
-                this.eraseHighlight();
+                this.movePlayer(caseClicked, 'player-2', '.player-1');
                 this.highlightPlayer1();
-                this.whoIsPlaying = $('.player-1');
             }
         }
     }
 }
-

@@ -24,18 +24,11 @@ img {
     margin-right:25px;
 }
 
+
 .align-vertical {
     transform: translateY(6%);
 }
-/* Players */
 
-.player-1 {
-    background-image: url(assets/ted-player.png);
-}
-
-.player-2 {
-    background-image: url(assets/barney-player.png);
-}
 
 /* Weapons */
 
@@ -55,6 +48,16 @@ img {
     background-image: url(assets/pineapple.png);
 }
 
+/* Players */
+
+.player-1 {
+    background-image: url(assets/ted-player.png);
+}
+
+.player-2 {
+    background-image: url(assets/barney-player.png);
+}
+
 .row {
     display: flex;
     margin-bottom: 2px;
@@ -67,11 +70,6 @@ img {
     margin-left: 1px;
     margin-right: 1px;
 }
-
-/* .caseBlock {
-    background-color: grey;
-    cursor:not-allowed !important;
-} */
 
 .caseGrey {
     height: 50px;
