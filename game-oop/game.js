@@ -171,24 +171,11 @@ class Game {
      * handlePlayerTurn : permet de déplacer le joueur et de passer la main au joueur suivant
      */
 
-    // Cette méthode connait la case qui vient d'être clickée.
-    // -> tu sais où ton joueur va être déplacé
-    // -> tu sais aussi si cette case contient une arme (tu sais ça parce que dans ton html, tu as des classes qui correpondent aux armes)
     handlePlayerTurn(caseClicked) {
         if ((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-1'))) {
-            // const weaponOnCaseClicked = this.retrieveWeaponFromCase(caseClicked)[0];
             this.switchWeapon(caseClicked, player1)
-            // caseClicked.removeClass('empty');
-            // caseClicked.addClass(player1._weapon);
-            // player1.handleWeaponSwitch(weaponOnCaseClicked);
-            // caseClicked.removeClass(weaponOnCaseClicked);
         } else if (((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-2')))) {
             this.switchWeapon(caseClicked, player2)
-            // const weaponOnCaseClicked = this.retrieveWeaponFromCase(caseClicked)[0];
-            // caseClicked.removeClass('empty');
-            // caseClicked.addClass(player2._weapon);
-            // player2.handleWeaponSwitch(weaponOnCaseClicked);
-            // caseClicked.removeClass(weaponOnCaseClicked);
         } if ((caseClicked.hasClass('caseYouCanGo')) && ((!caseClicked.hasClass('player-1')) && (!caseClicked.hasClass('player-2')) && (!caseClicked.hasClass('caseGrey')))) {
             if (this.whoIsPlaying.hasClass('player-1')) {
                 this.movePlayer(caseClicked, 'player-1', '.player-2');

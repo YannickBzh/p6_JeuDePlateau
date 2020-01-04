@@ -16,8 +16,6 @@ class Player extends GameAttribute {
 
     // changer d'arme
     handleWeaponSwitch(newWeapon) {
-        /*console.log('====')
-        console.log(newWeapon)*/
         this._weapon = newWeapon;
     }
 }

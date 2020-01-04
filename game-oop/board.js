@@ -1,10 +1,3 @@
-/**
- * - Générer la board
- * - Position des players
- * - Position des weapons
- * - Position des cases grises
- */
-
 class Board {
     /**
      * 

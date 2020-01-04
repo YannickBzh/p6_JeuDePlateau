@@ -1,3 +1,11 @@
+body {
+    background-color:#FEF8EE !important;
+}
+
+h6 {
+    align-self: center;
+}
+
 .center {
     display: flex;
     justify-content: center;
