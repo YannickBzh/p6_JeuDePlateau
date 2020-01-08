@@ -18,3 +18,4 @@ const newGame = new Game([player1, player2]);
 
 newGame.highlightPlayer1();
 newGame.handleClickOnCase();
+newGame.fightIsComing();
