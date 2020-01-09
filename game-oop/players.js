@@ -17,11 +17,28 @@ class Player extends GameAttribute {
 
     // défendre
     handleDefend() {
-        
+
     }
 
     // changer d'arme
     handleWeaponSwitch(newWeapon) {
-        this._weapon = newWeapon;
+        console.log('====')
+        console.log(newWeapon)
+
+        // const $currentPlayerWeapon = $('#tedWeapon')[0]
+
+        // console.log($currentPlayerWeapon)
+
+        $( "#tedWeapon" ).attr( "src", "assets/umbrella.png" )
+
+        // this._weapon = newWeapon;
+
+
+        /**
+         * 1. je sélection en dur mon élément sur le dom
+         * 2. replacer par une image en dure
+         * 3. je le fais de façon dynamique pour un seul joeur
+         * 4. Je l'applique aux deux joueurs
+         */
     }
 }
