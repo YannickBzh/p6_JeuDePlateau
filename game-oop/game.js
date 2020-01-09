@@ -1,4 +1,8 @@
 class Game {
+    /**
+     * 
+     * @param {Player} players 
+     */
     constructor(players) {
         this._players = players;
         this.$player1 = $('.player-1');
@@ -267,8 +271,40 @@ class Game {
         }
     }
 
+    // Quand tu lances la bagarre
     launchFight() {
         const $modal = $('#modalFight')[0];
         $modal.classList.replace("d-none", "d-block");
+
+        // Tu en profites pour écouter un évenement (la bouton fermer la modale)
+        this.handleCloseFightModal($modal)
+
+        const playerOne = this._players[0]
+        playerOne._action = 'attaque'
+
+        console.log(playerOne)
+
+        // Étapes d'après : 
+            // -> quel joueur commence ? (qui joue -> c'est une information que tu as déjà dans l'état de ta classe)
+            // -> choisi attaque ou défense (choisir l'action du joueur)
+            // -> autre joueur choisi attaque ou défense
+            // conséquences du tour de jeu
+    }
+
+    handleCloseFightModal($modal) {
+        const $closeModalBtn = $('.btn-close-modal')[0]
+
+        $closeModalBtn.addEventListener('click', function() {
+            console.log('====')
+            $modal.classList.replace('d-block', 'd-none')
+        })
     }
 }
+
+
+// const $modal = $('#modalFight')[0];
+// $modal.classList.replace("d-none", "d-block");
+
+
+
+
