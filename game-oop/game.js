@@ -203,6 +203,7 @@ class Game {
                 if ((casesOrdonnee == topCaseOrdonnee) && (casesAbscisse == parseInt(positionPlayers[0]))) {
                     if (positionPlayers[2][j].classList.contains('player-2')) {
                         this.eraseHighlight();
+                        this.launchFight();
                     } else return
                 }
             }
@@ -221,6 +222,7 @@ class Game {
                 if ((casesOrdonnee == bottomCaseOrdonnee) && (casesAbscisse == parseInt(positionPlayers[0]))) {
                     if (positionPlayers[2][j].classList.contains('player-2')) {
                         this.eraseHighlight();
+                        this.launchFight();
                     } else return
                 }
             }
@@ -239,6 +241,7 @@ class Game {
                 if ((casesAbscisse == leftCaseAbscisse) && (casesOrdonnee == parseInt(positionPlayers[1]))) {
                     if (positionPlayers[2][j].classList.contains('player-2')) {
                         this.eraseHighlight();
+                        this.launchFight();
                     } else return
                 }
             }
@@ -257,9 +260,15 @@ class Game {
                 if ((casesAbscisse == rightCaseAbscisse) && (casesOrdonnee == parseInt(positionPlayers[1]))) {
                     if (positionPlayers[2][j].classList.contains('player-2')) {
                         this.eraseHighlight();
+                        this.launchFight();
                     } else return
                 }
             }
         }
+    }
+
+    launchFight() {
+        const $modal = $('#modalFight')[0];
+        $modal.classList.replace("d-none", "d-block");
     }
 }

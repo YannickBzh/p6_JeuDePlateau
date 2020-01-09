@@ -27,7 +27,7 @@
                     <div class="flex-column align-self-center">
                         <div class="flex-row d-flex">
                             <h6>Weapon : </h6>
-                            <img src="assets/tie.png">
+                            <img id="tedWeapon" src="assets/tie.png">
                         </div>
                         <div>
                             <h6>Health : 100%</h6>
@@ -41,7 +41,7 @@
                     <div class="flex-column align-self-center">
                         <div class="flex-row d-flex">
                             <h6>Weapon : </h6>
-                            <img src="assets/tie.png">
+                            <img id="BarneyWeapon" src="assets/tie.png">
                         </div>
                         <div>
                             <h6>Health : 100%</h6>
@@ -70,6 +70,28 @@
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal d-none" id="modalFight" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">A fight is coming, and it will be legendary !
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </body>
 
