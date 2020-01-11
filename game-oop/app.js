@@ -1,5 +1,5 @@
-const player1 = new Player("Ted", "player-1", "weaponTie");
-const player2 = new Player("Barney", "player-2", "weaponTie");
+const player1 = new Player("Ted", "player-1", "weaponTie", 100);
+const player2 = new Player("Barney", "player-2", "weaponTie", 100);
 
 const weaponTie = new Weapons("Weapon Tie", 10, "weaponTie");
 const weaponUmbrella = new Weapons("weapon Umbrella", 20, "weaponUmbrella");

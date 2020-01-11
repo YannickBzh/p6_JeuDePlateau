@@ -1,4 +1,8 @@
 class Game {
+    /**
+     * 
+     * @param {Player} players 
+     */
     constructor(players) {
         this._players = players;
         this.$player1 = $('.player-1');
@@ -134,6 +138,7 @@ class Game {
         click.addClass($player);
         this.eraseHighlight();
         this.whoIsPlaying = $(playerName);
+        //console.log(this.whoIsPlaying)
     }
 
     handleClickOnCase() {
@@ -261,14 +266,50 @@ class Game {
                     if (positionPlayers[2][j].classList.contains('player-2')) {
                         this.eraseHighlight();
                         this.launchFight();
-                    } else return
+                    } else return;
                 }
             }
         }
     }
 
+    attackChoice(player) {
+        const $attack = $('.attack')[0];
+        $attack.addEventListener('click', function () {
+            console.log('+++')
+            player._action.add('attack');
+        })
+    }
+
+    // Quand tu lances la bagarre
     launchFight() {
         const $modal = $('#modalFight')[0];
         $modal.classList.replace("d-none", "d-block");
+
+        // Tu en profites pour écouter un évenement (le bouton fermer la modal)
+        this.handleCloseFightModal($modal);
+
+        // const playerOne = this._players[0];
+        // playerOne._action = 'attaque';
+        //console.log(playerOne);
+
+        if (this.whoIsPlaying == this.$player1) {
+            this.attackChoice(player1)
+            player2.handleFight();
+        } else player1.handleFight();
+
+
+        // Étapes d'après : 
+        // -> quel joueur commence ? (qui joue -> c'est une information que tu as déjà dans l'état de ta classe)
+        // -> choisi attaque ou défense (choisir l'action du joueur)
+        // -> autre joueur choisi attaque ou défense
+        // conséquences du tour de jeu
+    }
+
+    handleCloseFightModal($modal) {
+        const $closeModalBtn = $('.btn-close-modal')[0];
+        $closeModalBtn.addEventListener('click', function () {
+            console.log('====');
+            $modal.classList.replace('d-block', 'd-none');
+        })
     }
 }
