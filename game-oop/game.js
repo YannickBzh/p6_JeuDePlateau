@@ -272,17 +272,17 @@ class Game {
         }
     }
 
-    attackChoice(player) {
+    attackChoice(playerAttack) {
         const $attack = $('.attack')[0];
         $attack.addEventListener('click', function () {
-            player._action = 'attack';
+            playerAttack._action = 'attack';
         })
     }
 
-    defendChoice(player) {
+    defendChoice(playerDefend) {
         const $defend = $('.defend')[0];
         $defend.addEventListener('click', function () {
-            player._action = 'defend';
+            playerDefend._action = 'defend';
         })
     }
 
@@ -291,25 +291,24 @@ class Game {
         const $modal = $('#modalFight')[0];
         $modal.classList.replace("d-none", "d-block");
 
-
-
+        // Player 1 attaque
         if (this.whoIsPlaying.hasClass('player-1')) {
             if (this.attackChoice(player1)) {
-                console.log("tutu")
                 player2.handleFight();
             }
-
-        // } else {
-        //     console.log("toto")
-            // this.attackChoice(player2)
-            //player1.handleFight();
         }
 
-
-        // Étapes d'après : 
-        // -> quel joueur commence ? (qui joue -> c'est une information que tu as déjà dans l'état de ta classe)
-        // -> choisi attaque ou défense (choisir l'action du joueur)
-        // -> autre joueur choisi attaque ou défense
-        // conséquences du tour de jeu
+        // Player 1 défend
+        if (this.whoIsPlaying.hasClass('player-1')) {
+            if (this.defendChoice(player1)) {
+                player2.handleDefend();
+            }
+        }
     }
+
+    // Étapes d'après : 
+    // -> quel joueur commence ? (qui joue -> c'est une information que tu as déjà dans l'état de ta classe)
+    // -> choisi attaque ou défense (choisir l'action du joueur)
+    // -> autre joueur choisi attaque ou défense
+    // conséquences du tour de jeu
 }
