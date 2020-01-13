@@ -275,8 +275,14 @@ class Game {
     attackChoice(player) {
         const $attack = $('.attack')[0];
         $attack.addEventListener('click', function () {
-            console.log('+++')
-            player._action.add('attack');
+            player._action = 'attack';
+        })
+    }
+
+    defendChoice(player) {
+        const $defend = $('.defend')[0];
+        $defend.addEventListener('click', function () {
+            player._action = 'defend';
         })
     }
 
@@ -285,19 +291,19 @@ class Game {
         const $modal = $('#modalFight')[0];
         $modal.classList.replace("d-none", "d-block");
 
-        // Tu en profites pour écouter un évenement (le bouton fermer la modal)
-        this.handleCloseFightModal($modal);
 
-        // const playerOne = this._players[0];
-        // playerOne._action = 'attaque';
-        //console.log(playerOne);
 
-        if (this.whoIsPlaying == this.$player1) {
-            this.attackChoice(player1)
-            player2.handleFight();
-        } else {
-            this.attackChoice(player2)
-            player1.handleFight();}
+        if (this.whoIsPlaying.hasClass('player-1')) {
+            if (this.attackChoice(player1)) {
+                console.log("tutu")
+                player2.handleFight();
+            }
+
+        // } else {
+        //     console.log("toto")
+            // this.attackChoice(player2)
+            //player1.handleFight();
+        }
 
 
         // Étapes d'après : 
@@ -305,13 +311,5 @@ class Game {
         // -> choisi attaque ou défense (choisir l'action du joueur)
         // -> autre joueur choisi attaque ou défense
         // conséquences du tour de jeu
-    }
-
-    handleCloseFightModal($modal) {
-        const $closeModalBtn = $('.btn-close-modal')[0];
-        $closeModalBtn.addEventListener('click', function () {
-            console.log('====');
-            $modal.classList.replace('d-block', 'd-none');
-        })
     }
 }
