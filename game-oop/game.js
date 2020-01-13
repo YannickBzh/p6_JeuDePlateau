@@ -295,7 +295,9 @@ class Game {
         if (this.whoIsPlaying == this.$player1) {
             this.attackChoice(player1)
             player2.handleFight();
-        } else player1.handleFight();
+        } else {
+            this.attackChoice(player2)
+            player1.handleFight();}
 
 
         // Étapes d'après : 
