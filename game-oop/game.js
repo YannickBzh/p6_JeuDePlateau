@@ -9,6 +9,7 @@ class Game {
         this.$player2 = $('.player-2');
         this.$cases = $('.case');
         this.whoIsPlaying = this.$player1;
+        this.rounds = 0;
     }
 
 
@@ -132,13 +133,16 @@ class Game {
     }
 
     movePlayer(click, $player, playerName) {
+
         click.removeClass('empty');
         this.whoIsPlaying.removeClass($player);
         this.whoIsPlaying.addClass('empty');
         click.addClass($player);
         this.eraseHighlight();
+
         this.whoIsPlaying = $(playerName);
-        //console.log(this.whoIsPlaying)
+        this.$player1 = $('.player-1');
+        this.$player2 = $('.player-2');
     }
 
     handleClickOnCase() {
@@ -272,38 +276,87 @@ class Game {
         }
     }
 
-    attackChoice(playerAttack) {
-        const $attack = $('.attack')[0];
-        $attack.addEventListener('click', function () {
-            playerAttack._action = 'attack';
+    bindAttackButton() {
+        const $attackBtn = $('.attack');
+        const that = this
+
+        $attackBtn.click(function() {
+            that.attackChoice()
         })
     }
 
-    defendChoice(playerDefend) {
-        const $defend = $('.defend')[0];
-        $defend.addEventListener('click', function () {
-            playerDefend._action = 'defend';
+    bindDefendButton() {
+        const $defendBtn = $('.defend');
+        const that = this
+
+        $defendBtn.click(function() {
+            that.defendChoice()
         })
+    }
+
+    // Une fois que tu as fini un tour de jour (autrement dit, les deux joueurs ont un état, tu augrements la propriété round de 1)
+    handleTurnBasePlayer() {
+        // l'idée de cette méthode : 
+        // -> elle met à jour l'état des joueurs.
+        // -> elle augmente le round de 1 à chaque tour
+        // -> est-ce que la santée de l'un des joueurs est à 0 ?
+        // -> elle les réinitialise à 0
+    }
+
+    attackChoice() {
+        console.log('attaque')
+
+        // console.log(this.whoIsPlaying[0])
+        // console.log(this.$player1[0])
+        // console.log(this.$player2[0])
+
+        // Cette partie là part dans la méthode handleTurnBasePlayer
+        if (this.whoIsPlaying[0] === this.$player1[0]) {
+            console.log('le player 1 attaque')
+            this._players[0]._action  = 'attaque'
+            this.whoIsPlaying = this.$player2
+        } else {
+            console.log('le player 2 attaque')
+            this._players[1]._action  = 'attaque'
+            this.whoIsPlaying = this.$player1
+        }
+
+        console.log(this._players[0]._action)
+        console.log(this._players[1]._action)
+
+        // const $attack = $('.attack')[0];
+        // $attack.addEventListener('click', function () {
+        //     playerAttack._action = 'attack';
+        // })
+    }
+
+    defendChoice() {
+        console.log('défendre')
+        // const $defend = $('.defend')[0];
+        // $defend.addEventListener('click', function () {
+        //     playerDefend._action = 'defend';
+        // })
     }
 
     // Quand tu lances la bagarre
     launchFight() {
         const $modal = $('#modalFight')[0];
         $modal.classList.replace("d-none", "d-block");
+        
 
-        // Player 1 attaque
-        if (this.whoIsPlaying.hasClass('player-1')) {
-            if (this.attackChoice(player1)) {
-                player2.handleFight();
-            }
-        }
+        // // Player 1 attaque
+        // if (this.whoIsPlaying.hasClass('player-1')) {
+        //     if (this.attackChoice(player1)) {
+        //         player2.handleFight();
+        //     }
+        // }
 
-        // Player 1 défend
-        if (this.whoIsPlaying.hasClass('player-1')) {
-            if (this.defendChoice(player1)) {
-                player2.handleDefend();
-            }
-        }
+        // // Player 1 défend
+        // if (this.whoIsPlaying.hasClass('player-1')) {
+        //     if (this.defendChoice(player1)) {
+        //         player2.handleDefend();
+        //     }
+        // }
     }
 
     // Étapes d'après : 
