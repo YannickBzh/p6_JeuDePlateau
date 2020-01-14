@@ -155,7 +155,7 @@ class Game {
             that.playerCloseDown($(this));
             that.playerCloseLeft($(this));
             that.playerCloseRight($(this));
-        })
+        });
     }
 
     // Voir s'il existe une arme sur la case en question (autrement dit la case qui vient d'être cliquée)
@@ -272,11 +272,12 @@ class Game {
         }
     }
 
-    attackChoice(player) {
-        const $attack = $('.attack')[0];
+    attackChoice() {
+        const $attack = $('.attack');
+        const playerOne = this._players[0]
         $attack.addEventListener('click', function () {
             console.log('+++')
-            player._action.add('attack');
+            playerOne._action = 'attack';
         })
     }
 
@@ -293,7 +294,7 @@ class Game {
         //console.log(playerOne);
 
         if (this.whoIsPlaying == this.$player1) {
-            this.attackChoice(player1)
+            this.attackChoice()
             player2.handleFight();
         } else player1.handleFight();
 
