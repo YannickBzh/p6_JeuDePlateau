@@ -12,30 +12,27 @@ class Player extends GameAttribute {
 
     // attaquer
     handleFight() {
-        const damageWeapon = 10
-        this._xp = this._xp - damageWeapon
+        const damageWeapon = 10;
+        this._xp = this._xp - damageWeapon;
         // Mon player a comme action "attaque" et commme arme "Parapluie" -> 
         // Retourne les dégats
     }
 
     // défendre
     handleDefend() {
-        const damageWeapon = 10
-        this._xp = this._xp - damageWeapon/2
+        const damageWeapon = 10;
+        this._xp = this._xp - damageWeapon/2;
     }
 
     // changer d'arme
     handleWeaponSwitch(newWeapon) {
-        console.log('====')
-        console.log(newWeapon)
-
         // const $currentPlayerWeapon = $('#tedWeapon')[0]
 
         // console.log($currentPlayerWeapon)
 
-        $( "#tedWeapon" ).attr( "src", "assets/umbrella.png" )
+        $( "#tedWeapon" ).attr( "src", "assets/umbrella.png" );
 
-        this._weapon = newWeapon;
+        this._weapon = weapons.filter(weapon => weapon._className === newWeapon)[0]        
 
 
         /**
