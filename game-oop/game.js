@@ -332,6 +332,15 @@ class Game {
 
     defendChoice() {
         console.log('défendre')
+        if (this.whoIsPlaying[0] === this.$player1[0]) {
+            console.log('le player 1 défend')
+            this._players[0]._action  = 'defend'
+            this.whoIsPlaying = this.$player2
+        } else {
+            console.log('le player 2 défend')
+            this._players[1]._action  = 'defend'
+            this.whoIsPlaying = this.$player1
+        }
         // const $defend = $('.defend')[0];
         // $defend.addEventListener('click', function () {
         //     playerDefend._action = 'defend';
