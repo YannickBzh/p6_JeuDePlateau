@@ -23,3 +23,4 @@ newGame.handleClickOnCase();
 newGame.fightIsComing();
 newGame.bindAttackButton();
 newGame.bindDefendButton();
+//newGame.handleTurnBasePlayer();
