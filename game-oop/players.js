@@ -32,8 +32,7 @@ class Player extends GameAttribute {
 
         $( "#tedWeapon" ).attr( "src", "assets/umbrella.png" );
 
-        this._weapon = weapons.filter(weapon => weapon._className === newWeapon)[0]        
-
+        this._weapon = weapons.filter(weapon => weapon._className === newWeapon)[0];
 
         /**
          * 1. je sélection en dur mon élément sur le dom

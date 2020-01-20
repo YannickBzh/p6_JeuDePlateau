@@ -9,7 +9,6 @@ class Game {
         this.$player2 = $('.player-2');
         this.$cases = $('.case');
         this.whoIsPlaying = this.$player1;
-        this.rounds = 0;
     }
 
 
@@ -133,13 +132,11 @@ class Game {
     }
 
     movePlayer(click, $player, playerName) {
-
         click.removeClass('empty');
         this.whoIsPlaying.removeClass($player);
         this.whoIsPlaying.addClass('empty');
         click.addClass($player);
         this.eraseHighlight();
-
         this.whoIsPlaying = $(playerName);
         this.$player1 = $('.player-1');
         this.$player2 = $('.player-2');
@@ -174,18 +171,20 @@ class Game {
     }
 
     switchWeapon(click, player) {
-        const weaponOnCaseClicked = this.retrieveWeaponFromCase(click)[0];
-        click.removeClass('empty')
-        click.addClass(player._weapon)
-        player.handleWeaponSwitch(weaponOnCaseClicked);
-        click.removeClass(weaponOnCaseClicked);
+        if (click.hasClass('caseYouCanGo')) {
+            const weaponOnCaseClicked = this.retrieveWeaponFromCase(click)[0];
+            click.removeClass('empty');
+            click.addClass(player._weapon);
+            player.handleWeaponSwitch(weaponOnCaseClicked);
+            click.removeClass(weaponOnCaseClicked);
+        }
     }
     /**
      * handlePlayerTurn : permet de déplacer le joueur et de passer la main au joueur suivant
      */
 
     handlePlayerTurn(caseClicked) {
-        if ((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-1'))) {
+        if (((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-1')) && (caseClicked.hasClass('caseYouCanGo')))) {
             this.switchWeapon(caseClicked, player1)
         } else if (((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-2')))) {
             this.switchWeapon(caseClicked, player2)
@@ -296,16 +295,20 @@ class Game {
         })
     }
 
+    setActionNull() {
+        this._players[0]._action = '';
+        this._players[1]._action = '';
+    }
     // Une fois que tu as fini un tour de jeu (autrement dit, les deux joueurs ont un état, tu augmentes la propriété round de 1)
     handleTurnBasePlayer() {
         // l'idée de cette méthode : 
         // -> elle met à jour l'état des joueurs.
         // -> elle augmente le round de 1 à chaque tour
-        // -> est-ce que la santée de l'un des joueurs est à 0 ?
+        // -> est-ce que la santé de l'un des joueurs est à 0 ?
         // -> elle les réinitialise à 0
-        let count = 0;
-        while ((this._players[0]._xp > count) || (this._players[1]._xp > count)) {
-            count++;
+        let round = 0;
+        while ((this._players[0]._xp > round) || (this._players[1]._xp > round)) {
+            round++;
             if (((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === '')) || ((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === ''))) {
                 return
             } if (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === '') && (this._players[1]._action === 'attack')) || ((this.whoIsPlaying === this.$player2) && (this._players[1]._action === 'defend') && (this._players[0]._action === ''))) {
@@ -313,29 +316,25 @@ class Game {
             } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack')))) {
                 this._players[0].handleFight();
                 this._players[1].handleFight();
-                this._players[0]._action = '';
-                this._players[1]._action = '';
+                this.setActionNull();
                 console.log("player 1 xp = " + this._players[0]._xp)
                 console.log("player 2 xp = " + this._players[1]._xp)
             } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'defend'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'defend')))) {
-                this._players[0]._action = '';
-                this._players[1]._action = '';
+                this.setActionNull();
                 console.log("player 1 xp = " + this._players[0]._xp)
                 console.log("player 2 xp = " + this._players[1]._xp)
                 return
             } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'defend'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'defend')))) {
                 this._players[1].handleDefend();
-                this._players[0]._action = '';
-                this._players[1]._action = '';
+                this.setActionNull();
                 console.log("player 1 xp = " + this._players[0]._xp)
                 console.log("player 2 xp = " + this._players[1]._xp)
             } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'attack')))) {
                 this._players[0].handleDefend();
-                this._players[0]._action = '';
-                this._players[1]._action = '';
+                this.setActionNull();
                 console.log("player 1 xp = " + this._players[0]._xp)
                 console.log("player 2 xp = " + this._players[1]._xp)
-            } if ((this._players[0]._xp <= count) || (this._players[1]._xp <= count)) {
+            } if ((this._players[0]._xp <= round) || (this._players[1]._xp <= round)) {
                 const $modal = $('#modalFight')[0];
                 $modal.classList.replace("d-block", "d-none");
                 this.endGame();
@@ -344,7 +343,6 @@ class Game {
     }
 
     attackChoice() {
-        //console.log('attaque')
         if (this.whoIsPlaying[0] === this.$player1[0]) {
             console.log('le player 1 attaque')
             this._players[0]._action = 'attack'
@@ -354,13 +352,9 @@ class Game {
             this._players[1]._action = 'attack'
             this.whoIsPlaying = this.$player1
         }
-
-        // console.log(this._players[0]._action)
-        // console.log(this._players[1]._action)
     }
 
     defendChoice() {
-        //console.log('défendre')
         if (this.whoIsPlaying[0] === this.$player1[0]) {
             console.log('le player 1 défend')
             this._players[0]._action = 'defend'
@@ -370,8 +364,6 @@ class Game {
             this._players[1]._action = 'defend'
             this.whoIsPlaying = this.$player1
         }
-        // console.log(this._players[0]._action)
-        // console.log(this._players[1]._action)
     }
 
     // Quand tu lances la bagarre
@@ -380,14 +372,8 @@ class Game {
         $modal.classList.replace("d-none", "d-block");
     }
 
-    endGame(){
+    endGame() {
         const $modalEndFight = $('#modalEndGame')[0];
         $modalEndFight.classList.replace("d-none", "d-block");
     }
-
-    // Étapes d'après : 
-    // -> quel joueur commence ? (qui joue -> c'est une information que tu as déjà dans l'état de ta classe)
-    // -> choisi attaque ou défense (choisir l'action du joueur)
-    // -> autre joueur choisi attaque ou défense
-    // conséquences du tour de jeu
 }
