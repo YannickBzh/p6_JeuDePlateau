@@ -293,7 +293,8 @@ class Game {
 
         // Player 1 attaque
         if (this.whoIsPlaying.hasClass('player-1')) {
-            if (this.attackChoice(player1)) {
+            if (this.attackChoice(player1) === true) {
+                console.log("toto")
                 player2.handleFight();
             }
         }
