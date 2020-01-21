@@ -11,11 +11,20 @@ class Player extends GameAttribute {
     }
 
     // attaquer
-    handleFight() {
+    handleFight(toto, toto2) {
         const damageWeapon = 10;
         this._xp = this._xp - damageWeapon;
-        // Mon player a comme action "attaque" et commme arme "Parapluie" -> 
-        // Retourne les dégats
+        if (toto2._weapon = weaponUmbrella) {
+            toto._xp = toto._xp - weaponUmbrella._damage
+            //toto._xp = toto._xp - weaponTie._damage
+        } else if (toto2._weapon = weaponTie) {
+            toto._xp = toto._xp - weaponTie._damage
+        } else if (toto2._weapon = weaponHorn) {
+            toto._xp = toto._xp - weaponHorn._damage
+        } else if (toto2._weapon = weaponPineapple){
+            toto._xp = toto._xp - weaponPineapple._damage
+        } 
+        //console.log(player1._weapon)
     }
 
     // défendre
@@ -26,19 +35,13 @@ class Player extends GameAttribute {
 
     // changer d'arme
     handleWeaponSwitch(newWeapon) {
-        // const $currentPlayerWeapon = $('#tedWeapon')[0]
-
-        // console.log($currentPlayerWeapon)
-
-        $( "#tedWeapon" ).attr( "src", "assets/umbrella.png" );
+        //$( "#tedWeapon" ).attr( "src", "assets/umbrella.png" );
 
         this._weapon = weapons.filter(weapon => weapon._className === newWeapon)[0];
+        
+        this._weapon = newWeapon;
+        
+        console.log(this._weapon)
 
-        /**
-         * 1. je sélection en dur mon élément sur le dom
-         * 2. replacer par une image en dure
-         * 3. je le fais de façon dynamique pour un seul joeur
-         * 4. Je l'applique aux deux joueurs
-         */
     }
 }
