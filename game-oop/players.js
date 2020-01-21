@@ -26,17 +26,13 @@ class Player extends GameAttribute {
 
     // changer d'arme
     handleWeaponSwitch(newWeapon) {
-        console.log('====');
-        console.log(newWeapon);
-
         // const $currentPlayerWeapon = $('#tedWeapon')[0]
 
         // console.log($currentPlayerWeapon)
 
         $( "#tedWeapon" ).attr( "src", "assets/umbrella.png" );
 
-        this._weapon = newWeapon;
-
+        this._weapon = weapons.filter(weapon => weapon._className === newWeapon)[0];
 
         /**
          * 1. je sélection en dur mon élément sur le dom

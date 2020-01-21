@@ -6,6 +6,8 @@ const weaponUmbrella = new Weapons("weapon Umbrella", 20, "weaponUmbrella");
 const weaponHorn = new Weapons("weapon Horn", 20, "weaponHorn");
 const weaponPineapple = new Weapons("weapon Pineapple", 30, "weaponPineapple");
 
+const weapons = [weaponTie, weaponUmbrella, weaponHorn, weaponPineapple];
+
 
 const board = new Board(9, 9, 10, $('.game'), [player1, player2], [weaponTie, weaponUmbrella, weaponHorn, weaponPineapple]);
 
@@ -19,3 +21,6 @@ const newGame = new Game([player1, player2]);
 newGame.highlightPlayer1();
 newGame.handleClickOnCase();
 newGame.fightIsComing();
+newGame.bindAttackButton();
+newGame.bindDefendButton();
+//newGame.handleTurnBasePlayer();

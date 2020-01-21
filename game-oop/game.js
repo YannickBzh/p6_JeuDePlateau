@@ -138,7 +138,8 @@ class Game {
         click.addClass($player);
         this.eraseHighlight();
         this.whoIsPlaying = $(playerName);
-        //console.log(this.whoIsPlaying)
+        this.$player1 = $('.player-1');
+        this.$player2 = $('.player-2');
     }
 
     handleClickOnCase() {
@@ -155,7 +156,7 @@ class Game {
             that.playerCloseDown($(this));
             that.playerCloseLeft($(this));
             that.playerCloseRight($(this));
-        })
+        });
     }
 
     // Voir s'il existe une arme sur la case en question (autrement dit la case qui vient d'être cliquée)
@@ -170,18 +171,20 @@ class Game {
     }
 
     switchWeapon(click, player) {
-        const weaponOnCaseClicked = this.retrieveWeaponFromCase(click)[0];
-        click.removeClass('empty')
-        click.addClass(player._weapon)
-        player.handleWeaponSwitch(weaponOnCaseClicked);
-        click.removeClass(weaponOnCaseClicked);
+        if (click.hasClass('caseYouCanGo')) {
+            const weaponOnCaseClicked = this.retrieveWeaponFromCase(click)[0];
+            click.removeClass('empty');
+            click.addClass(player._weapon);
+            player.handleWeaponSwitch(weaponOnCaseClicked);
+            click.removeClass(weaponOnCaseClicked);
+        }
     }
     /**
      * handlePlayerTurn : permet de déplacer le joueur et de passer la main au joueur suivant
      */
 
     handlePlayerTurn(caseClicked) {
-        if ((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-1'))) {
+        if (((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-1')) && (caseClicked.hasClass('caseYouCanGo')))) {
             this.switchWeapon(caseClicked, player1)
         } else if (((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-2')))) {
             this.switchWeapon(caseClicked, player2)
@@ -272,44 +275,105 @@ class Game {
         }
     }
 
-    attackChoice(playerAttack) {
-        const $attack = $('.attack')[0];
-        $attack.addEventListener('click', function () {
-            playerAttack._action = 'attack';
+    bindAttackButton() {
+        const $attackBtn = $('.attack');
+        const that = this;
+
+        $attackBtn.click(function () {
+            that.attackChoice();
+            that.handleTurnBasePlayer();
         })
     }
 
-    defendChoice(playerDefend) {
-        const $defend = $('.defend')[0];
-        $defend.addEventListener('click', function () {
-            playerDefend._action = 'defend';
+    bindDefendButton() {
+        const $defendBtn = $('.defend');
+        const that = this;
+
+        $defendBtn.click(function () {
+            that.defendChoice();
+            that.handleTurnBasePlayer();
         })
+    }
+
+    setActionNull() {
+        this._players[0]._action = '';
+        this._players[1]._action = '';
+    }
+    // Une fois que tu as fini un tour de jeu (autrement dit, les deux joueurs ont un état, tu augmentes la propriété round de 1)
+    handleTurnBasePlayer() {
+        // l'idée de cette méthode : 
+        // -> elle met à jour l'état des joueurs.
+        // -> elle augmente le round de 1 à chaque tour
+        // -> est-ce que la santé de l'un des joueurs est à 0 ?
+        // -> elle les réinitialise à 0
+        let round = 0;
+        while ((this._players[0]._xp > round) || (this._players[1]._xp > round)) {
+            round++;
+            if (((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === '')) || ((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === ''))) {
+                return
+            } if (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === '') && (this._players[1]._action === 'attack')) || ((this.whoIsPlaying === this.$player2) && (this._players[1]._action === 'defend') && (this._players[0]._action === ''))) {
+                return
+            } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack')))) {
+                this._players[0].handleFight();
+                this._players[1].handleFight();
+                this.setActionNull();
+                console.log("player 1 xp = " + this._players[0]._xp)
+                console.log("player 2 xp = " + this._players[1]._xp)
+            } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'defend'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'defend')))) {
+                this.setActionNull();
+                console.log("player 1 xp = " + this._players[0]._xp)
+                console.log("player 2 xp = " + this._players[1]._xp)
+                return
+            } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'defend'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'defend')))) {
+                this._players[1].handleDefend();
+                this.setActionNull();
+                console.log("player 1 xp = " + this._players[0]._xp)
+                console.log("player 2 xp = " + this._players[1]._xp)
+            } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'attack')))) {
+                this._players[0].handleDefend();
+                this.setActionNull();
+                console.log("player 1 xp = " + this._players[0]._xp)
+                console.log("player 2 xp = " + this._players[1]._xp)
+            } if ((this._players[0]._xp <= round) || (this._players[1]._xp <= round)) {
+                const $modal = $('#modalFight')[0];
+                $modal.classList.replace("d-block", "d-none");
+                this.endGame();
+            } else return;
+        }
+    }
+
+    attackChoice() {
+        if (this.whoIsPlaying[0] === this.$player1[0]) {
+            console.log('le player 1 attaque')
+            this._players[0]._action = 'attack'
+            this.whoIsPlaying = this.$player2
+        } else {
+            console.log('le player 2 attaque')
+            this._players[1]._action = 'attack'
+            this.whoIsPlaying = this.$player1
+        }
+    }
+
+    defendChoice() {
+        if (this.whoIsPlaying[0] === this.$player1[0]) {
+            console.log('le player 1 défend')
+            this._players[0]._action = 'defend'
+            this.whoIsPlaying = this.$player2
+        } else {
+            console.log('le player 2 défend')
+            this._players[1]._action = 'defend'
+            this.whoIsPlaying = this.$player1
+        }
     }
 
     // Quand tu lances la bagarre
     launchFight() {
         const $modal = $('#modalFight')[0];
         $modal.classList.replace("d-none", "d-block");
-
-        // Player 1 attaque
-        if (this.whoIsPlaying.hasClass('player-1')) {
-            if (this.attackChoice(player1) === true) {
-                console.log("toto")
-                player2.handleFight();
-            }
-        }
-
-        // Player 1 défend
-        if (this.whoIsPlaying.hasClass('player-1')) {
-            if (this.defendChoice(player1)) {
-                player2.handleDefend();
-            }
-        }
     }
 
-    // Étapes d'après : 
-    // -> quel joueur commence ? (qui joue -> c'est une information que tu as déjà dans l'état de ta classe)
-    // -> choisi attaque ou défense (choisir l'action du joueur)
-    // -> autre joueur choisi attaque ou défense
-    // conséquences du tour de jeu
+    endGame() {
+        const $modalEndFight = $('#modalEndGame')[0];
+        $modalEndFight.classList.replace("d-none", "d-block");
+    }
 }
