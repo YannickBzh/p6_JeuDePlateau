@@ -300,13 +300,8 @@ class Game {
         this._players[0]._action = '';
         this._players[1]._action = '';
     }
-    // Une fois que tu as fini un tour de jeu (autrement dit, les deux joueurs ont un état, tu augmentes la propriété round de 1)
+    
     handleTurnBasePlayer() {
-        // l'idée de cette méthode : 
-        // -> elle met à jour l'état des joueurs.
-        // -> elle augmente le round de 1 à chaque tour
-        // -> est-ce que la santé de l'un des joueurs est à 0 ?
-        // -> elle les réinitialise à 0
         let round = 0;
         while ((this._players[0]._xp > round) || (this._players[1]._xp > round)) {
             round++;
@@ -315,8 +310,8 @@ class Game {
             } if (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === '') && (this._players[1]._action === 'attack')) || ((this.whoIsPlaying === this.$player2) && (this._players[1]._action === 'defend') && (this._players[0]._action === ''))) {
                 return
             } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack')))) {
-                this._players[0].handleFight(player1, player2);
-                //this._players[1].handleFight(player2, player1);
+                this._players[0].handleFight(player2, player1);
+                this._players[1].handleFight(player1, player2);
                 this.setActionNull();
                 console.log("player 1 xp = " + this._players[0]._xp)
                 console.log("player 2 xp = " + this._players[1]._xp)

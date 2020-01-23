@@ -8,29 +8,19 @@ class Player extends GameAttribute {
         this._weapon = weapon;
         this._xp = xp;
         this._action = '' // attaquer || defendre
+        this._force = 10;
     }
 
     // attaquer
-    handleFight(toto, toto2) {
-        const damageWeapon = 10;
-        this._xp = this._xp - damageWeapon;
-        if (toto2._weapon = weaponUmbrella) {
-            toto._xp = toto._xp - weaponUmbrella._damage
-            //toto._xp = toto._xp - weaponTie._damage
-        } else if (toto2._weapon = weaponTie) {
-            toto._xp = toto._xp - weaponTie._damage
-        } else if (toto2._weapon = weaponHorn) {
-            toto._xp = toto._xp - weaponHorn._damage
-        } else if (toto2._weapon = weaponPineapple){
-            toto._xp = toto._xp - weaponPineapple._damage
-        } 
-        //console.log(player1._weapon)
+    handleFight(enemy) {
+        
+        enemy._xp = enemy._xp - this._force;
+        
     }
 
     // défendre
     handleDefend() {
-        const damageWeapon = 10;
-        this._xp = this._xp - damageWeapon/2;
+        this._xp = (this._xp - this._force)/2;
     }
 
     // changer d'arme
@@ -38,10 +28,10 @@ class Player extends GameAttribute {
         //$( "#tedWeapon" ).attr( "src", "assets/umbrella.png" );
 
         this._weapon = weapons.filter(weapon => weapon._className === newWeapon)[0];
-        
-        this._weapon = newWeapon;
-        
-        console.log(this._weapon)
+       
+        this._force = parseInt(this._weapon._damage)
+
+        //console.log(this._weapon._damage);
 
     }
 }
