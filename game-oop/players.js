@@ -13,14 +13,12 @@ class Player extends GameAttribute {
 
     // attaquer
     handleFight(enemy) {
-        
         enemy._xp = enemy._xp - this._force;
-        
     }
 
     // défendre
-    handleDefend() {
-        this._xp = (this._xp - this._force)/2;
+    handleDefend(fighter) {
+        fighter._xp = fighter._xp - this._force/2;
     }
 
     // changer d'arme
@@ -30,8 +28,6 @@ class Player extends GameAttribute {
         this._weapon = weapons.filter(weapon => weapon._className === newWeapon)[0];
        
         this._force = parseInt(this._weapon._damage)
-
-        //console.log(this._weapon._damage);
 
     }
 }
