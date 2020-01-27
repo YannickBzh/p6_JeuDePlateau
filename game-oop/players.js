@@ -7,7 +7,7 @@ class Player extends GameAttribute {
         super(name, className)
         this._weapon = weapon;
         this._xp = xp;
-        this._action = '' // attaquer || defendre
+        this._action = '' 
         this._force = 10;
     }
 
@@ -17,8 +17,8 @@ class Player extends GameAttribute {
     }
 
     // défendre
-    handleDefend(fighter) {
-        fighter._xp = fighter._xp - this._force/2;
+    handleDefend(defender) {
+        defender._xp = defender._xp - this._force / 2;
     }
 
     // changer d'arme
@@ -26,8 +26,17 @@ class Player extends GameAttribute {
         //$( "#tedWeapon" ).attr( "src", "assets/umbrella.png" );
 
         this._weapon = weapons.filter(weapon => weapon._className === newWeapon)[0];
-       
-        this._force = parseInt(this._weapon._damage)
+        this._force = this._weapon._damage;
 
+
+        if (this.whoIsPlaying == this.$player1) {
+            console.log('toto');
+            $("#tedWeapon").removeClass();
+            $("#tedWeapon").addClass(this._weapon._className);
+        } else if (this.whoIsPlaying == this.$player2) {
+            console.log('tata');
+            $("#barneyWeapon").removeClass();
+            $("#barneyWeapon").addClass(this._weapon._className);
+        }
     }
 }

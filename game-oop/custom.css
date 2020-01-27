@@ -42,18 +42,26 @@ img {
 
 .weaponTie {
     background-image: url(assets/tie.png);
+    height: 50px;
+    width: 50px;
 }
 
 .weaponUmbrella {
     background-image: url(assets/umbrella.png);
+    height: 50px;
+    width: 50px;
 }
 
 .weaponHorn {
     background-image: url(assets/blue-horn-weapon.png);
+    height: 50px;
+    width: 50px;
 }
 
 .weaponPineapple {
     background-image: url(assets/pineapple.png);
+    height: 50px;
+    width: 50px;
 }
 
 /* Players */

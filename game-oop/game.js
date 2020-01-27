@@ -138,8 +138,8 @@ class Game {
         click.addClass($player);
         this.eraseHighlight();
         this.whoIsPlaying = $(playerName);
-        this.$player1 = $('.player-1');
-        this.$player2 = $('.player-2');
+        // this.$player1 = $('.player-1');
+        // this.$player2 = $('.player-2');
     }
 
     handleClickOnCase() {
@@ -310,8 +310,8 @@ class Game {
             } if (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === '') && (this._players[1]._action === 'attack')) || ((this.whoIsPlaying === this.$player2) && (this._players[1]._action === 'defend') && (this._players[0]._action === ''))) {
                 return
             } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack')))) {
-                this._players[0].handleFight(player2, player1);
-                this._players[1].handleFight(player1, player2);
+                this._players[0].handleFight(player2);
+                this._players[1].handleFight(player1);
                 this.setActionNull();
                 console.log("player 1 xp = " + this._players[0]._xp)
                 console.log("player 2 xp = " + this._players[1]._xp)
