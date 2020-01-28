@@ -138,8 +138,6 @@ class Game {
         click.addClass($player);
         this.eraseHighlight();
         this.whoIsPlaying = $(playerName);
-        // this.$player1 = $('.player-1');
-        // this.$player2 = $('.player-2');
     }
 
     handleClickOnCase() {
@@ -180,6 +178,8 @@ class Game {
             click.removeClass(weaponOnCaseClicked);
         }
     }
+
+    
     /**
      * handlePlayerTurn : permet de déplacer le joueur et de passer la main au joueur suivant
      */
@@ -187,8 +187,12 @@ class Game {
     handlePlayerTurn(caseClicked) {
         if (((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-1')) && (caseClicked.hasClass('caseYouCanGo')))) {
             this.switchWeapon(caseClicked, player1)
+            $("#tedWeapon").removeClass();
+            $("#tedWeapon").addClass(player1._weapon);
         } else if (((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-2')))) {
             this.switchWeapon(caseClicked, player2)
+            $("#barneyWeapon").removeClass();
+            $("#barneyWeapon").addClass(player2._weapon);
         } if ((caseClicked.hasClass('caseYouCanGo')) && ((!caseClicked.hasClass('player-1')) && (!caseClicked.hasClass('player-2')) && (!caseClicked.hasClass('caseGrey')))) {
             if (this.whoIsPlaying.hasClass('player-1')) {
                 this.movePlayer(caseClicked, 'player-1', '.player-2');
@@ -199,6 +203,7 @@ class Game {
             }
         }
     }
+
 
     playerCloseUp() {
         let positionPlayers = this.whereIsMyPlayer(player1);
@@ -224,10 +229,10 @@ class Game {
         for (let i = 1; i <= 1; i++) {
             let bottomCaseOrdonnee = (parseInt(positionPlayers[1]) + i);
             for (let j = 0; j < positionPlayers[2].length; j++) {
-                let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
-                let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
-                let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
-                let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
+                let casesAbs = positionPlayers[2][j].classList[1];
+                let casesOrd = positionPlayers[2][j].classList[2];
+                let casesAbscisse = casesAbs.substring(2, 4);
+                let casesOrdonnee = casesOrd.substring(2, 4);
                 if ((casesOrdonnee == bottomCaseOrdonnee) && (casesAbscisse == parseInt(positionPlayers[0]))) {
                     if (positionPlayers[2][j].classList.contains('player-2')) {
                         this.eraseHighlight();
@@ -243,10 +248,10 @@ class Game {
         for (let i = 1; i <= 1; i++) {
             let leftCaseAbscisse = (parseInt(positionPlayers[0]) - i);
             for (let j = 0; j < positionPlayers[2].length; j++) {
-                let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
-                let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
-                let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
-                let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
+                let casesAbs = positionPlayers[2][j].classList[1];
+                let casesOrd = positionPlayers[2][j].classList[2];
+                let casesAbscisse = casesAbs.substring(2, 4);
+                let casesOrdonnee = casesOrd.substring(2, 4);
                 if ((casesAbscisse == leftCaseAbscisse) && (casesOrdonnee == parseInt(positionPlayers[1]))) {
                     if (positionPlayers[2][j].classList.contains('player-2')) {
                         this.eraseHighlight();
