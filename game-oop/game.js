@@ -311,6 +311,7 @@ class Game {
         while ((this._players[0]._xp > round) || (this._players[1]._xp > round)) {
             round++;
             if (((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === '')) || ((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === ''))) {
+                $('#tedImg').addClass('dotBorder');
                 return
             } if (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === '') && (this._players[1]._action === 'attack')) || ((this.whoIsPlaying === this.$player2) && (this._players[1]._action === 'defend') && (this._players[0]._action === ''))) {
                 return
@@ -376,5 +377,10 @@ class Game {
     endGame() {
         const $modalEndFight = $('#modalEndGame')[0];
         $modalEndFight.classList.replace("d-none", "d-block");
+    }
+
+    addDotted() {
+        const $imgPlayer = $('#tedImg');
+        $imgPlayer.classList.add("dotBorder");
     }
 }
