@@ -138,6 +138,8 @@ class Game {
         click.addClass($player);
         this.eraseHighlight();
         this.whoIsPlaying = $(playerName);
+        this.$player1 = $('.player-1');
+        this.$player2 = $('.player-2');
     }
 
     handleClickOnCase() {
@@ -288,7 +290,11 @@ class Game {
         $attackBtn.click(function () {
             that.attackChoice();
             that.handleTurnBasePlayer();
-        })
+            if (that.whoIsPlaying[0] === that.$player1[0]) {
+                $('#tedImg').addClass('dotBorder');
+                $('#barneyImg').removeClass('dotBorder');
+            } else $('#tedImg').removeClass('dotBorder');
+        });
     }
 
     bindDefendButton() {
@@ -298,7 +304,11 @@ class Game {
         $defendBtn.click(function () {
             that.defendChoice();
             that.handleTurnBasePlayer();
-        })
+            if (that.whoIsPlaying[0] === that.$player1[0]) {
+                $('#tedImg').addClass('dotBorder');
+                $('#barneyImg').removeClass('dotBorder');
+            } else $('#tedImg').removeClass('dotBorder');
+        });
     }
 
     setActionNull() {
@@ -311,10 +321,9 @@ class Game {
         while ((this._players[0]._xp > round) || (this._players[1]._xp > round)) {
             round++;
             if (((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === '')) || ((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === ''))) {
-                $('#tedImg').addClass('dotBorder');
-                return
+                return;
             } if (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === '') && (this._players[1]._action === 'attack')) || ((this.whoIsPlaying === this.$player2) && (this._players[1]._action === 'defend') && (this._players[0]._action === ''))) {
-                return
+                return;
             } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack')))) {
                 this._players[0].handleFight(player2);
                 this._players[1].handleFight(player1);
@@ -325,7 +334,7 @@ class Game {
                 this.setActionNull();
                 console.log("player 1 xp = " + this._players[0]._xp)
                 console.log("player 2 xp = " + this._players[1]._xp)
-                return
+                return;
             } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'defend'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'defend')))) {
                 this._players[0].handleDefend(player2);
                 this.setActionNull();
@@ -346,25 +355,28 @@ class Game {
 
     attackChoice() {
         if (this.whoIsPlaying[0] === this.$player1[0]) {
+            $('#barneyImg').addClass('dotBorder');
             console.log('le player 1 attaque')
-            this._players[0]._action = 'attack'
+            this._players[0]._action = 'attack';
             this.whoIsPlaying = this.$player2
         } else {
             console.log('le player 2 attaque')
-            this._players[1]._action = 'attack'
+            this._players[1]._action = 'attack';
             this.whoIsPlaying = this.$player1
         }
     }
 
     defendChoice() {
         if (this.whoIsPlaying[0] === this.$player1[0]) {
+            $('#barneyImg').addClass('dotBorder');
             console.log('le player 1 défend')
-            this._players[0]._action = 'defend'
-            this.whoIsPlaying = this.$player2
+            this._players[0]._action = 'defend';
+            this.whoIsPlaying = this.$player2;
         } else {
+            $('#tedImg').addClass('dotBorder');
             console.log('le player 2 défend')
-            this._players[1]._action = 'defend'
-            this.whoIsPlaying = this.$player1
+            this._players[1]._action = 'defend';
+            this.whoIsPlaying = this.$player1;
         }
     }
 
@@ -372,15 +384,13 @@ class Game {
     launchFight() {
         const $modal = $('#modalFight')[0];
         $modal.classList.replace("d-none", "d-block");
+        if (this.whoIsPlaying[0] === this.$player1[0]) {
+            $('#tedImg').addClass('dotBorder');
+        } else $('#barneyImg').addClass('dotBorder');
     }
 
     endGame() {
         const $modalEndFight = $('#modalEndGame')[0];
         $modalEndFight.classList.replace("d-none", "d-block");
-    }
-
-    addDotted() {
-        const $imgPlayer = $('#tedImg');
-        $imgPlayer.classList.add("dotBorder");
     }
 }
