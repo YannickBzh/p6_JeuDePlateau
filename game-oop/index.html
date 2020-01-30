@@ -15,7 +15,7 @@
 
 <body>
     <div class="container">
-        <div class="row col-md-12 flex-row">
+        <div id="blurEffect" class="row col-md-12 flex-row">
             <div class="col-md-3 col-sm-12 col-12 flex-column">
                 <div class="mb-5">
                     <h1>how I <br>fight <br>your Bro</h1>
@@ -24,13 +24,13 @@
                     <div>
                         <img src="assets/ted_full_size.png">
                     </div>
-                    <div class="flex-column align-self-center">
+                    <div class="flex-column align-self-center pl-5">
                         <div class="flex-row d-flex">
-                            <h6>Weapon : </h6>
+                            <span>Weapon : </span>
                             <div id="tedWeapon" class="weaponTie"></div>
                         </div>
                         <div>
-                            <h6>Health : 100%</h6>
+                            <span>Health : <span class="player1Xp">100</span></span>
                         </div>
                     </div>
                 </div>
@@ -38,13 +38,13 @@
                     <div>
                         <img src="assets/barney_full_size.png">
                     </div>
-                    <div class="flex-column align-self-center">
+                    <div class="flex-column align-self-center pl-5">
                         <div class="flex-row d-flex">
-                            <h6>Weapon : </h6>
+                            <span>Weapon : </span>
                             <div id="barneyWeapon" class="weaponTie"></div>
                         </div>
                         <div>
-                            <h6>Health : 100%</h6>
+                            <span>Health : <span class="player2Xp">100</span></span>
                         </div>
                     </div>
                 </div>
@@ -84,13 +84,17 @@
                             <img src="assets/ted_full_size.png" id="tedImg" class="">
                             <img src="assets/barney_full_size.png" id="barneyImg" class="">
                         </div>
-                        <div class="d-flex flex-row justify-content-around">
-                            <div><span id="player1Xp">100</span></div>
-                            <div><span id="player2Xp">100</span></div>
+                        <div class="d-flex flex-row justify-content-around mt-2">
+                            <div id="tedWeaponModal" class="weaponTie"></div>
+                            <div id="barneyWeaponModal" class="weaponTie"></div>
                         </div>
-                        <div class="modal-footer justify-content-around">
+                        <div class="d-flex flex-row justify-content-around">
+                            <div><span class="player1Xp">100</span></div>
+                            <div><span class="player2Xp">100</span></div>
+                        </div>
+                        <div class="modal-footer justify-content-center mt-3">
                             <button type="button" class="btn btn-primary attack">Attack</button>
-                            <button type="button" class="btn btn-primary defend">Defend</button>
+                            <button type="button" class="btn btn-primary defendBtn">Defend</button>
                         </div>
                     </div>
                 </div>
@@ -103,14 +107,10 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Fight is over !!
-                        </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h5 class="modal-title">And the winner is</h5>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <div id="winner"></div>
                     </div>
                 </div>
             </div>

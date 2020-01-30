@@ -181,7 +181,7 @@ class Game {
         }
     }
 
-    
+
     /**
      * handlePlayerTurn : permet de déplacer le joueur et de passer la main au joueur suivant
      */
@@ -191,10 +191,14 @@ class Game {
             this.switchWeapon(caseClicked, player1)
             $("#tedWeapon").removeClass();
             $("#tedWeapon").addClass(player1._weapon);
+            $("#tedWeaponModal").removeClass();
+            $("#tedWeaponModal").addClass(player1._weapon);
         } else if (((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-2')))) {
             this.switchWeapon(caseClicked, player2)
             $("#barneyWeapon").removeClass();
             $("#barneyWeapon").addClass(player2._weapon);
+            $("#barneyWeaponModal").removeClass();
+            $("#barneyWeaponModal").addClass(player2._weapon);
         } if ((caseClicked.hasClass('caseYouCanGo')) && ((!caseClicked.hasClass('player-1')) && (!caseClicked.hasClass('player-2')) && (!caseClicked.hasClass('caseGrey')))) {
             if (this.whoIsPlaying.hasClass('player-1')) {
                 this.movePlayer(caseClicked, 'player-1', '.player-2');
@@ -292,15 +296,17 @@ class Game {
             that.handleTurnBasePlayer();
             if (that.whoIsPlaying[0] === that.$player1[0]) {
                 that.displayPlayer1Xp()
+                that.displayPlayer2Xp()
                 $('#barneyImg').addClass('greyEffect');
                 $('#tedImg').removeClass('greyEffect');
             } else $('#barneyImg').removeClass('greyEffect');
+            that.displayPlayer1Xp()
             that.displayPlayer2Xp()
         });
     }
 
     bindDefendButton() {
-        const $defendBtn = $('.defend');
+        const $defendBtn = $('.defendBtn');
         const that = this;
 
         $defendBtn.click(function () {
@@ -308,9 +314,11 @@ class Game {
             that.handleTurnBasePlayer();
             if (that.whoIsPlaying[0] === that.$player1[0]) {
                 that.displayPlayer1Xp()
+                that.displayPlayer2Xp()
                 $('#barneyImg').addClass('greyEffect');
                 $('#tedImg').removeClass('greyEffect');
             } else $('#barneyImg').removeClass('greyEffect');
+            that.displayPlayer1Xp()
             that.displayPlayer2Xp()
         });
     }
@@ -319,7 +327,7 @@ class Game {
         this._players[0]._action = '';
         this._players[1]._action = '';
     }
-    
+
     handleTurnBasePlayer() {
         let round = 0;
         while ((this._players[0]._xp > round) || (this._players[1]._xp > round)) {
@@ -353,6 +361,7 @@ class Game {
                 const $modal = $('#modalFight')[0];
                 $modal.classList.replace("d-block", "d-none");
                 this.endGame();
+                this.displayWinner()
             } else return;
         }
     }
@@ -388,6 +397,7 @@ class Game {
     launchFight() {
         const $modal = $('#modalFight')[0];
         $modal.classList.replace("d-none", "d-block");
+        $('#blurEffect').addClass('blur');
         if (this.whoIsPlaying[0] === this.$player1[0]) {
             $('#barneyImg').addClass('greyEffect');
         } else $('#tedImg').addClass('greyEffect');
@@ -399,10 +409,25 @@ class Game {
     }
 
     displayPlayer1Xp() {
-        $('#player1Xp')[0].innerHTML = this._players[0]._xp
+        for (let i = 0; i < $('.player1Xp').length; i++) {
+            $('.player1Xp')[i].innerHTML = this._players[0]._xp
+        }
     }
 
     displayPlayer2Xp() {
-        $('#player2Xp')[0].innerHTML = this._players[1]._xp
+        for (let i = 0; i < $('.player2Xp').length; i++) {
+            $('.player2Xp')[i].innerHTML = this._players[1]._xp
+        }
+    }
+
+    displayWinner() {
+        if ((this._players[0]._xp > 0) && (this._players[1]._xp <= 0)){
+            $('#winner').append('<img src="assets/ted_full_size.png"/>');
+        } if ((this._players[0]._xp <= 0) && (this._players[1]._xp <= 0)) {
+            $('#winner').append('<img src="assets/ted_full_size.png"/>');
+            $('#winner').append('<img src="assets/barney_full_size.png"/>');
+        } if ((this._players[1]._xp > 0) && (this._players[0]._xp <= 0)) {
+            $('#winner').append('<img src="assets/barney_full_size.png"/>');
+        } else return
     }
 }
