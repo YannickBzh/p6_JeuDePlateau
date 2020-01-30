@@ -155,8 +155,8 @@ span {
     background-color:#4e9267 !important;
 }
 
-.greyEffect {
-    filter: grayscale(100%);
+.opacityEffect {
+    filter: opacity(0.3);
 }
     
   

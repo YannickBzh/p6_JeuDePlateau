@@ -297,9 +297,9 @@ class Game {
             if (that.whoIsPlaying[0] === that.$player1[0]) {
                 that.displayPlayer1Xp()
                 that.displayPlayer2Xp()
-                $('#barneyImg').addClass('greyEffect');
-                $('#tedImg').removeClass('greyEffect');
-            } else $('#barneyImg').removeClass('greyEffect');
+                $('#barneyImg').addClass('opacityEffect');
+                $('#tedImg').removeClass('opacityEffect');
+            } else $('#barneyImg').removeClass('opacityEffect');
             that.displayPlayer1Xp()
             that.displayPlayer2Xp()
         });
@@ -315,9 +315,9 @@ class Game {
             if (that.whoIsPlaying[0] === that.$player1[0]) {
                 that.displayPlayer1Xp()
                 that.displayPlayer2Xp()
-                $('#barneyImg').addClass('greyEffect');
-                $('#tedImg').removeClass('greyEffect');
-            } else $('#barneyImg').removeClass('greyEffect');
+                $('#barneyImg').addClass('opacityEffect');
+                $('#tedImg').removeClass('opacityEffect');
+            } else $('#barneyImg').removeClass('opacityEffect');
             that.displayPlayer1Xp()
             that.displayPlayer2Xp()
         });
@@ -361,14 +361,14 @@ class Game {
                 const $modal = $('#modalFight')[0];
                 $modal.classList.replace("d-block", "d-none");
                 this.endGame();
-                this.displayWinner()
+                break;
             } else return;
         }
     }
 
     attackChoice() {
         if (this.whoIsPlaying[0] === this.$player1[0]) {
-            $('#tedImg').addClass('greyEffect');
+            $('#tedImg').addClass('opacityEffect');
             console.log('le player 1 attaque')
             this._players[0]._action = 'attack';
             this.whoIsPlaying = this.$player2
@@ -381,12 +381,12 @@ class Game {
 
     defendChoice() {
         if (this.whoIsPlaying[0] === this.$player1[0]) {
-            $('#tedImg').addClass('greyEffect');
+            $('#tedImg').addClass('opacityEffect');
             console.log('le player 1 défend')
             this._players[0]._action = 'defend';
             this.whoIsPlaying = this.$player2;
         } else {
-            $('#tedImg').addClass('greyEffect');
+            $('#tedImg').addClass('opacityEffect');
             console.log('le player 2 défend')
             this._players[1]._action = 'defend';
             this.whoIsPlaying = this.$player1;
@@ -399,13 +399,14 @@ class Game {
         $modal.classList.replace("d-none", "d-block");
         $('#blurEffect').addClass('blur');
         if (this.whoIsPlaying[0] === this.$player1[0]) {
-            $('#barneyImg').addClass('greyEffect');
-        } else $('#tedImg').addClass('greyEffect');
+            $('#barneyImg').addClass('opacityEffect');
+        } else $('#tedImg').addClass('opacityEffect');
     }
 
     endGame() {
         const $modalEndFight = $('#modalEndGame')[0];
         $modalEndFight.classList.replace("d-none", "d-block");
+        this.displayWinner();
     }
 
     displayPlayer1Xp() {
@@ -421,13 +422,21 @@ class Game {
     }
 
     displayWinner() {
-        if ((this._players[0]._xp > 0) && (this._players[1]._xp <= 0)){
-            $('#winner').append('<img src="assets/ted_full_size.png"/>');
+        if ((this._players[0]._xp > 0) && (this._players[1]._xp <= 0)) {
+            $('#winner').append('<img src="https://media.giphy.com/media/NJzu0CDur92Y8/source.gif"/>');
         } if ((this._players[0]._xp <= 0) && (this._players[1]._xp <= 0)) {
-            $('#winner').append('<img src="assets/ted_full_size.png"/>');
-            $('#winner').append('<img src="assets/barney_full_size.png"/>');
+            $('#winner').append('<img src="https://media.giphy.com/media/z6BeyFxDYDBNC/source.gif"/>');
+            //$('#winner').append('<img src="assets/barney_full_size.png"/>');
+            $('#modalWinner').html("It's a draw ! Both are winners");
         } if ((this._players[1]._xp > 0) && (this._players[0]._xp <= 0)) {
-            $('#winner').append('<img src="assets/barney_full_size.png"/>');
+            $('#winner').append('<img src="https://media.giphy.com/media/3WY8qMF9l3ldK/source.gif"/>');
         } else return
+    }
+
+    reloadGame() {
+        $("#reload").click(function () {
+            console.log('tata')
+            location.reload(true);
+        });
     }
 }
