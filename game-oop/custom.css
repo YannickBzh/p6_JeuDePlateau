@@ -117,6 +117,12 @@ img {
     -ms-animation: fadein 1s; /* Internet Explorer */
     -o-animation: fadein 1s; /* Opera < 12.1 */
     animation: fadein 1s;
+    opacity: 0;
+    animation-name: bounceIn;
+    animation-duration: 600ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-delay: 0.1s;
 }
 
 .modal-content {
@@ -133,10 +139,37 @@ img {
     border: none !important;
 }
 
-.btn-primary:focus{
+.btn-primary:focus { 
     box-shadow: none !important;
 }
 
-.dotBorder{
-    border-style:dotted !important;
+.greyEffect {
+    filter: grayscale(100%);
+}
+    
+  
+span:nth-child(2){animation-delay: 0.5s;}
+
+  
+@keyframes bounceIn {
+    0%{
+      opacity: 0;
+      transform: scale(0.3) translate3d(0,0,0);
+    }
+    50%{
+      opacity: 0.9;
+      transform: scale(1.1);
+    }
+    80%{
+      opacity: 1;
+      transform: scale(0.89);
+    }
+    100%{
+      opacity: 1;
+      transform: scale(1) translate3d(0,0,0);
+    }
+}
+
+.modal-footer {
+    border-top:none !important;
 }

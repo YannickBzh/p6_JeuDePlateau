@@ -291,9 +291,11 @@ class Game {
             that.attackChoice();
             that.handleTurnBasePlayer();
             if (that.whoIsPlaying[0] === that.$player1[0]) {
-                $('#tedImg').addClass('dotBorder');
-                $('#barneyImg').removeClass('dotBorder');
-            } else $('#tedImg').removeClass('dotBorder');
+                that.displayPlayer1Xp()
+                $('#barneyImg').addClass('greyEffect');
+                $('#tedImg').removeClass('greyEffect');
+            } else $('#barneyImg').removeClass('greyEffect');
+            that.displayPlayer2Xp()
         });
     }
 
@@ -305,9 +307,11 @@ class Game {
             that.defendChoice();
             that.handleTurnBasePlayer();
             if (that.whoIsPlaying[0] === that.$player1[0]) {
-                $('#tedImg').addClass('dotBorder');
-                $('#barneyImg').removeClass('dotBorder');
-            } else $('#tedImg').removeClass('dotBorder');
+                that.displayPlayer1Xp()
+                $('#barneyImg').addClass('greyEffect');
+                $('#tedImg').removeClass('greyEffect');
+            } else $('#barneyImg').removeClass('greyEffect');
+            that.displayPlayer2Xp()
         });
     }
 
@@ -355,7 +359,7 @@ class Game {
 
     attackChoice() {
         if (this.whoIsPlaying[0] === this.$player1[0]) {
-            $('#barneyImg').addClass('dotBorder');
+            $('#tedImg').addClass('greyEffect');
             console.log('le player 1 attaque')
             this._players[0]._action = 'attack';
             this.whoIsPlaying = this.$player2
@@ -368,12 +372,12 @@ class Game {
 
     defendChoice() {
         if (this.whoIsPlaying[0] === this.$player1[0]) {
-            $('#barneyImg').addClass('dotBorder');
+            $('#tedImg').addClass('greyEffect');
             console.log('le player 1 défend')
             this._players[0]._action = 'defend';
             this.whoIsPlaying = this.$player2;
         } else {
-            $('#tedImg').addClass('dotBorder');
+            $('#tedImg').addClass('greyEffect');
             console.log('le player 2 défend')
             this._players[1]._action = 'defend';
             this.whoIsPlaying = this.$player1;
@@ -385,12 +389,20 @@ class Game {
         const $modal = $('#modalFight')[0];
         $modal.classList.replace("d-none", "d-block");
         if (this.whoIsPlaying[0] === this.$player1[0]) {
-            $('#tedImg').addClass('dotBorder');
-        } else $('#barneyImg').addClass('dotBorder');
+            $('#barneyImg').addClass('greyEffect');
+        } else $('#tedImg').addClass('greyEffect');
     }
 
     endGame() {
         const $modalEndFight = $('#modalEndGame')[0];
         $modalEndFight.classList.replace("d-none", "d-block");
+    }
+
+    displayPlayer1Xp() {
+        $('#player1Xp')[0].innerHTML = this._players[0]._xp
+    }
+
+    displayPlayer2Xp() {
+        $('#player2Xp')[0].innerHTML = this._players[1]._xp
     }
 }

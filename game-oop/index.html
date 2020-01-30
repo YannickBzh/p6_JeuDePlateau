@@ -69,13 +69,14 @@
                 </div>
             </div>
         </div>
+
         <!-- Modal Fight -->
         <div class="modal d-none" id="modalFight" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header justify-content-center">
-                        <h5 class="modal-title" id="exampleModalLabel">A fight is coming, and it will be legendary !
+                        <h5 class="modal-title">A fight is coming, and it will be legendary !
                         </h5>
                     </div>
                     <div class="modal-body">
@@ -83,21 +84,26 @@
                             <img src="assets/ted_full_size.png" id="tedImg" class="">
                             <img src="assets/barney_full_size.png" id="barneyImg" class="">
                         </div>
+                        <div class="d-flex flex-row justify-content-around">
+                            <div><span id="player1Xp">100</span></div>
+                            <div><span id="player2Xp">100</span></div>
+                        </div>
                         <div class="modal-footer justify-content-around">
-                            <button type="button" class="btn btn-primary attack">Attaquer</button>
-                            <button type="button" class="btn btn-primary defend">Défendre</button>
+                            <button type="button" class="btn btn-primary attack">Attack</button>
+                            <button type="button" class="btn btn-primary defend">Defend</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Modal End Game -->
         <div class="modal d-none" id="modalEndGame" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Fight is over !!
+                        <h5 class="modal-title">Fight is over !!
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -109,6 +115,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </body>
 
