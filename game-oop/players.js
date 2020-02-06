@@ -6,6 +6,7 @@ class Player extends GameAttribute {
     constructor(name, className, weapon, xp) {
         super(name, className)
         this._weapon = weapon;
+        // Plus pv que xp (xp => expérience)
         this._xp = xp;
         this._action = ''
         this._force = 10;

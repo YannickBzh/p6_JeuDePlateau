@@ -18,7 +18,7 @@ board.generatePlayersAndWeapons();
 
 const newGame = new Game([player1, player2]);
 
-newGame.highlightPlayer1();
+newGame.highlightPlayer(player1);
 newGame.handleClickOnCase();
 newGame.fightIsComing();
 newGame.bindAttackButton();

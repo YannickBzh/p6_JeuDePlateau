@@ -108,19 +108,11 @@ class Game {
         }
     }
 
-    highlightPlayer1() {
-        this.highlightTop(player1);
-        this.highlightBottom(player1);
-        this.highlightLeft(player1);
-        this.highlightRight(player1);
-    }
-
-
-    highlightPlayer2() {
-        this.highlightTop(player2);
-        this.highlightBottom(player2);
-        this.highlightLeft(player2);
-        this.highlightRight(player2);
+    highlightPlayer(player) {
+        this.highlightTop(player);
+        this.highlightBottom(player);
+        this.highlightLeft(player);
+        this.highlightRight(player);
     }
 
 
@@ -131,6 +123,9 @@ class Game {
         }
     }
 
+    /**
+     * @review trouver un meilleur nommage : $player, playerName
+     */
     movePlayer(click, $player, playerName) {
         click.removeClass('empty');
         this.whoIsPlaying.removeClass($player);
@@ -202,14 +197,21 @@ class Game {
         } if ((caseClicked.hasClass('caseYouCanGo')) && ((!caseClicked.hasClass('player-1')) && (!caseClicked.hasClass('player-2')) && (!caseClicked.hasClass('caseGrey')))) {
             if (this.whoIsPlaying.hasClass('player-1')) {
                 this.movePlayer(caseClicked, 'player-1', '.player-2');
-                this.highlightPlayer2();
+                this.highlightPlayer(player2);
             } else if (this.whoIsPlaying.hasClass('player-2')) {
                 this.movePlayer(caseClicked, 'player-2', '.player-1');
-                this.highlightPlayer1();
+                this.highlightPlayer(player1);
             }
         }
     }
 
+    /**
+     * REVIEW :
+     *      -> essayer de refacto highlightTop et playerCloseUp (mais c'est pour l'ensemble des méthodes utilisées)
+     *      -> si possible, essaye de faire un fichier avec une classe Fight qui s'occupe du combat : 
+     *          -> autrement dit : attaque, défense, affichage des points d'xp, etc.
+     *      -> tu instancierais cette classe lors du launchFight
+     */
 
     playerCloseUp() {
         let positionPlayers = this.whereIsMyPlayer(player1);
