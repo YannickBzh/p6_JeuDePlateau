@@ -131,11 +131,11 @@ class Game {
         }
     }
 
-    movePlayer(click, $player, playerName) {
+    movePlayer(click, $playerClass, playerName) {
         click.removeClass('empty');
-        this.whoIsPlaying.removeClass($player);
+        this.whoIsPlaying.removeClass($playerClass);
         this.whoIsPlaying.addClass('empty');
-        click.addClass($player);
+        click.addClass($playerClass);
         this.eraseHighlight();
         this.whoIsPlaying = $(playerName);
         this.$player1 = $('.player-1');
@@ -152,10 +152,10 @@ class Game {
     fightIsComing() {
         const that = this;
         $('.case').click(function () {
-            that.playerCloseUp($(this));
-            that.playerCloseDown($(this));
-            that.playerCloseLeft($(this));
-            that.playerCloseRight($(this));
+            that.playerCloseUp();
+            that.playerCloseDown();
+            that.playerCloseLeft();
+            that.playerCloseRight();
         });
     }
 
@@ -188,13 +188,13 @@ class Game {
 
     handlePlayerTurn(caseClicked) {
         if (((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-1')) && (caseClicked.hasClass('caseYouCanGo')))) {
-            this.switchWeapon(caseClicked, player1)
+            this.switchWeapon(caseClicked, player1);
             $("#tedWeapon").removeClass();
             $("#tedWeapon").addClass(player1._weapon);
             $("#tedWeaponModal").removeClass();
             $("#tedWeaponModal").addClass(player1._weapon);
         } else if (((this.hasCaseWeapon(caseClicked)) && (this.whoIsPlaying.hasClass('player-2')))) {
-            this.switchWeapon(caseClicked, player2)
+            this.switchWeapon(caseClicked, player2);
             $("#barneyWeapon").removeClass();
             $("#barneyWeapon").addClass(player2._weapon);
             $("#barneyWeaponModal").removeClass();
@@ -224,7 +224,7 @@ class Game {
                     if (positionPlayers[2][j].classList.contains('player-2')) {
                         this.eraseHighlight();
                         this.launchFight();
-                    } else return
+                    } else return;
                 }
             }
         }
@@ -243,7 +243,7 @@ class Game {
                     if (positionPlayers[2][j].classList.contains('player-2')) {
                         this.eraseHighlight();
                         this.launchFight();
-                    } else return
+                    } else return;
                 }
             }
         }
@@ -262,7 +262,7 @@ class Game {
                     if (positionPlayers[2][j].classList.contains('player-2')) {
                         this.eraseHighlight();
                         this.launchFight();
-                    } else return
+                    } else return;
                 }
             }
         }
@@ -287,114 +287,112 @@ class Game {
         }
     }
 
-    bindAttackButton() {
-        const $attackBtn = $('.attack');
-        const that = this;
 
-        $attackBtn.click(function () {
-            that.attackChoice();
-            that.handleTurnBasePlayer();
-            if (that.whoIsPlaying[0] === that.$player1[0]) {
-                that.displayPlayer1Xp()
-                that.displayPlayer2Xp()
-                $('#barneyImg').addClass('opacityEffect');
-                $('#tedImg').removeClass('opacityEffect');
-            } else $('#barneyImg').removeClass('opacityEffect');
-            that.displayPlayer1Xp()
-            that.displayPlayer2Xp()
-        });
-    }
+    /** Fight */
+    // bindAttackButton() {
+    //     const $attackBtn = $('.attack');
+    //     const that = this;
 
-    bindDefendButton() {
-        const $defendBtn = $('.defendBtn');
-        const that = this;
+    //     $attackBtn.click(function () {
+    //         that.attackChoice();
+    //         that.handleTurnBasePlayer();
+    //         if (that.whoIsPlaying[0] === that.$player1[0]) {
+    //             that.displayPlayer1Pv()
+    //             that.displayPlayer2Pv()
+    //             $('#barneyImg').addClass('opacityEffect');
+    //             $('#tedImg').removeClass('opacityEffect');
+    //         } else $('#barneyImg').removeClass('opacityEffect');
+    //         that.displayPlayer1Pv()
+    //         that.displayPlayer2Pv()
+    //     });
+    // }
 
-        $defendBtn.click(function () {
-            that.defendChoice();
-            that.handleTurnBasePlayer();
-            if (that.whoIsPlaying[0] === that.$player1[0]) {
-                that.displayPlayer1Xp()
-                that.displayPlayer2Xp()
-                $('#barneyImg').addClass('opacityEffect');
-                $('#tedImg').removeClass('opacityEffect');
-            } else $('#barneyImg').removeClass('opacityEffect');
-            that.displayPlayer1Xp()
-            that.displayPlayer2Xp()
-        });
-    }
+    // /** Fight */
+    // bindDefendButton() {
+    //     const $defendBtn = $('.defendBtn');
+    //     const that = this;
 
-    setActionNull() {
-        this._players[0]._action = '';
-        this._players[1]._action = '';
-    }
+    //     $defendBtn.click(function () {
+    //         that.defendChoice();
+    //         that.handleTurnBasePlayer();
+    //         if (that.whoIsPlaying[0] === that.$player1[0]) {
+    //             that.displayPlayer1Pv()
+    //             that.displayPlayer2Pv()
+    //             $('#barneyImg').addClass('opacityEffect');
+    //             $('#tedImg').removeClass('opacityEffect');
+    //         } else $('#barneyImg').removeClass('opacityEffect');
+    //         that.displayPlayer1Pv()
+    //         that.displayPlayer2Pv()
+    //     });
+    // }
 
-    handleTurnBasePlayer() {
-        let round = 0;
-        while ((this._players[0]._xp > round) || (this._players[1]._xp > round)) {
-            round++;
-            if (((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === '')) || ((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === ''))) {
-                return;
-            } if (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === '') && (this._players[1]._action === 'attack')) || ((this.whoIsPlaying === this.$player2) && (this._players[1]._action === 'defend') && (this._players[0]._action === ''))) {
-                return;
-            } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack')))) {
-                this._players[0].handleFight(player2);
-                this._players[1].handleFight(player1);
-                this.setActionNull();
-                console.log("player 1 xp = " + this._players[0]._xp)
-                console.log("player 2 xp = " + this._players[1]._xp)
-            } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'defend'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'defend')))) {
-                this.setActionNull();
-                console.log("player 1 xp = " + this._players[0]._xp)
-                console.log("player 2 xp = " + this._players[1]._xp)
-                return;
-            } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'defend'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'defend')))) {
-                this._players[0].handleDefend(player2);
-                this.setActionNull();
-                console.log("player 1 xp = " + this._players[0]._xp)
-                console.log("player 2 xp = " + this._players[1]._xp)
-            } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'attack')))) {
-                this._players[1].handleDefend(player1);
-                this.setActionNull();
-                console.log("player 1 xp = " + this._players[0]._xp)
-                console.log("player 2 xp = " + this._players[1]._xp)
-            } if ((this._players[0]._xp <= round) || (this._players[1]._xp <= round)) {
-                const $modal = $('#modalFight')[0];
-                $modal.classList.replace("d-block", "d-none");
-                this.endGame();
-                break;
-            } else return;
-        }
-    }
+    // /** Fight */
+    // setActionNull() {
+    //     this._players[0]._action = '';
+    //     this._players[1]._action = '';
+    // }
 
-    attackChoice() {
-        if (this.whoIsPlaying[0] === this.$player1[0]) {
-            $('#tedImg').addClass('opacityEffect');
-            console.log('le player 1 attaque')
-            this._players[0]._action = 'attack';
-            this.whoIsPlaying = this.$player2
-        } else {
-            console.log('le player 2 attaque')
-            this._players[1]._action = 'attack';
-            this.whoIsPlaying = this.$player1
-        }
-    }
+    // /** Fight */
+    // handleTurnBasePlayer() {
+    //     let round = 0;
+    //     while ((this._players[0]._pv > round) || (this._players[1]._pv > round)) {
+    //         round++;
+    //         if (((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === '')) || ((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === ''))) {
+    //             return;
+    //         } if (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === '') && (this._players[1]._action === 'attack')) || ((this.whoIsPlaying === this.$player2) && (this._players[1]._action === 'defend') && (this._players[0]._action === ''))) {
+    //             return;
+    //         } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack')))) {
+    //             this._players[0].handleFight(player2);
+    //             this._players[1].handleFight(player1);
+    //             this.setActionNull();
+    //         } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'defend'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'defend')))) {
+    //             this.setActionNull();
+    //             return;
+    //         } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'defend'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'defend')))) {
+    //             this._players[0].handleDefend(player2);
+    //             this.setActionNull();
+    //         } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'attack')))) {
+    //             this._players[1].handleDefend(player1);
+    //             this.setActionNull();
+    //         } if ((this._players[0]._pv <= round) || (this._players[1]._pv <= round)) {
+    //             const $modal = $('#modalFight')[0];
+    //             $modal.classList.replace("d-block", "d-none");
+    //             this.modalEndGame();
+    //             break;
+    //         } else return;
+    //     }
+    // }
 
-    defendChoice() {
-        if (this.whoIsPlaying[0] === this.$player1[0]) {
-            $('#tedImg').addClass('opacityEffect');
-            console.log('le player 1 défend')
-            this._players[0]._action = 'defend';
-            this.whoIsPlaying = this.$player2;
-        } else {
-            $('#tedImg').addClass('opacityEffect');
-            console.log('le player 2 défend')
-            this._players[1]._action = 'defend';
-            this.whoIsPlaying = this.$player1;
-        }
-    }
+    // /** Fight */
+    // attackChoice() {
+    //     if (this.whoIsPlaying[0] === this.$player1[0]) {
+    //         $('#tedImg').addClass('opacityEffect');
+    //         this._players[0]._action = 'attack';
+    //         this.whoIsPlaying = this.$player2
+    //     } else {
+    //         this._players[1]._action = 'attack';
+    //         this.whoIsPlaying = this.$player1
+    //     }
+    // }
+
+    // /** Fight */
+    // defendChoice() {
+    //     if (this.whoIsPlaying[0] === this.$player1[0]) {
+    //         $('#tedImg').addClass('opacityEffect');
+    //         this._players[0]._action = 'defend';
+    //         this.whoIsPlaying = this.$player2;
+    //     } else {
+    //         $('#tedImg').addClass('opacityEffect');
+    //         this._players[1]._action = 'defend';
+    //         this.whoIsPlaying = this.$player1;
+    //     }
+    // }
 
     // Quand tu lances la bagarre
     launchFight() {
+        const newFight = new Fight([player1, player2]);
+        newFight.bindAttackButton();
+        newFight.bindDefendButton();
         const $modal = $('#modalFight')[0];
         $modal.classList.replace("d-none", "d-block");
         $('#blurEffect').addClass('blur');
@@ -403,39 +401,39 @@ class Game {
         } else $('#tedImg').addClass('opacityEffect');
     }
 
-    endGame() {
-        const $modalEndFight = $('#modalEndGame')[0];
-        $modalEndFight.classList.replace("d-none", "d-block");
-        this.displayWinner();
-    }
+    /** Fight */
+    // modalEndGame() {
+    //     const $modalEndFight = $('#modalEndGame')[0];
+    //     $modalEndFight.classList.replace("d-none", "d-block");
+    //     this.displayWinner();
+    // }
 
-    displayPlayer1Xp() {
-        for (let i = 0; i < $('.player1Xp').length; i++) {
-            $('.player1Xp')[i].innerHTML = this._players[0]._xp
+
+    displayPlayer1Pv() {
+        for (let i = 0; i < $('.player1Pv').length; i++) {
+            $('.player1Pv')[i].innerHTML = this._players[0]._pv;
         }
     }
 
-    displayPlayer2Xp() {
-        for (let i = 0; i < $('.player2Xp').length; i++) {
-            $('.player2Xp')[i].innerHTML = this._players[1]._xp
+    displayPlayer2Pv() {
+        for (let i = 0; i < $('.player2Pv').length; i++) {
+            $('.player2Pv')[i].innerHTML = this._players[1]._pv;
         }
     }
 
-    displayWinner() {
-        if ((this._players[0]._xp > 0) && (this._players[1]._xp <= 0)) {
-            $('#winner').append('<img src="https://media.giphy.com/media/NJzu0CDur92Y8/source.gif"/>');
-        } if ((this._players[0]._xp <= 0) && (this._players[1]._xp <= 0)) {
-            $('#winner').append('<img src="https://media.giphy.com/media/z6BeyFxDYDBNC/source.gif"/>');
-            //$('#winner').append('<img src="assets/barney_full_size.png"/>');
-            $('#modalWinner').html("It's a draw ! Both are winners");
-        } if ((this._players[1]._xp > 0) && (this._players[0]._xp <= 0)) {
-            $('#winner').append('<img src="https://media.giphy.com/media/3WY8qMF9l3ldK/source.gif"/>');
-        } else return
-    }
+    // displayWinner() {
+    //     if ((this._players[0]._pv > 0) && (this._players[1]._pv <= 0)) {
+    //         $('#winner').append('<img src="https://media.giphy.com/media/NJzu0CDur92Y8/source.gif" alt="gif Ted" style="width:100%"/>');
+    //     } if ((this._players[0]._pv <= 0) && (this._players[1]._pv <= 0)) {
+    //         $('#winner').append('<img src="https://media.giphy.com/media/z6BeyFxDYDBNC/source.gif" alt="gif Ted et Barney" style="width:100%"/>');
+    //         $('#modalWinner').html("It's a draw ! Both are winners");
+    //     } if ((this._players[1]._pv > 0) && (this._players[0]._pv <= 0)) {
+    //         $('#winner').append('<img src="https://media.giphy.com/media/3WY8qMF9l3ldK/source.gif" alt="gif Barney" style="width:100%"/>');
+    //     } else return
+    // }
 
     reloadGame() {
         $("#reload").click(function () {
-            console.log('tata')
             location.reload(true);
         });
     }

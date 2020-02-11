@@ -37,7 +37,6 @@ span {
     transform: translateY(6%);
 }
 
-
 /* Weapons */
 
 .weaponTie {
@@ -135,7 +134,7 @@ span {
 }
 
 .blur {
-    filter: blur(2px)
+    filter: blur(2px);
 }
 
 .btn-primary {
