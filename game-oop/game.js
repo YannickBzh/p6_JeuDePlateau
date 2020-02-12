@@ -12,7 +12,7 @@ class Game {
     }
 
 
-
+    // Je sors les coordonnées X et Y du player, je les stocke dans un tableau
     whereIsMyPlayer(player) {
         let arrayPosition = [];
         let playerPosition = $('.' + player._className); // Position du player
@@ -23,7 +23,7 @@ class Game {
         return arrayPosition;
     }
 
-
+    // Affiche les cases de déplacement du player vers le haut
     highlightTop(player) {
         let positionPlayers = this.whereIsMyPlayer(player);
         for (let i = 1; i <= 3; i++) {
@@ -45,6 +45,7 @@ class Game {
         }
     }
 
+    // Affiche les cases de déplacement du player vers le bas
     highlightBottom(player) {
         let positionPlayers = this.whereIsMyPlayer(player);
         for (let i = 1; i <= 3; i++) {
@@ -66,6 +67,7 @@ class Game {
         }
     }
 
+    // Affiche les cases de déplacement du player vers la gauche
     highlightLeft(player) {
         let positionPlayers = this.whereIsMyPlayer(player);
         for (let i = 1; i <= 3; i++) {
@@ -87,6 +89,7 @@ class Game {
         }
     }
 
+    // Affiche les cases de déplacement du player vers la droite
     highlightRight(player) {
         let positionPlayers = this.whereIsMyPlayer(player);
         for (let i = 1; i <= 3; i++) {
@@ -108,6 +111,7 @@ class Game {
         }
     }
 
+    // Méthode qui affiche les 4 directions de déplacement du Player 1
     highlightPlayer1() {
         this.highlightTop(player1);
         this.highlightBottom(player1);
@@ -115,7 +119,7 @@ class Game {
         this.highlightRight(player1);
     }
 
-
+    // Méthode qui affiche les 4 directions de déplacement du Player 2
     highlightPlayer2() {
         this.highlightTop(player2);
         this.highlightBottom(player2);
@@ -123,7 +127,7 @@ class Game {
         this.highlightRight(player2);
     }
 
-
+    // Méthode qui supprime les directions de déplacement des players
     eraseHighlight() {
         for (let j = 0; j < this.$cases.length; j++) {
             this.$cases[j].classList.remove("caseYouCanGo");
@@ -131,6 +135,7 @@ class Game {
         }
     }
 
+    // Déplace le player lorsque celui-ci clique sur une case
     movePlayer(click, $playerClass, playerName) {
         click.removeClass('empty');
         this.whoIsPlaying.removeClass($playerClass);
@@ -142,6 +147,7 @@ class Game {
         this.$player2 = $('.player-2');
     }
 
+    // Au clic sur une case la méthode "handlePlayerTurn" est appelée
     handleClickOnCase() {
         const that = this;
         $('.case').click(function () {
@@ -149,6 +155,7 @@ class Game {
         })
     }
 
+    // Au clic sur une case je vérifie si les players sont situés sur une case adjacente
     fightIsComing() {
         const that = this;
         $('.case').click(function () {
@@ -170,6 +177,7 @@ class Game {
         return !!this.retrieveWeaponFromCase(currentCase).length;
     }
 
+    // Méthode pour switcher l'arme en possession du joueur avec celle située sur la case cliquée
     switchWeapon(click, player) {
         if (click.hasClass('caseYouCanGo')) {
             const weaponOnCaseClicked = this.retrieveWeaponFromCase(click)[0];
@@ -210,7 +218,7 @@ class Game {
         }
     }
 
-
+    // Vérifier si les players sont sur des cases adjacentes vers le haut
     playerCloseUp() {
         let positionPlayers = this.whereIsMyPlayer(player1);
         for (let i = 1; i <= 1; i++) {
@@ -230,6 +238,7 @@ class Game {
         }
     }
 
+    // Vérifier si les players sont sur des cases adjacentes vers le bas
     playerCloseDown() {
         let positionPlayers = this.whereIsMyPlayer(player1);
         for (let i = 1; i <= 1; i++) {
@@ -248,7 +257,8 @@ class Game {
             }
         }
     }
-
+    
+    // Vérifier si les players sont sur des cases adjacentes vers la gauche
     playerCloseLeft() {
         let positionPlayers = this.whereIsMyPlayer(player1);
         for (let i = 1; i <= 1; i++) {
@@ -268,6 +278,7 @@ class Game {
         }
     }
 
+    // Vérifier si les players sont sur des cases adjacentes vers la droite
     playerCloseRight() {
         let positionPlayers = this.whereIsMyPlayer(player1);
         for (let i = 1; i <= 1; i++) {
@@ -287,108 +298,7 @@ class Game {
         }
     }
 
-
-    /** Fight */
-    // bindAttackButton() {
-    //     const $attackBtn = $('.attack');
-    //     const that = this;
-
-    //     $attackBtn.click(function () {
-    //         that.attackChoice();
-    //         that.handleTurnBasePlayer();
-    //         if (that.whoIsPlaying[0] === that.$player1[0]) {
-    //             that.displayPlayer1Pv()
-    //             that.displayPlayer2Pv()
-    //             $('#barneyImg').addClass('opacityEffect');
-    //             $('#tedImg').removeClass('opacityEffect');
-    //         } else $('#barneyImg').removeClass('opacityEffect');
-    //         that.displayPlayer1Pv()
-    //         that.displayPlayer2Pv()
-    //     });
-    // }
-
-    // /** Fight */
-    // bindDefendButton() {
-    //     const $defendBtn = $('.defendBtn');
-    //     const that = this;
-
-    //     $defendBtn.click(function () {
-    //         that.defendChoice();
-    //         that.handleTurnBasePlayer();
-    //         if (that.whoIsPlaying[0] === that.$player1[0]) {
-    //             that.displayPlayer1Pv()
-    //             that.displayPlayer2Pv()
-    //             $('#barneyImg').addClass('opacityEffect');
-    //             $('#tedImg').removeClass('opacityEffect');
-    //         } else $('#barneyImg').removeClass('opacityEffect');
-    //         that.displayPlayer1Pv()
-    //         that.displayPlayer2Pv()
-    //     });
-    // }
-
-    // /** Fight */
-    // setActionNull() {
-    //     this._players[0]._action = '';
-    //     this._players[1]._action = '';
-    // }
-
-    // /** Fight */
-    // handleTurnBasePlayer() {
-    //     let round = 0;
-    //     while ((this._players[0]._pv > round) || (this._players[1]._pv > round)) {
-    //         round++;
-    //         if (((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === '')) || ((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === ''))) {
-    //             return;
-    //         } if (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === '') && (this._players[1]._action === 'attack')) || ((this.whoIsPlaying === this.$player2) && (this._players[1]._action === 'defend') && (this._players[0]._action === ''))) {
-    //             return;
-    //         } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'attack')))) {
-    //             this._players[0].handleFight(player2);
-    //             this._players[1].handleFight(player1);
-    //             this.setActionNull();
-    //         } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'defend'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'defend')))) {
-    //             this.setActionNull();
-    //             return;
-    //         } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'defend'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'attack') && (this._players[1]._action === 'defend')))) {
-    //             this._players[0].handleDefend(player2);
-    //             this.setActionNull();
-    //         } if ((((this.whoIsPlaying === this.$player1) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'attack'))) || (((this.whoIsPlaying === this.$player2) && (this._players[0]._action === 'defend') && (this._players[1]._action === 'attack')))) {
-    //             this._players[1].handleDefend(player1);
-    //             this.setActionNull();
-    //         } if ((this._players[0]._pv <= round) || (this._players[1]._pv <= round)) {
-    //             const $modal = $('#modalFight')[0];
-    //             $modal.classList.replace("d-block", "d-none");
-    //             this.modalEndGame();
-    //             break;
-    //         } else return;
-    //     }
-    // }
-
-    // /** Fight */
-    // attackChoice() {
-    //     if (this.whoIsPlaying[0] === this.$player1[0]) {
-    //         $('#tedImg').addClass('opacityEffect');
-    //         this._players[0]._action = 'attack';
-    //         this.whoIsPlaying = this.$player2
-    //     } else {
-    //         this._players[1]._action = 'attack';
-    //         this.whoIsPlaying = this.$player1
-    //     }
-    // }
-
-    // /** Fight */
-    // defendChoice() {
-    //     if (this.whoIsPlaying[0] === this.$player1[0]) {
-    //         $('#tedImg').addClass('opacityEffect');
-    //         this._players[0]._action = 'defend';
-    //         this.whoIsPlaying = this.$player2;
-    //     } else {
-    //         $('#tedImg').addClass('opacityEffect');
-    //         this._players[1]._action = 'defend';
-    //         this.whoIsPlaying = this.$player1;
-    //     }
-    // }
-
-    // Quand tu lances la bagarre
+    // Lancement du combat - Affichage de la modal de combat
     launchFight() {
         const newFight = new Fight([player1, player2]);
         newFight.bindAttackButton();
@@ -401,37 +311,7 @@ class Game {
         } else $('#tedImg').addClass('opacityEffect');
     }
 
-    /** Fight */
-    // modalEndGame() {
-    //     const $modalEndFight = $('#modalEndGame')[0];
-    //     $modalEndFight.classList.replace("d-none", "d-block");
-    //     this.displayWinner();
-    // }
-
-
-    displayPlayer1Pv() {
-        for (let i = 0; i < $('.player1Pv').length; i++) {
-            $('.player1Pv')[i].innerHTML = this._players[0]._pv;
-        }
-    }
-
-    displayPlayer2Pv() {
-        for (let i = 0; i < $('.player2Pv').length; i++) {
-            $('.player2Pv')[i].innerHTML = this._players[1]._pv;
-        }
-    }
-
-    // displayWinner() {
-    //     if ((this._players[0]._pv > 0) && (this._players[1]._pv <= 0)) {
-    //         $('#winner').append('<img src="https://media.giphy.com/media/NJzu0CDur92Y8/source.gif" alt="gif Ted" style="width:100%"/>');
-    //     } if ((this._players[0]._pv <= 0) && (this._players[1]._pv <= 0)) {
-    //         $('#winner').append('<img src="https://media.giphy.com/media/z6BeyFxDYDBNC/source.gif" alt="gif Ted et Barney" style="width:100%"/>');
-    //         $('#modalWinner').html("It's a draw ! Both are winners");
-    //     } if ((this._players[1]._pv > 0) && (this._players[0]._pv <= 0)) {
-    //         $('#winner').append('<img src="https://media.giphy.com/media/3WY8qMF9l3ldK/source.gif" alt="gif Barney" style="width:100%"/>');
-    //     } else return
-    // }
-
+    // Relance le jeu au clic sur le bouton "Fight again"
     reloadGame() {
         $("#reload").click(function () {
             location.reload(true);

@@ -15,6 +15,7 @@ class Board {
         this._weapons = weapons;
     }
 
+    // Génération du plateau de jeu
     generatedBoard() {
         for (let j = 0; j <= this._numberOfLines; j++) {
             const $row = $('<div class="row"></div>');
@@ -27,6 +28,7 @@ class Board {
         }
     }
 
+    // Génération aléatoire des cases inaccessibles
     generatedGreyCases() {
         for (let i = 1; i <= this._numberOfCaseGrey; i++) {
             const $selectAllCases = $('.empty');
@@ -36,6 +38,7 @@ class Board {
         }
     }
 
+    // Génération des players et des weapons sur le plateau de jeu
     generatePlayersAndWeapons() {
         const playersAndWeapons = this._players.concat(this._weapons)
         playersAndWeapons.forEach(element => {

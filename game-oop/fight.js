@@ -7,7 +7,7 @@ class Fight {
     }
 
 
-    /** Fight */
+    // Au clic sur le bouton "Attaquer" ajout de l'opacité sur le player qui ne joue pas + ajout de l'action "attack" sur l'objet du player
     bindAttackButton() {
         const $attackBtn = $('.attack');
         const that = this;
@@ -29,7 +29,7 @@ class Fight {
         });
     }
 
-    /** Fight */
+    // Au clic sur le bouton "Attaquer" ajout de l'opacité sur le player qui ne joue pas + ajout de l'action "defend" sur l'objet du player
     bindDefendButton() {
         const $defendBtn = $('.defendBtn');
         const that = this;
@@ -50,7 +50,7 @@ class Fight {
         });
     }
 
-    /** Fight */
+    // Ajout de l'action "attack" sur l'objet du player + changement de tour de jeu
     attackChoice() {
         if (this.whoIsPlaying[0] === this.$player1[0]) {
             $('#tedImg').addClass('opacityEffect');
@@ -62,7 +62,7 @@ class Fight {
         }
     }
 
-    /** Fight */
+    // Ajout de l'action "defend" sur l'objet du player + changement de tour de jeu
     defendChoice() {
         if (this.whoIsPlaying[0] === this.$player1[0]) {
             $('#tedImg').addClass('opacityEffect');
@@ -75,13 +75,13 @@ class Fight {
         }
     }
 
-    /** Fight */
+    // Remise à 0 des actions des objets players
     setActionNull() {
         this._players[0]._action = '';
         this._players[1]._action = '';
     }
 
-    /** Fight */
+    // Calcul des points de vie des players en fonction de leur action "attack" et/ou "defend" / Fin du jeu si player atteint 0 point de vie
     handleTurnBasePlayer() {
         let round = 0;
         while ((this._players[0]._pv > round) || (this._players[1]._pv > round)) {
@@ -112,19 +112,21 @@ class Fight {
         }
     }
 
-
+    // Affiche les points de vie du player 1
     displayPlayer1Pv() {
         for (let i = 0; i < $('.player1Pv').length; i++) {
             $('.player1Pv')[i].innerHTML = this._players[0]._pv;
         }
     }
 
+    // Affiche les points de vie du player 2
     displayPlayer2Pv() {
         for (let i = 0; i < $('.player2Pv').length; i++) {
             $('.player2Pv')[i].innerHTML = this._players[1]._pv;
         }
     }
 
+    // Affiche le gagnant du jeu
     displayWinner() {
         if ((this._players[0]._pv > 0) && (this._players[1]._pv <= 0)) {
             $('#winner').append('<img src="https://media.giphy.com/media/NJzu0CDur92Y8/source.gif" alt="gif Ted" style="width:100%"/>');
@@ -136,7 +138,7 @@ class Fight {
         } else return;
     }
 
-    /** Fight */
+    // Modal de fin du jeu
     modalEndGame() {
         const $modalEndFight = $('#modalEndGame')[0];
         $modalEndFight.classList.replace("d-none", "d-block");
