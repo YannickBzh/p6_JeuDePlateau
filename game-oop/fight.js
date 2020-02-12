@@ -1,9 +1,9 @@
 class Fight {
-    constructor(players) {
+    constructor(players, fighter) {
         this._players = players;
         this.$player1 = $('.player-1');
         this.$player2 = $('.player-2');
-        this.whoIsPlaying = this.$player1;
+        this.whoIsPlaying = fighter;
     }
 
 
@@ -22,7 +22,6 @@ class Fight {
                 $('#tedImg').removeClass('opacityEffect');
             } else {
                 $('#barneyImg').removeClass('opacityEffect');
-                console.log('tata');
                 that.displayPlayer1Pv();
                 that.displayPlayer2Pv();
             }

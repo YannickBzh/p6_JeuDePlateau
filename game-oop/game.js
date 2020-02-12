@@ -300,7 +300,7 @@ class Game {
 
     // Lancement du combat - Affichage de la modal de combat
     launchFight() {
-        const newFight = new Fight([player1, player2]);
+        const newFight = new Fight([player1, player2], this.whoIsPlaying);
         newFight.bindAttackButton();
         newFight.bindDefendButton();
         const $modal = $('#modalFight')[0];
