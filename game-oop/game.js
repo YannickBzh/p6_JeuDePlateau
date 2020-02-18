@@ -24,26 +24,26 @@ class Game {
     }
 
     // Affiche les cases de déplacement du player vers le haut
-    highlightTop(player) {
-        let positionPlayers = this.whereIsMyPlayer(player);
-        for (let i = 1; i <= 3; i++) {
-            let topCaseOrdonnee = (parseInt(positionPlayers[1]) - i);
-            for (let j = 0; j < positionPlayers[2].length; j++) {
-                let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
-                let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
-                let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
-                let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
-                if ((casesOrdonnee == topCaseOrdonnee) && (casesAbscisse == parseInt(positionPlayers[0]))) {
-                    if (positionPlayers[2][j].classList.contains('caseGrey')) {
-                        return;
-                    } else {
-                        positionPlayers[2][j].classList.remove('empty');
-                        positionPlayers[2][j].classList.add("caseYouCanGo");
-                    }
-                }
-            }
-        }
-    }
+    // highlightTop(player) {
+    //     let positionPlayers = this.whereIsMyPlayer(player);
+    //     for (let i = 1; i <= 3; i++) {
+    //         let topCaseOrdonnee = (parseInt(positionPlayers[1]) - i);
+    //         for (let j = 0; j < positionPlayers[2].length; j++) {
+    //             let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
+    //             let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
+    //             let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
+    //             let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
+    //             if ((casesOrdonnee == topCaseOrdonnee) && (casesAbscisse == parseInt(positionPlayers[0]))) {
+    //                 if (positionPlayers[2][j].classList.contains('caseGrey')) {
+    //                     return;
+    //                 } else {
+    //                     positionPlayers[2][j].classList.remove('empty');
+    //                     positionPlayers[2][j].classList.add("caseYouCanGo");
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     // Affiche les cases de déplacement du player vers le bas
     highlightBottom(player) {
@@ -67,17 +67,19 @@ class Game {
         }
     }
 
+    
+
     // Affiche les cases de déplacement du player vers la gauche
-    highlightLeft(player) {
+    highlightTopLeft(player, topLeftCaseXY, posPlayer, caseX, caseY) {
         let positionPlayers = this.whereIsMyPlayer(player);
         for (let i = 1; i <= 3; i++) {
-            let leftCaseAbscisse = (parseInt(positionPlayers[0]) - i);
+            topLeftCaseXY = (parseInt(posPlayer) - i);
             for (let j = 0; j < positionPlayers[2].length; j++) {
                 let casesAbs = positionPlayers[2][j].classList[1]; // je sors la classe des abscisses de cases
                 let casesOrd = positionPlayers[2][j].classList[2]; // je sors la classe des ordonnées de cases
-                let casesAbscisse = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
-                let casesOrdonnee = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
-                if ((casesAbscisse == leftCaseAbscisse) && (casesOrdonnee == parseInt(positionPlayers[1]))) {
+                caseX = casesAbs.substring(2, 4); // j'isole le nombre des abscisses de mes cases
+                caseY = casesOrd.substring(2, 4); // J'isole le nombre des ordonnées de mes cases
+                if ((caseX == topLeftCaseXY) && (caseY == parseInt(posPlayer))) {
                     if (positionPlayers[2][j].classList.contains('caseGrey')) {
                         return;
                     } else {
@@ -113,17 +115,17 @@ class Game {
 
     // Méthode qui affiche les 4 directions de déplacement du Player 1
     highlightPlayer1() {
-        this.highlightTop(player1);
+        this.highlightTopLeft(player1, topCaseOrdonnee, positionPlayers[1], casesAbscisse, casesOrdonnee);
         this.highlightBottom(player1);
-        this.highlightLeft(player1);
+        this.highlightTopLeft(player1, leftCaseAbscisse, positionPlayers[0], casesAbscisse, casesOrdonnee)
         this.highlightRight(player1);
     }
 
     // Méthode qui affiche les 4 directions de déplacement du Player 2
     highlightPlayer2() {
-        this.highlightTop(player2);
+        this.highlightTopLeft(player2, topCaseOrdonnee, positionPlayers[1], casesAbscisse, casesOrdonnee);
         this.highlightBottom(player2);
-        this.highlightLeft(player2);
+        this.highlightTopLeft(player2, leftCaseAbscisse, positionPlayers[0], casesAbscisse, casesOrdonnee);
         this.highlightRight(player2);
     }
 
