@@ -63,6 +63,12 @@ span {
     width: 50px;
 }
 
+#goat {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+}
+
 /* Players */
 
 .player-1 {
@@ -189,4 +195,10 @@ span:nth-child(2){animation-delay: 0.5s;}
     .modal-dialog {
         max-width: 600px !important;
     }
+}
+
+#plane { 
+    position: absolute; 
+    left: -1000px; 
+    width: 20%;
 }

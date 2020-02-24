@@ -4,4 +4,3 @@ class GameAttribute {
         this._className = className;
     }
 }
-

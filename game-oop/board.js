@@ -48,4 +48,20 @@ class Board {
             $selectAllCases[randomNumber].classList.remove("empty");
         })
     }
+
+    movingGoat() {
+        $(function () {
+            let goat = $("#goat"),
+                width = goat.get(0).width,
+                screenWidth = $(window).width(),
+                duration = 20000;
+
+            function animateGoat() {
+             goat.css("left", -width).animate({
+                    "left": screenWidth,
+                }, duration, animateGoat);
+            }
+            animateGoat();
+        });
+    }
 }
