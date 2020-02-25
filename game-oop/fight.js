@@ -143,5 +143,4 @@ class Fight {
         $modalEndFight.classList.replace("d-none", "d-block");
         this.displayWinner();
     }
-
 }

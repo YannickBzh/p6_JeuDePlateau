@@ -49,6 +49,7 @@ class Board {
         })
     }
 
+    // Méthode pour déplacer la chèvre
     movingGoat() {
         $(function () {
             let goat = $("#goat"),

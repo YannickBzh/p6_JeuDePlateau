@@ -11,7 +11,6 @@ class Game {
         this.whoIsPlaying = this.$player1;
     }
 
-
     // Je sors les coordonnées X et Y du player, je les stocke dans un tableau
     whereIsMyPlayer(player) {
         let arrayPosition = [];

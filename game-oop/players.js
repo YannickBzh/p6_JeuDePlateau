@@ -1,7 +1,3 @@
-/**
- * Générer les players
- */
-
 class Player extends GameAttribute {
     constructor(name, className, weapon, pv) {
         super(name, className);

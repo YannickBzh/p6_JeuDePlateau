@@ -1,5 +1,11 @@
+/* CSS général */
+
 body {
     background-color:#FEF8EE !important;
+}
+
+h1, h5 {
+    font-family: 'Maven Pro', sans-serif;
 }
 
 h6 {
@@ -16,15 +22,6 @@ h6 {
     margin-right:0 !important;
     margin-left:0 !important;
     max-width:100% !important;
-}
-
-.row {
-    margin-right:0 !important;
-    margin-left:0 !important;
-}
-
-h1, h5 {
-    font-family: 'Maven Pro', sans-serif;
 }
 
 span {
@@ -63,6 +60,8 @@ span {
     width: 50px;
 }
 
+/* Chèvre */
+
 #goat {
     position: absolute;
     height: 200px;
@@ -79,9 +78,13 @@ span {
     background-image: url(assets/barney-player.png);
 }
 
+/* Board */
+
 .row {
     display: flex;
     margin-bottom: 2px;
+    margin-right:0 !important;
+    margin-left:0 !important;
 }
 
 .case {
@@ -110,6 +113,8 @@ span {
     transition: 1s ease;
     cursor: pointer;
 }
+
+/* Modal + Boutons Modal */
 
 .btn {
     cursor: pointer;
@@ -163,10 +168,6 @@ span {
 .opacityEffect {
     filter: opacity(0.3);
 }
-    
-  
-span:nth-child(2){animation-delay: 0.5s;}
-
   
 @keyframes bounceIn {
     0%{
@@ -195,10 +196,4 @@ span:nth-child(2){animation-delay: 0.5s;}
     .modal-dialog {
         max-width: 600px !important;
     }
-}
-
-#plane { 
-    position: absolute; 
-    left: -1000px; 
-    width: 20%;
 }

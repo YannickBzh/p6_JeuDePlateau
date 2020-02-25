@@ -8,7 +8,6 @@ const weaponPineapple = new Weapons("Weapon Pineapple", 30, "weaponPineapple");
 
 const weapons = [weaponTie, weaponUmbrella, weaponHorn, weaponPineapple];
 
-
 const board = new Board(9, 9, 10, $('.game'), [player1, player2], [weaponTie, weaponUmbrella, weaponHorn, weaponPineapple]);
 
 // Initialisation du jeu
@@ -16,9 +15,9 @@ board.generatedBoard();
 board.generatedGreyCases();
 board.generatePlayersAndWeapons();
 board.movingGoat();
+
 const newGame = new Game([player1, player2]);
 
-// newGame.blockClosePlayersAtLaunch();
 newGame.highlightPlayer(player1);
 newGame.handleClickOnCase();
 newGame.fightIsComing();
