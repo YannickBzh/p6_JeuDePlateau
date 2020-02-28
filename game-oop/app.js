@@ -22,3 +22,6 @@ newGame.highlightPlayer(player1);
 newGame.handleClickOnCase();
 newGame.fightIsComing();
 newGame.reloadGame();
+
+// Reload de la page si joueurs adjacents
+board.playerCloseFirstLoad(newGame.whereIsMyPlayer(player1));
